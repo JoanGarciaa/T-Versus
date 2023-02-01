@@ -8,18 +8,17 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import cat.iesvidreres.tversus.R
 import cat.iesvidreres.tversus.databinding.FragmentMenuBinding
-import cat.iesvidreres.tversus.databinding.FragmentUserBinding
 
+class TiendaFragment : Fragment() {
 
-class UserFragment : Fragment() {
+    private lateinit var binding: FragmentMenuBinding
 
-    private lateinit var binding: FragmentUserBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding =  DataBindingUtil.inflate<FragmentUserBinding>(inflater, R.layout.fragment_menu,container,false);
+        binding =  DataBindingUtil.inflate<FragmentMenuBinding>(inflater, R.layout.fragment_menu,container,false);
 
         return binding.root
     }
