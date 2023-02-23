@@ -1,7 +1,6 @@
 package cat.iesvidreres.tversus.src.ui
 
 import android.app.Activity
-import android.app.PendingIntent
 import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
@@ -10,7 +9,6 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
-import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import cat.iesvidreres.tversus.R
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -30,6 +28,7 @@ class LoginActivity : AppCompatActivity() {
     companion object {
         private const val RC_SIGN_IN = 9001
     }
+
     val firebaseAuth = FirebaseAuth.getInstance()
 
     private lateinit var auth: FirebaseAuth
@@ -73,7 +72,14 @@ class LoginActivity : AppCompatActivity() {
             startActivityForResult(signInIntent, RC_SIGN_IN)
         }
 
+        var botonLogin = findViewById<Button>(R.id.buttonLogin)
 
+        botonLogin.setOnClickListener(){
+
+            var email = findViewById<EditText>(R.id.editTextNameLogin)
+            var pass = findViewById<EditText>(R.id.editTextNameLogin)
+            loginNormal(email,pass)
+        }
 
 
 
@@ -114,28 +120,21 @@ class LoginActivity : AppCompatActivity() {
             showHome(email, ProviderType.valueOf(provider))
         }
     }
-    private fun loginNormal(){
-        var email = findViewById<EditText>(R.id.editTextNameLogin)
-        var pass = findViewById<EditText>(R.id.editTextNameLogin)
-        var botonLogin = findViewById<Button>(R.id.buttonLogin)
+    private fun loginNormal(email: EditText, pass: EditText) {
 
-        botonLogin.setOnClickListener(){
+        if (email.text.isNotEmpty()&&pass.text.isNotEmpty()){
+            FirebaseAuth.getInstance().createUserWithEmailAndPassword(email.text.toString(),pass.text.toString()).addOnCompleteListener{
+                if (it.isSuccessful){
+                    //showHome(it.result?.user?.email ?:"",ProviderType.BASIC)
+                }else{
+                    //alerta()
 
-            if (email.text.isNotEmpty()&&pass.text.isNotEmpty()){
-                FirebaseAuth.getInstance().createUserWithEmailAndPassword(email.text.toString(),pass.text.toString()).addOnCompleteListener{
-                    if (it.isSuccessful){
-                        //showHome(it.result?.user?.email ?:"",ProviderType.BASIC)
-                    }else{
-                        //alerta()
-
-                        val prefs = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE).edit()
-                        prefs.putString("email", email.text.toString())
-                        prefs.putString("provider", ProviderType.BASIC.toString())
-                        prefs.apply()
-                    }
+                    val prefs = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE).edit()
+                    prefs.putString("email", email.text.toString())
+                    prefs.putString("provider", ProviderType.BASIC.toString())
+                    prefs.apply()
                 }
             }
-
         }
     }
 

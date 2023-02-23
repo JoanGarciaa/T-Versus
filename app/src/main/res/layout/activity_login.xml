@@ -30,7 +30,7 @@
         android:foregroundTint="#FFFFFF"
         android:hint="Correo electronico"
         android:inputType="textPersonName"
-        android:textColor="#0F6F6F6F"
+        android:textColor="#FFFFFF"
         android:textColorHint="#F6F6F6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
