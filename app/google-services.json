@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "685865760074",
+    "firebase_url": "https://tversus-f87bb-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "tversus-f87bb",
+    "storage_bucket": "tversus-f87bb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:685865760074:android:7f38ee73198d56ecf07db3",
+        "android_client_info": {
+          "package_name": "cat.iesvidreres.tversus"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "685865760074-h8bro2t0p57n289tukaiu1g07udvkbj0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCELKeePwuvODje_n0Ce3e_dyeEcExQeV4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "685865760074-h8bro2t0p57n289tukaiu1g07udvkbj0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

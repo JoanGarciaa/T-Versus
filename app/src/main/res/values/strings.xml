@@ -2,4 +2,5 @@
     <string name="app_name">TVERSUS</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="prefs_file">cat.iesvidreres.tversus.PREFERENCE_FILE_KEY</string>
 </resources>
