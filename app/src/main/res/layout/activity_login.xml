@@ -21,7 +21,7 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextPasswordLogin" />
 
     <EditText
-        android:id="@+id/editTextNameLogin"
+        android:id="@+id/editTextEmailLogin"
         android:layout_width="239dp"
         android:layout_height="54dp"
         android:layout_marginTop="70dp"
@@ -59,7 +59,7 @@
         android:textColorHint="#F6F6F6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNameLogin" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextEmailLogin" />
 
     <Button
         android:id="@+id/buttonLogin"
@@ -73,4 +73,14 @@
         app:layout_constraintHorizontal_bias="0.242"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextPasswordLogin" />
+
+    <Button
+        android:id="@+id/btnToRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Register"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonLogin" />
 </androidx.constraintlayout.widget.ConstraintLayout>
