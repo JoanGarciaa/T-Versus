@@ -22,4 +22,14 @@
     </style>
     <style name="Theme.TVERSUS.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <style name="Theme.TVERSUS.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="PrimaryButton" parent="Widget.MaterialComponents.Button">
+        <item name="android:textSize">12sp</item>
+        <item name="textAllCaps">true</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:textColor">@color/terciarytversus</item>
+        <item name="android:gravity">center</item>
+        <item name="backgroundTint">@color/secondarytversus</item>
+    </style>
 </resources>

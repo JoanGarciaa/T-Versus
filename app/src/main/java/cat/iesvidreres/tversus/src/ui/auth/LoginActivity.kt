@@ -1,7 +1,6 @@
-package cat.iesvidreres.tversus.src.ui
+package cat.iesvidreres.tversus.src.ui.auth
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
@@ -12,10 +11,9 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import cat.iesvidreres.tversus.MainActivity
+import cat.iesvidreres.tversus.src.ui.home.MainActivity
 import cat.iesvidreres.tversus.R
 import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
@@ -32,7 +30,6 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     lateinit var nombreLogin : String
     private val GOOGLE_SIGN_IN = 100
-    private lateinit var googleSignIn: GoogleSignInClient
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -98,7 +95,7 @@ class LoginActivity : AppCompatActivity() {
                     FirebaseAuth.getInstance().signInWithCredential(credential).addOnCompleteListener {
                         if(it.isSuccessful){
                             Toast.makeText(baseContext, "Login ben fet amb google", Toast.LENGTH_SHORT).show()
-                            showHome(account.email ?: "",ProviderType.GOOGLE)
+                            showHome(account.email ?: "", ProviderType.GOOGLE)
                             val intent = Intent(this, MainActivity::class.java)
                             startActivity(intent)
                         }else {

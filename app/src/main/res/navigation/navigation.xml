@@ -3,19 +3,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/menuFragment">
+    app:startDestination="@id/homeFragment">
 
     <fragment
-        android:id="@+id/menuFragment"
-        android:name="cat.iesvidreres.tversus.src.ui.MenuFragment"
+        android:id="@+id/homeFragment"
+        android:name="cat.iesvidreres.tversus.src.ui.home.tabs.home_tab.HomeFragment"
         android:label="fragment_menu"
-        tools:layout="@layout/fragment_menu" >
-        <action
-            android:id="@+id/action_menuFragment_to_userFragment"
-            app:destination="@id/userFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_home" />
     <fragment
-        android:id="@+id/userFragment"
-        android:name="cat.iesvidreres.tversus.src.ui.UserFragment"
-        android:label="UserFragment" />
+        android:id="@+id/shopFragment"
+        android:name="cat.iesvidreres.tversus.src.ui.home.tabs.shop_tab.ShopFragment"
+        android:label="fragment_shop"
+        tools:layout="@layout/fragment_shop" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="cat.iesvidreres.tversus.src.ui.home.tabs.profile_tab.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/tournamentFragment"
+        android:name="cat.iesvidreres.tversus.src.ui.home.tabs.tournament_tab.TournamentFragment"
+        android:label="fragment_tournament"
+        tools:layout="@layout/fragment_tournament" />
 </navigation>

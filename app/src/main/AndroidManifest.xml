@@ -12,7 +12,7 @@
         android:theme="@style/Theme.TVERSUS"
         tools:targetApi="31">
         <activity
-            android:name=".src.ui.RegisterActivity"
+            android:name=".src.ui.auth.RegisterActivity"
             android:exported="false"
             android:label="@string/title_activity_register"
             android:theme="@style/Theme.TVERSUS.NoActionBar">
@@ -21,11 +21,11 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".src.ui.LoginActivity"
+            android:name=".src.ui.auth.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
-            android:exported="true"></activity>
+            android:name=".src.ui.home.MainActivity"
+            android:exported="true" />
         <activity
             android:name=".src.splash.SplashActivity"
             android:exported="true"

@@ -1,4 +1,4 @@
-package cat.iesvidreres.tversus.src.ui
+package cat.iesvidreres.tversus.src.ui.auth
 
 import android.content.ContentValues.TAG
 import android.content.Intent
@@ -10,7 +10,6 @@ import android.widget.EditText
 import android.widget.Toast
 import cat.iesvidreres.tversus.R
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.actionCodeSettings
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
