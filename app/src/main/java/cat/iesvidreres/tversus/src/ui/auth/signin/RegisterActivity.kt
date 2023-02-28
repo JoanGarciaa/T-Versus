@@ -1,4 +1,4 @@
-package cat.iesvidreres.tversus.src.ui.auth
+package cat.iesvidreres.tversus.src.ui.auth.signin
 
 import android.content.ContentValues.TAG
 import android.content.Intent
@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import cat.iesvidreres.tversus.R
+import cat.iesvidreres.tversus.src.ui.auth.LoginActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -22,13 +23,13 @@ class RegisterActivity : AppCompatActivity() {
 
 
         var buttonToLogin: Button = findViewById(R.id.buttonToLogin)
-        var buttonRegister: Button = findViewById(R.id.buttonRegister)
+        var buttonRegister: Button = findViewById(R.id.btnRegister)
 
 
         buttonRegister.setOnClickListener {
-            var nombreRegister = findViewById<EditText>(R.id.editTextNameRegister).text.toString()
+            var nombreRegister = findViewById<EditText>(R.id.input_email_registre_text).text.toString()
             var passwordRegister =
-                findViewById<EditText>(R.id.editTextPasswRegister).text.toString()
+                findViewById<EditText>(R.id.input_password_registre_text).text.toString()
             auth.createUserWithEmailAndPassword(nombreRegister, passwordRegister)
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {

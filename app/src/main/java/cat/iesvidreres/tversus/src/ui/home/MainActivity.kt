@@ -9,7 +9,6 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
-import cat.iesvidreres.tversus.BuildConfig
 import cat.iesvidreres.tversus.R
 import cat.iesvidreres.tversus.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -29,7 +28,7 @@ class MainActivity : AppCompatActivity() {
         drawerLayout = binding.drawerLayout
 
 
-        //hideBottomBar()
+        hideBottomBar()
 
         NavigationUI.setupActionBarWithNavController(this,navController,drawerLayout)
         NavigationUI.setupWithNavController(binding.bottomNavigationView, navController)
@@ -52,7 +51,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun itemMenu(){
         val navDrawer = binding.navView.menu
-
+        navDrawer.findItem(R.id.signOut).setOnMenuItemClickListener {
+            finish()
+            true
+        }
         drawerLayout.closeDrawer(GravityCompat.START)
     }
 

@@ -35,9 +35,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
+                android:background="#3A3640"
                 app:itemIconTint="@color/secondarytversus"
                 app:itemTextColor="@color/white"
-                android:background="@color/tversus"
                 app:menu="@menu/bottom_navigation_menu" />
 
         </LinearLayout>

@@ -19,10 +19,36 @@
         android:id="@+id/profileFragment"
         android:name="cat.iesvidreres.tversus.src.ui.home.tabs.profile_tab.ProfileFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_editProfileFragment"
+            app:destination="@id/editProfileFragment" />
+    </fragment>
     <fragment
         android:id="@+id/tournamentFragment"
         android:name="cat.iesvidreres.tversus.src.ui.home.tabs.tournament_tab.TournamentFragment"
         android:label="fragment_tournament"
-        tools:layout="@layout/fragment_tournament" />
+        tools:layout="@layout/fragment_tournament" >
+        <action
+            android:id="@+id/action_tournamentFragment_to_unOfficialTournamentsFragment"
+            app:destination="@id/unOfficialTournamentsFragment" />
+        <action
+            android:id="@+id/action_tournamentFragment_to_officialTournamentFragment"
+            app:destination="@id/officialTournamentFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/officialTournamentFragment"
+        android:name="cat.iesvidreres.tversus.src.ui.home.tabs.tournament_tab.official_tournament_tab.OfficialTournamentFragment"
+        android:label="fragment_official_tournament"
+        tools:layout="@layout/fragment_official_tournament" />
+    <fragment
+        android:id="@+id/unOfficialTournamentsFragment"
+        android:name="cat.iesvidreres.tversus.src.ui.home.tabs.tournament_tab.unofficial_tournament_tab.UnOfficialTournamentsFragment"
+        android:label="fragment_un_official_tournaments"
+        tools:layout="@layout/fragment_un_official_tournaments" />
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="cat.iesvidreres.tversus.src.ui.home.tabs.profile_tab.edit_profile.EditProfileFragment"
+        android:label="fragment_edit_profile"
+        tools:layout="@layout/fragment_edit_profile" />
 </navigation>

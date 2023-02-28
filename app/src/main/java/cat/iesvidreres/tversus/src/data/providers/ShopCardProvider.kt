@@ -2,7 +2,6 @@ package cat.iesvidreres.tversus.src.data.providers
 
 import cat.iesvidreres.tversus.R
 import cat.iesvidreres.tversus.src.data.models.ShopCard
-import org.checkerframework.checker.units.qual.g
 
 class ShopCardProvider {
     companion object {
