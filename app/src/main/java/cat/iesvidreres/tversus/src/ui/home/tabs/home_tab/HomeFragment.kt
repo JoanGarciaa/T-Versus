@@ -8,8 +8,9 @@ import android.view.ViewGroup
 import cat.iesvidreres.tversus.R
 import cat.iesvidreres.tversus.databinding.FragmentHomeBinding
 import cat.iesvidreres.tversus.databinding.FragmentShopBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding

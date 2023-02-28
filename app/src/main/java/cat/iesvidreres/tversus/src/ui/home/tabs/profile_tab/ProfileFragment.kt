@@ -8,7 +8,9 @@ import android.view.ViewGroup
 import cat.iesvidreres.tversus.R
 import cat.iesvidreres.tversus.databinding.FragmentProfileBinding
 import cat.iesvidreres.tversus.databinding.FragmentShopBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ProfileFragment : Fragment() {
     private lateinit var binding: FragmentProfileBinding
 

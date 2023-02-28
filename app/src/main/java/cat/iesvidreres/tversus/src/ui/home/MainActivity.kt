@@ -9,9 +9,13 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
+import cat.iesvidreres.tversus.BuildConfig
 import cat.iesvidreres.tversus.R
 import cat.iesvidreres.tversus.databinding.ActivityMainBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
     private lateinit var drawerLayout: DrawerLayout
@@ -23,6 +27,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         navController = this.findNavController(R.id.myNavHostFragment)
         drawerLayout = binding.drawerLayout
+
 
         //hideBottomBar()
 

@@ -8,7 +8,9 @@ import android.view.ViewGroup
 import cat.iesvidreres.tversus.R
 import cat.iesvidreres.tversus.databinding.FragmentShopBinding
 import cat.iesvidreres.tversus.databinding.FragmentTournamentBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class TournamentFragment : Fragment() {
 
     private lateinit var binding: FragmentTournamentBinding
