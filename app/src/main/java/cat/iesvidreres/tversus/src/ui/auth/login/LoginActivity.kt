@@ -49,8 +49,13 @@ class LoginActivity : AppCompatActivity() {
         }
 
         buttonLogin.setOnClickListener {
-            nombreLogin = findViewById<EditText>(R.id.editTextEmailLogin).text.toString()
-            var passwordLogin = findViewById<EditText>(R.id.editTextPasswordLogin).text.toString()
+            var email = findViewById<EditText>(R.id.editTextEmailLogin).text
+            var password = findViewById<EditText>(R.id.editTextPasswordLogin).text
+
+
+            if (email.isNotEmpty()&&password.isNotEmpty()){
+                nombreLogin = email.toString()
+                var passwordLogin = password.toString()
             auth.signInWithEmailAndPassword(nombreLogin, passwordLogin)
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
@@ -70,7 +75,7 @@ class LoginActivity : AppCompatActivity() {
                         Toast.makeText(baseContext, "Authentication failed.",
                             Toast.LENGTH_SHORT).show()
                     }
-                }
+                }}
         }
 
 
@@ -88,9 +93,10 @@ class LoginActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
 
         if(requestCode == GOOGLE_SIGN_IN){
+            try {
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
             val account = task.getResult(ApiException::class.java)
-            try {
+
                 if(account != null){
                     val credential = GoogleAuthProvider.getCredential(account.idToken,null)
                     FirebaseAuth.getInstance().signInWithCredential(credential).addOnCompleteListener {
