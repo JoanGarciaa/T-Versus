@@ -23,10 +23,6 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
 
-enum class ProviderType{
-    BASIC,
-    GOOGLE
-}
 class LoginActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     lateinit var nombreLogin : String
@@ -81,12 +77,12 @@ class LoginActivity : AppCompatActivity() {
 
 
 
-        buttonLoginGoogle.setOnClickListener {
-            val googleConf = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken(getString(R.string.default_web_client_id)).requestEmail().build()
-            val googleClient = GoogleSignIn.getClient(this,googleConf)
-            googleClient.signOut()
-            startActivityForResult(googleClient.signInIntent, GOOGLE_SIGN_IN)
-        }
+//        buttonLoginGoogle.setOnClickListener {
+//            val googleConf = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken(getString(R.string.default_web_client_id)).requestEmail().build()
+//            val googleClient = GoogleSignIn.getClient(this,googleConf)
+//            googleClient.signOut()
+//            startActivityForResult(googleClient.signInIntent, GOOGLE_SIGN_IN)
+//        }
 
     }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -102,7 +98,7 @@ class LoginActivity : AppCompatActivity() {
                     FirebaseAuth.getInstance().signInWithCredential(credential).addOnCompleteListener {
                         if(it.isSuccessful){
                             Toast.makeText(baseContext, "Login ben fet amb google", Toast.LENGTH_SHORT).show()
-                            showHome(account.email ?: "", ProviderType.GOOGLE)
+                            showHome(account.email ?: "")
                             val intent = Intent(this, MainActivity::class.java)
                             startActivity(intent)
                         }else {
@@ -114,7 +110,6 @@ class LoginActivity : AppCompatActivity() {
                 showAlert()
             }
         }
-
     }
 
     private fun session(){
@@ -122,11 +117,11 @@ class LoginActivity : AppCompatActivity() {
         val email = prefs.getString("email",null)
         val provider = prefs.getString("provider",null)
         if (email != null && provider != null) {
-            showHome(email, ProviderType.valueOf(provider))
+            showHome(email)
         }
     }
 
-    private fun showHome(email: String, provider: ProviderType){
+    private fun showHome(email: String){
 //        val homeIntent = Intent(this,HomeActivity::class.java).apply{
 //            putExtra("email",email )
 //            putExtra("provider", provider.name)

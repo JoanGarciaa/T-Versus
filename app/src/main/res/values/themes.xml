@@ -32,4 +32,16 @@
         <item name="android:gravity">center</item>
         <item name="backgroundTint">@color/secondarytversus</item>
     </style>
+
+    <style name="ButtonChoose" parent="Widget.MaterialComponents.Button">
+        <item name="android:textSize">12sp</item>
+        <item name="textAllCaps">true</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:textColor">@color/tversus</item>
+        <item name="android:gravity">center</item>
+        <item name="backgroundTint">@color/terciarytversus</item>
+    </style>
+
+
 </resources>

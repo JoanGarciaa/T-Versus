@@ -13,19 +13,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
-        android:textSize="30sp"
         android:text="TORNEOS"
         android:textColor="@color/terciarytversus"
+        android:textSize="50sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btnOficial"
-        style="@style/PrimaryButton"
+        style="@style/ButtonChoose"
         android:layout_width="240dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="160dp"
+        android:layout_marginTop="140dp"
+        android:background="@drawable/rounded_button"
         android:text="Torneos oficiales"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
@@ -34,17 +35,27 @@
 
     <Button
         android:id="@+id/btnNoOfficial"
+        style="@style/ButtonChoose"
         android:layout_width="240dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:background="@drawable/rounded_button"
         android:text="Torneos no oficiales"
-        style="@style/PrimaryButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="80dp"
         app:layout_constraintTop_toBottomOf="@id/btnOficial" />
 
-
-
+    <Button
+        android:id="@+id/btnToCreateTournament"
+        style="@style/PrimaryButton"
+        android:layout_width="240dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:background="@drawable/rounded_button"
+        android:text="Crear Torneo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnNoOfficial" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
