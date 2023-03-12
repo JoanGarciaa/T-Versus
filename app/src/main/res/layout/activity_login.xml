@@ -32,22 +32,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/btnToRegister" />
 
-            <EditText
-                android:id="@+id/editTextEmailLogin"
-                android:layout_width="239dp"
-                android:layout_height="54dp"
-                android:layout_marginTop="70dp"
-                android:backgroundTint="#FD4052"
-                android:ems="10"
-                android:text="joangsmassanet@gmail.com"
-                android:foregroundTint="#FFFFFF"
-                android:hint="Correo electronico"
-                android:inputType="textPersonName"
-                android:textColor="#FFFFFF"
-                android:textColorHint="#F6F6F6"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
 
             <ImageView
                 android:id="@+id/imageView"
@@ -59,21 +44,50 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/logo" />
 
-            <EditText
-                android:id="@+id/editTextPasswordLogin"
-                android:layout_width="239dp"
-                android:layout_height="54dp"
-                android:layout_marginTop="50dp"
-                android:backgroundTint="#FD3F57"
-                android:ems="10"
-                android:text="asecas123"
-                android:hint="Contraseña"
-                android:inputType="textPassword"
-                android:textColor="#F6F6F6"
-                android:textColorHint="#F6F6F6"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/input_email_registre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="100dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                app:endIconMode="clear_text"
+                style="@style/FormTextInputLayout"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editTextEmailLogin" />
+                app:layout_constraintTop_toBottomOf="@id/imageView">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/input_email_registre_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/FormEditText"
+                    android:inputType="textEmailAddress"
+                    android:hint="Correo Electronico" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/input_password_registre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                app:endIconMode="password_toggle"
+                style="@style/FormTextInputLayout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/input_email_registre">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/input_password_registre_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:imeOptions="actionNext"
+                    style="@style/FormEditText"
+                    android:inputType="textPassword"
+                    android:hint="Contraseña" />
+            </com.google.android.material.textfield.TextInputLayout>
 
             <Button
                 android:id="@+id/buttonLogin"
@@ -84,7 +98,7 @@
                 android:text="Entrar"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editTextPasswordLogin" />
+                app:layout_constraintTop_toBottomOf="@+id/input_password_registre" />
 
             <Button
                 android:id="@+id/btnToRegister"
