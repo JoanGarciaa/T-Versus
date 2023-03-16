@@ -5,5 +5,5 @@ data class ShopCard (
     val price : Int,
     val img : Int,
     val valor : Int,
-    )
+)
 

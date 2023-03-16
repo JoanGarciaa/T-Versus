@@ -35,6 +35,9 @@
         <action
             android:id="@+id/action_tournamentFragment_to_officialTournamentFragment"
             app:destination="@id/officialTournamentFragment" />
+        <action
+            android:id="@+id/action_tournamentFragment_to_createTournamentFragment"
+            app:destination="@id/createTournamentFragment" />
     </fragment>
     <fragment
         android:id="@+id/officialTournamentFragment"
@@ -51,4 +54,9 @@
         android:name="cat.iesvidreres.tversus.src.ui.home.tabs.profile_tab.edit_profile.EditProfileFragment"
         android:label="fragment_edit_profile"
         tools:layout="@layout/fragment_edit_profile" />
+    <fragment
+        android:id="@+id/createTournamentFragment"
+        android:name="cat.iesvidreres.tversus.src.ui.home.tabs.tournament_tab.create_tournament_tab.CreateTournamentFragment"
+        android:label="fragment_create_tournament"
+        tools:layout="@layout/fragment_create_tournament" />
 </navigation>

@@ -32,8 +32,8 @@ class RegisterViewModel @Inject constructor(
         dataNaixement.value=data
     }
 
-    fun registerUser(email: String, password: String, context: Context, userRegister: UserRegister){
-        authenticationRepository.createAccount(email,password, context,userRegister)
+    fun registerUser(context: Context, userRegister: UserRegister){
+        authenticationRepository.createAccount(context,userRegister)
     }
 
 

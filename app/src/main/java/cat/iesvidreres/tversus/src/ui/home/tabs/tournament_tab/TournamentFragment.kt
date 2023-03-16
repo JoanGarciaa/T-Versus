@@ -36,6 +36,10 @@ class TournamentFragment : Fragment() {
 
         }
 
+        binding.btnToCreateTournament.setOnClickListener{
+            view?.findNavController()?.navigate(R.id.action_tournamentFragment_to_createTournamentFragment)
+        }
+
 
     }
 

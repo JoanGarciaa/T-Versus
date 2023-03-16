@@ -54,7 +54,7 @@ class RegisterActivity : AppCompatActivity() {
             val password = binding.inputPasswordRegistreText.text.toString()
             val nickname = binding.inputNicknameRegistreText.text.toString()
             val years = binding.inputBorndateRegistreText.text.toString()
-            registerViewModel.registerUser(email,password,this, UserRegister(email,password,nickname,years))
+            registerViewModel.registerUser(this, UserRegister(nickname, email, password, years))
         }
 
         buttonToLogin.setOnClickListener {
