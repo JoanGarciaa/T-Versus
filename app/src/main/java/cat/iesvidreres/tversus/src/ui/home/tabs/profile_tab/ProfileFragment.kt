@@ -13,8 +13,15 @@ import androidx.navigation.findNavController
 import cat.iesvidreres.tversus.R
 import cat.iesvidreres.tversus.databinding.FragmentProfileBinding
 import cat.iesvidreres.tversus.databinding.FragmentShopBinding
+import cat.iesvidreres.tversus.src.data.interfaces.userAPI
+import cat.iesvidreres.tversus.src.data.models.User
 import cat.iesvidreres.tversus.src.data.providers.firebase.AuthenticationRepository
 import dagger.hilt.android.AndroidEntryPoint
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 @AndroidEntryPoint
 class ProfileFragment : Fragment() {
@@ -39,7 +46,8 @@ class ProfileFragment : Fragment() {
 
     private fun init(){
         changeVisibility()
-        getFields()
+        ///getFields()
+        retrofit()
     }
 
     private fun getFields(){
@@ -71,6 +79,30 @@ class ProfileFragment : Fragment() {
                 binding.inputBornDate.setVisibility(View.VISIBLE)
             }
         }
+    }
+
+
+    private fun retrofit() {
+        val retrofit = Retrofit.Builder().baseUrl("http://10.0.2.2:3000/")
+            .addConverterFactory(GsonConverterFactory.create()).build()
+
+        val api = retrofit.create(userAPI::class.java);
+        var userList:User
+        api.getUserByEmail(profileViewModel.authenticationRepository.getCurrentUserEmail().email.toString()).enqueue(object : Callback<User> {
+            override fun onResponse(
+                call: Call<User>, response: Response<User>
+            ) {
+                userList = response.body()!!
+                Log.i("hool","$userList")
+                binding.inputEmailText.text =  Editable.Factory.getInstance().newEditable(userList.email)
+
+
+            }
+            override fun onFailure(call: Call<User>, t: Throwable) {
+                Log.i("Error","$t")
+            }
+
+        })
     }
 
 }

@@ -60,6 +60,10 @@ class AuthenticationRepository @Inject constructor(
         return auth.currentUser!!
     }
 
+    fun getCurrentUserEmail(): FirebaseUser{
+        return auth.currentUser!!
+    }
+
 
 
 

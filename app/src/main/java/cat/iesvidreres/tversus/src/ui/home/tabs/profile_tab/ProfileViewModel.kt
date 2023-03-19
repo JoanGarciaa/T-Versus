@@ -1,6 +1,7 @@
 package cat.iesvidreres.tversus.src.ui.home.tabs.profile_tab
 
 import android.view.View
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import cat.iesvidreres.tversus.src.data.models.User
@@ -22,4 +23,5 @@ class ProfileViewModel @Inject constructor(
         }
         return user
     }
+
 }
