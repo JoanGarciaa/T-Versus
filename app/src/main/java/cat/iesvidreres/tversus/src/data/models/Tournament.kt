@@ -4,7 +4,7 @@ import com.google.common.math.IntMath
 
 data class Tournament (
     val name : String,
-    val id : Int,
+    val id : String,
     val game : String,
     val organizer : String,
     val description : String,

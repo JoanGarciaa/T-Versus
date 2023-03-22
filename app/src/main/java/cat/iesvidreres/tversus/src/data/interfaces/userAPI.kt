@@ -10,6 +10,6 @@ interface userAPI {
     @GET("get-user/{email}")
     fun getUserByEmail(@Path("email") email: String?): Call<User>
 
-    @GET("user")
-    fun getUsers(): Call<User>
+//    @GET("user")
+//    fun getUsers(): Call<User>
 }

@@ -87,15 +87,16 @@ class ProfileFragment : Fragment() {
             .addConverterFactory(GsonConverterFactory.create()).build()
 
         val api = retrofit.create(userAPI::class.java);
-        var userList:User
+        var user:User
         api.getUserByEmail(profileViewModel.authenticationRepository.getCurrentUserEmail().email.toString()).enqueue(object : Callback<User> {
             override fun onResponse(
                 call: Call<User>, response: Response<User>
             ) {
-                userList = response.body()!!
-                Log.i("hool","$userList")
-                binding.inputEmailText.text =  Editable.Factory.getInstance().newEditable(userList.email)
-
+                user = response.body()!!
+                binding.inputEmailText.text =  Editable.Factory.getInstance().newEditable(user.email)
+                binding.tokensUser.text = user.tokens
+                binding.tvUsername.text = user.username
+                binding.inputBornDateText.text = Editable.Factory.getInstance().newEditable(user.borndate)
 
             }
             override fun onFailure(call: Call<User>, t: Throwable) {
