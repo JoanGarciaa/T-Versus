@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import cat.iesvidreres.tversus.R
@@ -17,6 +18,7 @@ import cat.iesvidreres.tversus.src.data.interfaces.userAPI
 import cat.iesvidreres.tversus.src.data.models.User
 import cat.iesvidreres.tversus.src.data.providers.firebase.AuthenticationRepository
 import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.lifecycle.HiltViewModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -26,20 +28,23 @@ import retrofit2.converter.gson.GsonConverterFactory
 @AndroidEntryPoint
 class ProfileFragment : Fragment() {
     private lateinit var binding: FragmentProfileBinding
-    private val profileViewModel: ProfileViewModel by viewModels()
+    private val profileViewModel: ProfileViewModel by activityViewModels()
+    private lateinit var user:User
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         binding =  FragmentProfileBinding.inflate(inflater,container,false)
-
-        binding.btnEditar.setOnClickListener(){
-            view?.findNavController()?.navigate(R.id.action_profileFragment_to_editProfileFragment)
-        }
+        user = profileViewModel.user!!
 
         init()
 
+        Log.i("Asdsadsadsadsadas","$user")
+        binding.inputEmailText.text =  Editable.Factory.getInstance().newEditable(user.email)
+        binding.tokensUser.text = user.tokens
+        binding.tvUsername.text = user.username
+        binding.inputBornDateText.text = Editable.Factory.getInstance().newEditable(user.borndate)
         return binding.root
     }
 
@@ -47,7 +52,7 @@ class ProfileFragment : Fragment() {
     private fun init(){
         changeVisibility()
         ///getFields()
-        retrofit()
+        profileViewModel.retrofit()
     }
 
     private fun getFields(){
@@ -82,28 +87,6 @@ class ProfileFragment : Fragment() {
     }
 
 
-    private fun retrofit() {
-        val retrofit = Retrofit.Builder().baseUrl("http://10.0.2.2:3000/")
-            .addConverterFactory(GsonConverterFactory.create()).build()
 
-        val api = retrofit.create(userAPI::class.java);
-        var user:User
-        api.getUserByEmail(profileViewModel.authenticationRepository.getCurrentUserEmail().email.toString()).enqueue(object : Callback<User> {
-            override fun onResponse(
-                call: Call<User>, response: Response<User>
-            ) {
-                user = response.body()!!
-                binding.inputEmailText.text =  Editable.Factory.getInstance().newEditable(user.email)
-                binding.tokensUser.text = user.tokens
-                binding.tvUsername.text = user.username
-                binding.inputBornDateText.text = Editable.Factory.getInstance().newEditable(user.borndate)
-
-            }
-            override fun onFailure(call: Call<User>, t: Throwable) {
-                Log.i("Error","$t")
-            }
-
-        })
-    }
 
 }

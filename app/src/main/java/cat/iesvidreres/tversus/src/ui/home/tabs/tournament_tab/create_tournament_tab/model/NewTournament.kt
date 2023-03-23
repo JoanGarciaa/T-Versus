@@ -6,7 +6,5 @@ data class NewTournament(
     var description: String,
     var price: Int,
 ){
-    fun isNotEmpty(){
-        name.isNotEmpty() && description.isNotEmpty()
-    }
+    fun isNotEmpty() =name.isNotEmpty() && description.isNotEmpty()
 }

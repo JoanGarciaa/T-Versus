@@ -33,7 +33,6 @@ class HomeFragment : Fragment() {
 
     private fun initUI(){
         setRecyclerView()
-        observeCard()
     }
 
     private fun setRecyclerView() {
@@ -49,18 +48,20 @@ class HomeFragment : Fragment() {
                 Log.i("addasd","$tournament")
             }
         })
+        observeCard()
     }
 
-    private fun observeCard() {
+     private fun observeCard() {
         val retrofit = Retrofit.Builder().baseUrl("http://10.0.2.2:3000/")
             .addConverterFactory(GsonConverterFactory.create()).build()
 
-        val api = retrofit.create(tournamentAPI::class.java);
-        var tournamentList: MutableList<Tournament> = mutableListOf()
+        val api = retrofit.create(tournamentAPI::class.java)
+         var tournamentList: MutableList<Tournament>
         api.showTournaments().enqueue(object : Callback<MutableList<Tournament>> {
             override fun onResponse(
                 call: Call<MutableList<Tournament>>, response: Response<MutableList<Tournament>>
             ) {
+
                 tournamentList = response.body()!!
 //                val tournaments = arrayOfNulls<String>(tournamentList.size)
 //

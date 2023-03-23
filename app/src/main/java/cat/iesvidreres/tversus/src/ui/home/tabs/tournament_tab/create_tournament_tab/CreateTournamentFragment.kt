@@ -15,13 +15,17 @@ import cat.iesvidreres.tversus.src.ui.home.tabs.tournament_tab.create_tournament
 import cat.iesvidreres.tversus.src.core.ex.*
 import cat.iesvidreres.tversus.src.data.interfaces.tournamentAPI
 import cat.iesvidreres.tversus.src.data.models.Tournament
+import cat.iesvidreres.tversus.src.data.models.User
 import cat.iesvidreres.tversus.src.data.providers.firebase.AuthenticationRepository
+import com.google.gson.GsonBuilder
 import dagger.hilt.android.AndroidEntryPoint
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.sql.Timestamp
+import kotlin.random.Random
 
 @AndroidEntryPoint
 class CreateTournamentFragment : Fragment() {
@@ -42,7 +46,6 @@ class CreateTournamentFragment : Fragment() {
     private fun initUI() {
         initListeners()
         initObservers()
-        retrofit()
     }
 
     private fun initListeners() {
@@ -57,9 +60,6 @@ class CreateTournamentFragment : Fragment() {
             inputDescriptionText.setOnFocusChangeListener { _, hasFocus -> onFieldChanged(hasFocus) }
             inputDescriptionText.onTextChanged { onFieldChanged() }
 
-            btnCreateNewTournament.setOnClickListener{
-                createTournamentViewModel.getUser()
-            }
 
             createTournamentViewModel.onFieldsChanged(
                 NewTournament(
@@ -85,6 +85,14 @@ class CreateTournamentFragment : Fragment() {
             createTournamentViewModel.viewState.collect { viewState ->
                 updateUI(viewState)
                 viewState.createTournamentValidated()
+                binding.btnCreateNewTournament.setOnClickListener{
+                    createTournamentViewModel.onFinishSelected(requireContext(),NewTournament(
+                        image = R.drawable.valotourn,
+                        name = binding.inputNameText.text.toString(),
+                        description = binding.inputDescriptionText.text.toString(),
+                        price = 0
+                    ))
+                }
             }
         }
     }
@@ -93,9 +101,7 @@ class CreateTournamentFragment : Fragment() {
         with(binding) {
             if (inputNameText.text.toString().isNotEmpty() && inputDescriptionText.text.toString()
                     .isNotEmpty()
-            ) {
-
-            }
+            )
             if (!hasFocus) {
                 createTournamentViewModel.onFieldsChanged(
                     NewTournament(
@@ -107,33 +113,39 @@ class CreateTournamentFragment : Fragment() {
                 )
             }
         }
-
     }
 
-    private fun retrofit() {
-        val retrofit = Retrofit.Builder().baseUrl("http://10.0.2.2:3000/")
-            .addConverterFactory(GsonConverterFactory.create()).build()
-        var tournament = Tournament("asd","2","asd","asdd","asd",2,1)
-
-        val api = retrofit.create(tournamentAPI::class.java);
-        var userList: Tournament
-        api.newTournament(tournament).enqueue(object : Callback<Tournament> {
-            override fun onResponse(
-                call: Call<Tournament>, response: Response<Tournament>
-            ) {
-                Log.i("asd","$tournament")
-                userList = response.body()!!
-                Log.i("comanem","$userList")
-
-
-            }
-
-            override fun onFailure(call: Call<Tournament>, t: Throwable) {
-                Log.i("Erroddr","$t")
-            }
-
-        })
-
-    }
+//    fun fieldsTournaments(): Tournament{
+//        var name = binding.inputNameText.text.toString()
+//        var description = binding.inputDescriptionText.text.toString()
+//        val id = Random.nextDouble(1000000.0, 20000000.0).toString()
+//        val organizator = createTournamentViewModel.authenticationRepository.getCurrentUser()
+//
+//        val tournament = Tournament(name,id,"Valorant", organizator.toString(),description,0,R.drawable.valotourn,"unofficial")
+//
+//        return tournament
+//    }
+//    private fun retrofit() {
+//        fieldsTournaments()
+//        val gson = GsonBuilder().setLenient().create()
+//        val retrofit = Retrofit.Builder().baseUrl("http://10.0.2.2:3000/")
+//            .addConverterFactory(GsonConverterFactory.create(gson)).build()
+//        var new : Tournament
+//        val api = retrofit.create(tournamentAPI::class.java);
+//        api.newTournament(fieldsTournaments()).enqueue(object : Callback<Tournament> {
+//            override fun onResponse(
+//                call: Call<Tournament>, response: Response<Tournament>
+//            ) {
+//                new = response.body()!!
+//                Log.i("asd","$new")
+//            }
+//
+//            override fun onFailure(call: Call<Tournament>, t: Throwable) {
+//                Log.i("Erroddr","$t")
+//            }
+//
+//        })
+//        Log.i("guay","guay")
+//    }
 
 }
