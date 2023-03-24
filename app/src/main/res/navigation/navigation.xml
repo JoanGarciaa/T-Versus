@@ -58,5 +58,9 @@
         android:id="@+id/createTournamentFragment"
         android:name="cat.iesvidreres.tversus.src.ui.home.tabs.tournament_tab.create_tournament_tab.CreateTournamentFragment"
         android:label="fragment_create_tournament"
-        tools:layout="@layout/fragment_create_tournament" />
+        tools:layout="@layout/fragment_create_tournament" >
+        <action
+            android:id="@+id/action_createTournamentFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
 </navigation>

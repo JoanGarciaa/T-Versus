@@ -53,8 +53,8 @@ class HomeRVAdapter @Inject constructor() : RecyclerView.Adapter<HomeRVAdapter.I
 
     inner class ItemTournamentHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bindView(tournament: Tournament) {
-            val organizerViewTournament = itemView.findViewById<TextView>(R.id.tvOrganizerName)
-            organizerViewTournament.text = tournament.organizer
+            val descriptionViewTournament = itemView.findViewById<TextView>(R.id.tvDescriptionViewTournament)
+            descriptionViewTournament.text = tournament.description
             val imageViewTournament = itemView.findViewById<ImageView>(R.id.ivViewTournament)
             imageViewTournament.setImageResource(R.drawable.valotourn)
             val nameViewTournament = itemView.findViewById<TextView>(R.id.tvNameViewTournament)

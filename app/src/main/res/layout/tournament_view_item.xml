@@ -34,28 +34,28 @@
             card_view:layout_constraintTop_toBottomOf="@+id/ivViewTournament" />
 
         <TextView
-            android:id="@+id/tvOrganizerName"
+            android:id="@+id/tvNameViewTournament"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="35dp"
             android:layout_marginTop="10dp"
-            android:text="JoanAsecas"
+            android:text="Sala amigos"
             android:textColor="@color/terciarytversus"
             android:textSize="20dp"
             card_view:layout_constraintStart_toStartOf="parent"
             card_view:layout_constraintTop_toBottomOf="@+id/ivViewTournament" />
 
         <TextView
-            android:id="@+id/tvNameViewTournament"
+            android:id="@+id/tvDescriptionViewTournament"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Competitivo 1v1"
+            android:text="Gente con la que jugar"
             android:layout_marginTop="10dp"
             android:layout_marginStart="35dp"
             android:textColor="@color/terciarytversus"
             android:layout_marginLeft="10dp"
             card_view:layout_constraintStart_toStartOf="parent"
-            card_view:layout_constraintTop_toBottomOf="@+id/tvOrganizerName" />
+            card_view:layout_constraintTop_toBottomOf="@+id/tvNameViewTournament" />
 
         <ImageView
             android:id="@+id/ivViewTournament"

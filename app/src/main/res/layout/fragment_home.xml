@@ -26,4 +26,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/searchView" />
+
+    <TextView
+        android:id="@+id/tvLastTournaments"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="23dp"
+        android:textColor="@color/terciarytversus"
+        android:layout_marginTop="30dp"
+        android:text="Ultimos torneos creados"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchView" />
 </androidx.constraintlayout.widget.ConstraintLayout>

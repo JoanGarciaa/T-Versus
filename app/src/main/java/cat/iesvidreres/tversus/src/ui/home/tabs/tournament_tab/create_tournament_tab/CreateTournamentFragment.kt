@@ -7,8 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.findNavController
 import cat.iesvidreres.tversus.R
 import cat.iesvidreres.tversus.databinding.FragmentCreateTournamentBinding
 import cat.iesvidreres.tversus.src.ui.home.tabs.tournament_tab.create_tournament_tab.model.NewTournament
@@ -66,7 +68,8 @@ class CreateTournamentFragment : Fragment() {
                     image = R.drawable.ascent,
                     name = inputNameText.text.toString(),
                     description = inputDescriptionText.text.toString(),
-                    price = 0
+                    price = 0,
+                    organizer = createTournamentViewModel.authenticationRepository.getCurrentUser().email.toString()
                 )
             )
         }
@@ -84,14 +87,17 @@ class CreateTournamentFragment : Fragment() {
         lifecycleScope.launchWhenStarted {
             createTournamentViewModel.viewState.collect { viewState ->
                 updateUI(viewState)
-                viewState.createTournamentValidated()
                 binding.btnCreateNewTournament.setOnClickListener{
                     createTournamentViewModel.onFinishSelected(requireContext(),NewTournament(
                         image = R.drawable.valotourn,
                         name = binding.inputNameText.text.toString(),
                         description = binding.inputDescriptionText.text.toString(),
-                        price = 0
+                        price = 0,
+                        organizer = createTournamentViewModel.authenticationRepository.getCurrentUser().email.toString()
                     ))
+                    Toast.makeText(requireContext(),"Torneo creado",Toast.LENGTH_SHORT).show()
+                    Thread.sleep(500)
+                    view?.findNavController()?.navigate(R.id.action_createTournamentFragment_to_homeFragment)
                 }
             }
         }
@@ -108,7 +114,8 @@ class CreateTournamentFragment : Fragment() {
                         image = R.drawable.ascent,
                         name = inputNameText.text.toString(),
                         description = inputDescriptionText.text.toString(),
-                        price = 0
+                        price = 0,
+                        organizer = createTournamentViewModel.authenticationRepository.getCurrentUser().email.toString()
                     )
                 )
             }

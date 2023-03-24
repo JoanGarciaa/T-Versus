@@ -29,22 +29,16 @@ import retrofit2.converter.gson.GsonConverterFactory
 class ProfileFragment : Fragment() {
     private lateinit var binding: FragmentProfileBinding
     private val profileViewModel: ProfileViewModel by activityViewModels()
-    private lateinit var user:User
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         binding =  FragmentProfileBinding.inflate(inflater,container,false)
-        user = profileViewModel.user!!
+
 
         init()
-
-        Log.i("Asdsadsadsadsadas","$user")
-        binding.inputEmailText.text =  Editable.Factory.getInstance().newEditable(user.email)
-        binding.tokensUser.text = user.tokens
-        binding.tvUsername.text = user.username
-        binding.inputBornDateText.text = Editable.Factory.getInstance().newEditable(user.borndate)
         return binding.root
     }
 
@@ -52,17 +46,9 @@ class ProfileFragment : Fragment() {
     private fun init(){
         changeVisibility()
         ///getFields()
-        profileViewModel.retrofit()
+        retrofit()
     }
 
-    private fun getFields(){
-        profileViewModel.getUserFromDB().observe(requireActivity()){
-            binding.inputEmailText.text = Editable.Factory.getInstance().newEditable(it.email)
-            binding.inputBornDateText.text = Editable.Factory.getInstance().newEditable(it.borndate)
-            binding.tvUsername.text = it.username
-            binding.tokensUser.text = it.tokens
-        }
-    }
 
     private fun changeVisibility(){
         binding.tvModificar.setOnClickListener {
@@ -84,6 +70,29 @@ class ProfileFragment : Fragment() {
                 binding.inputBornDate.setVisibility(View.VISIBLE)
             }
         }
+    }
+
+    private fun retrofit() {
+        val retrofit = Retrofit.Builder().baseUrl("http://10.0.2.2:3000/")
+            .addConverterFactory(GsonConverterFactory.create()).build()
+        val api = retrofit.create(userAPI::class.java);
+        var user:User
+        api.getUserByEmail(profileViewModel.authenticationRepository.getCurrentUserEmail().email.toString()).enqueue(object : Callback<User> {
+            override fun onResponse(
+                call: Call<User>, response: Response<User>
+            ) {
+                user = response.body()!!
+                binding.inputEmailText.text =  Editable.Factory.getInstance().newEditable(user.email)
+                binding.tokensUser.text = user.tokens
+                binding.tvUsername.text = user.username
+                binding.inputBornDateText.text = Editable.Factory.getInstance().newEditable(user.borndate)
+
+            }
+            override fun onFailure(call: Call<User>, t: Throwable) {
+                Log.i("Error","$t")
+            }
+
+        })
     }
 
 

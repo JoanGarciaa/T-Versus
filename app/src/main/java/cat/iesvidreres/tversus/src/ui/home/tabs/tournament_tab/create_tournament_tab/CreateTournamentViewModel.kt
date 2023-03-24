@@ -3,6 +3,8 @@ package cat.iesvidreres.tversus.src.ui.home.tabs.tournament_tab.create_tournamen
 import android.content.Context
 import android.util.Log
 import android.widget.Toast
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import cat.iesvidreres.tversus.R
 import cat.iesvidreres.tversus.src.data.interfaces.tournamentAPI
@@ -24,13 +26,15 @@ import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Inject
 import kotlin.random.Random
 
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.LifecycleOwner
+import cat.iesvidreres.tversus.src.data.models.User
+
 @HiltViewModel
 class CreateTournamentViewModel @Inject constructor(
     val authenticationRepository: AuthenticationRepository,
-    val userRepository: UserRepository,
-    //val profileFragment: ProfileFragment
 ):ViewModel(){
-
+    private var organizator = ""
     private companion object{
         const val NAME_LENGTH = 4
         const val DESCRIPTION_LENGHT = 8
@@ -39,6 +43,7 @@ class CreateTournamentViewModel @Inject constructor(
     private val _viewState = MutableStateFlow(CreateTournamentViewState())
     val viewState: StateFlow<CreateTournamentViewState>
         get() = _viewState
+
 
     fun onFieldsChanged(newTournament: NewTournament) {
         _viewState.value = newTournament.toNewTournamentState()
@@ -56,9 +61,6 @@ class CreateTournamentViewModel @Inject constructor(
         )
     }
 
-    fun getUser(){
-        userRepository.findUserByEmail(authenticationRepository.getCurrentUser().email!!)
-    }
 
     fun onFinishSelected(context: Context,newTournament: NewTournament){
         val viewState = newTournament.toNewTournamentState()
@@ -66,9 +68,11 @@ class CreateTournamentViewModel @Inject constructor(
             val id = Random.nextDouble(1000000.0, 20000000.0).toString()
             var name = newTournament.name
             var description = newTournament.description
-            //var organizator = profileFragment.user.email
+            var organization = newTournament.organizer
 
-            val tournament = Tournament(name,id,"Valorant","s",description,0, R.drawable.valotourn,"unofficial")
+
+
+            val tournament = Tournament(name,id,"Valorant",organization,description,0, R.drawable.valotourn,"unofficial")
 
 
             val gson = GsonBuilder().setLenient().create()
@@ -89,6 +93,7 @@ class CreateTournamentViewModel @Inject constructor(
                 }
 
             })
+
             Log.i("guay","guay")
 
         }else{
@@ -96,6 +101,7 @@ class CreateTournamentViewModel @Inject constructor(
             Toast.makeText(context, "¡El torneo necesita un nombre y una descripcion!", Toast.LENGTH_SHORT).show()
         }
     }
+
 
 
 }
