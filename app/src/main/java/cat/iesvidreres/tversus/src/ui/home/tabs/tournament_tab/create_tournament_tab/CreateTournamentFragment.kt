@@ -105,9 +105,6 @@ class CreateTournamentFragment : Fragment() {
 
     private fun onFieldChanged(hasFocus: Boolean = false) {
         with(binding) {
-            if (inputNameText.text.toString().isNotEmpty() && inputDescriptionText.text.toString()
-                    .isNotEmpty()
-            )
             if (!hasFocus) {
                 createTournamentViewModel.onFieldsChanged(
                     NewTournament(
@@ -121,38 +118,5 @@ class CreateTournamentFragment : Fragment() {
             }
         }
     }
-
-//    fun fieldsTournaments(): Tournament{
-//        var name = binding.inputNameText.text.toString()
-//        var description = binding.inputDescriptionText.text.toString()
-//        val id = Random.nextDouble(1000000.0, 20000000.0).toString()
-//        val organizator = createTournamentViewModel.authenticationRepository.getCurrentUser()
-//
-//        val tournament = Tournament(name,id,"Valorant", organizator.toString(),description,0,R.drawable.valotourn,"unofficial")
-//
-//        return tournament
-//    }
-//    private fun retrofit() {
-//        fieldsTournaments()
-//        val gson = GsonBuilder().setLenient().create()
-//        val retrofit = Retrofit.Builder().baseUrl("http://10.0.2.2:3000/")
-//            .addConverterFactory(GsonConverterFactory.create(gson)).build()
-//        var new : Tournament
-//        val api = retrofit.create(tournamentAPI::class.java);
-//        api.newTournament(fieldsTournaments()).enqueue(object : Callback<Tournament> {
-//            override fun onResponse(
-//                call: Call<Tournament>, response: Response<Tournament>
-//            ) {
-//                new = response.body()!!
-//                Log.i("asd","$new")
-//            }
-//
-//            override fun onFailure(call: Call<Tournament>, t: Throwable) {
-//                Log.i("Erroddr","$t")
-//            }
-//
-//        })
-//        Log.i("guay","guay")
-//    }
 
 }

@@ -6,10 +6,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import cat.iesvidreres.tversus.R
 import cat.iesvidreres.tversus.databinding.FragmentHomeBinding
 import cat.iesvidreres.tversus.src.data.interfaces.tournamentAPI
 import cat.iesvidreres.tversus.src.data.models.Tournament
+import cat.iesvidreres.tversus.src.ui.home.tabs.tournament_tab.info_tournament.InfoTournamentViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import retrofit2.Call
 import retrofit2.Callback
@@ -22,6 +26,7 @@ class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
     private var cardAdapter = HomeRVAdapter()
+    private val infoTournamentViewModel : InfoTournamentViewModel by activityViewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -44,8 +49,9 @@ class HomeFragment : Fragment() {
 
         cardAdapter.setItemListener(object : HomeRVAdapter.OnItemClickListener {
             override fun onItemClick(tournament: Tournament) {
-                val tournament = tournament.id
+                infoTournamentViewModel.setTournament(tournament)
                 Log.i("addasd","$tournament")
+                view?.findNavController()?.navigate(R.id.action_homeFragment_to_infoTournamentFragment)
             }
         })
         observeCard()
@@ -69,6 +75,8 @@ class HomeFragment : Fragment() {
 //                    tournaments[i] = tournamentList[i].name
 //                }
                 cardAdapter.setListData(tournamentList)
+                binding.progressBar.visibility = View.GONE
+                cardAdapter.notifyDataSetChanged()
             }
 
             override fun onFailure(call: Call<MutableList<Tournament>>, t: Throwable) {

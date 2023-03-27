@@ -9,7 +9,11 @@
         android:id="@+id/homeFragment"
         android:name="cat.iesvidreres.tversus.src.ui.home.tabs.home_tab.HomeFragment"
         android:label="fragment_menu"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_infoTournamentFragment"
+            app:destination="@id/infoTournamentFragment" />
+    </fragment>
     <fragment
         android:id="@+id/shopFragment"
         android:name="cat.iesvidreres.tversus.src.ui.home.tabs.shop_tab.ShopFragment"
@@ -63,4 +67,9 @@
             android:id="@+id/action_createTournamentFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/infoTournamentFragment"
+        android:name="cat.iesvidreres.tversus.src.ui.home.tabs.tournament_tab.info_tournament.InfoTournamentFragment"
+        android:label="fragment_info_tournament"
+        tools:layout="@layout/fragment_info_tournament" />
 </navigation>

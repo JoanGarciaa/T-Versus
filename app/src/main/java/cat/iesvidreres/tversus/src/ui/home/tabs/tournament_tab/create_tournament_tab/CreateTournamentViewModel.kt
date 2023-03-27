@@ -64,11 +64,11 @@ class CreateTournamentViewModel @Inject constructor(
 
     fun onFinishSelected(context: Context,newTournament: NewTournament){
         val viewState = newTournament.toNewTournamentState()
-        if (viewState.createTournamentValidated()) {
+        if (viewState.createTournamentValidated() && newTournament.isNotEmpty()) {
             val id = Random.nextDouble(1000000.0, 20000000.0).toString()
-            var name = newTournament.name
-            var description = newTournament.description
-            var organization = newTournament.organizer
+            val name = newTournament.name
+            val description = newTournament.description
+            val organization = newTournament.organizer
 
 
 

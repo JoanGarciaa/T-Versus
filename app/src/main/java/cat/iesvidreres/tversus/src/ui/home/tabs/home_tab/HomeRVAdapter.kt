@@ -20,7 +20,7 @@ class HomeRVAdapter @Inject constructor() : RecyclerView.Adapter<HomeRVAdapter.I
     private var listData = listOf<Tournament>()
 
     interface OnItemClickListener {
-        fun onItemClick(shopCard: Tournament)
+        fun onItemClick(tournament: Tournament)
     }
 
     fun setListData(data: List<Tournament>) {

@@ -1,5 +1,6 @@
 package cat.iesvidreres.tversus.src.ui.home.tabs.profile_tab
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.text.Editable
 import android.util.Log
@@ -78,15 +79,16 @@ class ProfileFragment : Fragment() {
         val api = retrofit.create(userAPI::class.java);
         var user:User
         api.getUserByEmail(profileViewModel.authenticationRepository.getCurrentUserEmail().email.toString()).enqueue(object : Callback<User> {
+            @SuppressLint("SetTextI18n")
             override fun onResponse(
                 call: Call<User>, response: Response<User>
             ) {
                 user = response.body()!!
                 binding.inputEmailText.text =  Editable.Factory.getInstance().newEditable(user.email)
-                binding.tokensUser.text = user.tokens
+                binding.tokensUser.text = user.tokens + " TOKENS"
                 binding.tvUsername.text = user.username
                 binding.inputBornDateText.text = Editable.Factory.getInstance().newEditable(user.borndate)
-
+                binding.progressBar2.visibility = View.GONE
             }
             override fun onFailure(call: Call<User>, t: Throwable) {
                 Log.i("Error","$t")

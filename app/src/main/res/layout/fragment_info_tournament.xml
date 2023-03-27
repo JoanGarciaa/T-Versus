@@ -1,14 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/tversus"
+    android:paddingHorizontal="16dp"
     tools:context=".src.ui.home.tabs.tournament_tab.info_tournament.InfoTournamentFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
 
-</FrameLayout>
+    <ImageView
+        android:id="@+id/ivInfoTournament"
+        android:layout_width="match_parent"
+        android:layout_height="280dp"
+        android:src="@drawable/ascent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnJoinTournament"
+        style="@style/PrimaryButton"
+        android:layout_width="140dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/rounded_button"
+        android:text="Unirse"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivInfoTournament" />
+
+    <TextView
+        android:id="@+id/tvInfoTournamentDescription"
+        android:layout_width="260dp"
+        android:layout_height="170dp"
+        android:layout_marginTop="20dp"
+        android:text="TextView"
+        android:textColor="@color/terciarytversus"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvInfoTournamentName" />
+
+    <TextView
+        android:id="@+id/tvInfoTournamentGame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/terciarytversus"
+        android:textSize="19sp"
+        android:layout_margin="20dp"
+        android:text="Juego: Valorant"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvInfoTournamentDescription" />
+
+    <TextView
+        android:id="@+id/tvInfoTournamentName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Primer Torneo"
+        android:textSize="20sp"
+        android:textColor="@color/terciarytversus"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnJoinTournament" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
