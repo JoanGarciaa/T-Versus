@@ -58,10 +58,15 @@ class ShopRVAdapter @Inject constructor() : RecyclerView.Adapter<ShopRVAdapter.S
             valorItemShop.text = shopCard.valor.toString()
             val priceItemShop = itemView.findViewById<TextView>(R.id.priceItemShop)
             priceItemShop.text = "${shopCard.price.toString() + "€"}"
+            val btnComprar = itemView.findViewById<TextView>(R.id.btnBuyTokens)
 
-            itemView.setOnClickListener {
+//            itemView.setOnClickListener {
+//                listener.onItemClick(shopCard)
+//            }
+            btnComprar.setOnClickListener{
                 listener.onItemClick(shopCard)
             }
+
         }
 
 

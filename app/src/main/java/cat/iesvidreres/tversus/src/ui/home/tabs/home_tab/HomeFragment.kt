@@ -50,7 +50,6 @@ class HomeFragment : Fragment() {
         cardAdapter.setItemListener(object : HomeRVAdapter.OnItemClickListener {
             override fun onItemClick(tournament: Tournament) {
                 infoTournamentViewModel.setTournament(tournament)
-                Log.i("addasd","$tournament")
                 view?.findNavController()?.navigate(R.id.action_homeFragment_to_infoTournamentFragment)
             }
         })

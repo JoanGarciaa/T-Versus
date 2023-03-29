@@ -65,15 +65,12 @@ class CreateTournamentViewModel @Inject constructor(
     fun onFinishSelected(context: Context,newTournament: NewTournament){
         val viewState = newTournament.toNewTournamentState()
         if (viewState.createTournamentValidated() && newTournament.isNotEmpty()) {
-            val id = Random.nextDouble(1000000.0, 20000000.0).toString()
+            val id = Random.nextInt(100000, 200000000).toString()
             val name = newTournament.name
             val description = newTournament.description
             val organization = newTournament.organizer
 
-
-
             val tournament = Tournament(name,id,"Valorant",organization,description,0, R.drawable.valotourn,"unofficial")
-
 
             val gson = GsonBuilder().setLenient().create()
             val retrofit = Retrofit.Builder().baseUrl("http://10.0.2.2:3000/")
@@ -85,7 +82,6 @@ class CreateTournamentViewModel @Inject constructor(
                     call: Call<Tournament>, response: Response<Tournament>
                 ) {
                     new = response.body()!!
-                    Log.i("asd","$new")
                 }
 
                 override fun onFailure(call: Call<Tournament>, t: Throwable) {
@@ -93,9 +89,6 @@ class CreateTournamentViewModel @Inject constructor(
                 }
 
             })
-
-            Log.i("guay","guay")
-
         }else{
             onFieldsChanged(newTournament)
             Toast.makeText(context, "¡El torneo necesita un nombre y una descripcion!", Toast.LENGTH_SHORT).show()

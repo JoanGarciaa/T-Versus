@@ -23,47 +23,70 @@
         style="@style/PrimaryButton"
         android:layout_width="140dp"
         android:layout_height="40dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="20dp"
         android:background="@drawable/rounded_button"
         android:text="Unirse"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivInfoTournament" />
+        app:layout_constraintTop_toBottomOf="@+id/tvInfoTournamentDescription" />
 
     <TextView
         android:id="@+id/tvInfoTournamentDescription"
         android:layout_width="260dp"
         android:layout_height="170dp"
-        android:layout_marginTop="20dp"
-        android:text="TextView"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
         android:textColor="@color/terciarytversus"
         android:textSize="15sp"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvInfoTournamentName" />
+        app:layout_constraintTop_toBottomOf="@+id/tvInfoTournamentName"
+        tools:text="Descripcion del torneo: Un torneo para gente avanzada detro del juego" />
 
     <TextView
         android:id="@+id/tvInfoTournamentGame"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/terciarytversus"
-        android:textSize="19sp"
-        android:layout_margin="20dp"
-        android:text="Juego: Valorant"
+        tools:text="Game: Valorant"
+        app:layout_constraintTop_toBottomOf="@id/tvInfoTournamentDescription"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvInfoTournamentDescription" />
+        android:layout_marginTop="37dp"
+        android:layout_marginStart="20dp"
+        android:textSize="19sp"
+        android:textColor="@color/terciarytversus"/>
 
     <TextView
         android:id="@+id/tvInfoTournamentName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Primer Torneo"
-        android:textSize="20sp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="25dp"
         android:textColor="@color/terciarytversus"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvInfoTournamentPrice"
+        tools:text="Nombre: Primer Torneo" />
+
+    <TextView
+        android:id="@+id/tvInfoTournamentPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/secondarytversus"
+        android:textSize="25sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnJoinTournament" />
+        app:layout_constraintTop_toBottomOf="@+id/ivInfoTournament"
+        tools:text="Precio: 1000" />
+
+    <ProgressBar
+        android:id="@+id/progressBarInfoTournament"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

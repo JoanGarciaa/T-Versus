@@ -85,7 +85,7 @@ class ProfileFragment : Fragment() {
             ) {
                 user = response.body()!!
                 binding.inputEmailText.text =  Editable.Factory.getInstance().newEditable(user.email)
-                binding.tokensUser.text = user.tokens + " TOKENS"
+                binding.tokensUser.text = user.tokens.toString() + " TOKENS"
                 binding.tvUsername.text = user.username
                 binding.inputBornDateText.text = Editable.Factory.getInstance().newEditable(user.borndate)
                 binding.progressBar2.visibility = View.GONE

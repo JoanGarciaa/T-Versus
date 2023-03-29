@@ -8,9 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
-import cat.iesvidreres.tversus.R
-import cat.iesvidreres.tversus.databinding.FragmentCreateTournamentBinding
 import cat.iesvidreres.tversus.databinding.FragmentInfoTournamentBinding
 import cat.iesvidreres.tversus.src.data.interfaces.tournamentAPI
 import cat.iesvidreres.tversus.src.data.models.Tournament
@@ -53,16 +50,25 @@ class InfoTournamentFragment : Fragment() {
                     tvInfoTournamentName.text = infoTournament.name
                     tvInfoTournamentDescription.text = "Descripcion: " + infoTournament.description
                     tvInfoTournamentGame.text = "GAME: " + infoTournament.game
+                    definePrice(infoTournament.price)
+                    progressBarInfoTournament.visibility = View.GONE
                 }
-
             }
-
             override fun onFailure(call: Call<Tournament>, t: Throwable) {
                 Log.i("Erroddr","$t")
             }
 
         })
 
+    }
+
+    @SuppressLint("SetTextI18n")
+    fun definePrice(price : Int){
+        if(price == 0){
+            binding.tvInfoTournamentPrice.text = "¡Gratis!"
+        }else{
+            binding.tvInfoTournamentPrice.text = "Precio: $price"
+        }
     }
 
 

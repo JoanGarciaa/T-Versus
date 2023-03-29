@@ -21,7 +21,7 @@ class UserRepository @Inject constructor(){
     }
 
     fun createUserTable(userRegister: UserRegister){
-        val user = User(userRegister.nickname, userRegister.email,userRegister.password,userRegister.years,"0" )
+        val user = User(userRegister.nickname, userRegister.email,userRegister.password,userRegister.years,0 )
         db.collection("users").document(user.email).set(user)
     }
     fun findUserByEmail(email:String):MutableLiveData<User>{
@@ -35,7 +35,7 @@ class UserRepository @Inject constructor(){
                 it.documents.first().getString(EMAIL_FIELD)!!,
                 it.documents.first().getString(PASSWORD_FIELD)!!,
                 it.documents.first().getString(BORN_FIELD)!!,
-                it.documents.first().getString(TOKEN_FIELD)!!
+                it.documents.first().getField<Int>(TOKEN_FIELD)!!
             )
         }
         return user
