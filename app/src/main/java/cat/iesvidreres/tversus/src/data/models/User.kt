@@ -6,5 +6,6 @@ data class User(
     val email: String,
     val password: String,
     val borndate : String,
-    var tokens: Int
+    var tokens: Int,
+    var tournament_id: String
 )

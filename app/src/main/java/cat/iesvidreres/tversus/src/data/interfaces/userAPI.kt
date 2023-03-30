@@ -14,6 +14,9 @@ interface userAPI {
     @POST("buy-tokens/{id}")
     fun buyTokens(@Path("id")id:String,@Body user:User): Call<User>
 
+    @POST("join-tournament/{id}")
+    fun joinTournament(@Path("id")id:String,@Body user:User): Call<User>
+
 //    @GET("user")
 //    fun getUsers(): Call<User>
 }

@@ -18,7 +18,11 @@
         android:id="@+id/shopFragment"
         android:name="cat.iesvidreres.tversus.src.ui.home.tabs.shop_tab.ShopFragment"
         android:label="fragment_shop"
-        tools:layout="@layout/fragment_shop" />
+        tools:layout="@layout/fragment_shop" >
+        <action
+            android:id="@+id/action_shopFragment_to_paymentFragment"
+            app:destination="@id/paymentFragment" />
+    </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="cat.iesvidreres.tversus.src.ui.home.tabs.profile_tab.ProfileFragment"
@@ -71,5 +75,20 @@
         android:id="@+id/infoTournamentFragment"
         android:name="cat.iesvidreres.tversus.src.ui.home.tabs.tournament_tab.info_tournament.InfoTournamentFragment"
         android:label="fragment_info_tournament"
-        tools:layout="@layout/fragment_info_tournament" />
+        tools:layout="@layout/fragment_info_tournament" >
+        <action
+            android:id="@+id/action_infoTournamentFragment_to_shopFragment"
+            app:destination="@id/shopFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false" />
+    </fragment>
+    <fragment
+        android:id="@+id/paymentFragment"
+        android:name="cat.iesvidreres.tversus.src.ui.home.tabs.shop_tab.payment.PaymentFragment"
+        android:label="fragment_payment"
+        tools:layout="@layout/fragment_payment" >
+        <action
+            android:id="@+id/action_paymentFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
 </navigation>

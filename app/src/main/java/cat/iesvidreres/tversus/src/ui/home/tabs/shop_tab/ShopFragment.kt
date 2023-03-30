@@ -9,13 +9,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import cat.iesvidreres.tversus.R
 import cat.iesvidreres.tversus.databinding.FragmentShopBinding
 import cat.iesvidreres.tversus.src.data.interfaces.userAPI
 import cat.iesvidreres.tversus.src.data.models.ShopCard
 import cat.iesvidreres.tversus.src.data.models.User
 import cat.iesvidreres.tversus.src.data.providers.ShopCardProvider
 import cat.iesvidreres.tversus.src.ui.home.tabs.profile_tab.ProfileViewModel
+import cat.iesvidreres.tversus.src.ui.home.tabs.shop_tab.payment.PaymentViewModel
 import com.google.gson.GsonBuilder
 import dagger.hilt.android.AndroidEntryPoint
 import retrofit2.Call
@@ -28,7 +31,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 class ShopFragment : Fragment() {
     private lateinit var binding: FragmentShopBinding
     private val profileViewModel: ProfileViewModel by activityViewModels()
-
+    private val paymentViewModel : PaymentViewModel by activityViewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -53,42 +56,9 @@ class ShopFragment : Fragment() {
 
         cardAdapter.setItemListener(object : ShopRVAdapter.OnItemClickListener {
             override fun onItemClick(shopCard: ShopCard) {
-
-                val gson = GsonBuilder().setLenient().create()
-                val retrofit = Retrofit.Builder().baseUrl("http://10.0.2.2:3000/")
-                    .addConverterFactory(GsonConverterFactory.create(gson)).build()
-                val api = retrofit.create(userAPI::class.java);
-                var user: User
-                api.getUserByEmail(profileViewModel.authenticationRepository.getCurrentUserEmail().email.toString())
-                    .enqueue(object : Callback<User> {
-                        @SuppressLint("SetTextI18n")
-                        override fun onResponse(
-                            call: Call<User>, response: Response<User>
-                        ) {
-                            user = response.body()!!
-                            val oldTokens = user.tokens
-                            val newTokens = shopCard.valor
-                            val finalTokens = oldTokens + newTokens
-                            user.tokens = finalTokens
-                            api.buyTokens(profileViewModel.authenticationRepository.getCurrentUserEmail().email.toString(), user).enqueue(object : Callback<User> {
-                                @SuppressLint("SetTextI18n")
-                                override fun onResponse(
-                                    call: Call<User>, response: Response<User>
-                                ) {
-                                    user = response.body()!!
-                                }
-                                override fun onFailure(call: Call<User>, t: Throwable) {
-                                    Log.i("Error", "$t")
-                                }
-                            })
-                        }
-
-                        override fun onFailure(call: Call<User>, t: Throwable) {
-                            Log.i("Error", "$t")
-                        }
-
-                    })
-
+                paymentViewModel.setItemShop(shopCard)
+                Log.i("adasdasdsadasd","$shopCard")
+                view?.findNavController()?.navigate(R.id.action_shopFragment_to_paymentFragment)
             }
         })
     }

@@ -4,6 +4,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -61,10 +62,18 @@ class HomeRVAdapter @Inject constructor() : RecyclerView.Adapter<HomeRVAdapter.I
             nameViewTournament.text = tournament.name
             val priceViewTournament = itemView.findViewById<TextView>(R.id.tvPriceTournament)
             priceViewTournament.text = tournament.price.toString()
+            val btnJoin = itemView.findViewById<Button>(R.id.btnToJoin)
 
             itemView.setOnClickListener {
                 listener.onItemClick(tournament)
             }
+
+            btnJoin.setOnClickListener{
+                listener.onItemClick(tournament)
+            }
+
+
+
         }
 
 

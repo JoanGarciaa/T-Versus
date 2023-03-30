@@ -95,9 +95,12 @@ class CreateTournamentFragment : Fragment() {
                         price = 0,
                         organizer = createTournamentViewModel.authenticationRepository.getCurrentUser().email.toString()
                     ))
-                    Toast.makeText(requireContext(),"Torneo creado",Toast.LENGTH_SHORT).show()
-                    Thread.sleep(500)
-                    view?.findNavController()?.navigate(R.id.action_createTournamentFragment_to_homeFragment)
+                }
+                createTournamentViewModel.navigateToHome.observe(requireActivity()) {
+                    it.getContentIfNotHandled()?.let {
+                        view?.findNavController()?.navigate(R.id.action_createTournamentFragment_to_homeFragment)
+                        toast("Torneo Creado!")
+                    }
                 }
             }
         }

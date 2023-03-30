@@ -3,9 +3,6 @@ package cat.iesvidreres.tversus.src.ui.home.tabs.tournament_tab.create_tournamen
 import android.content.Context
 import android.util.Log
 import android.widget.Toast
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import cat.iesvidreres.tversus.R
 import cat.iesvidreres.tversus.src.data.interfaces.tournamentAPI
 import cat.iesvidreres.tversus.src.data.models.Tournament
@@ -25,20 +22,27 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Inject
 import kotlin.random.Random
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.*
+import cat.iesvidreres.tversus.src.core.Event
 import cat.iesvidreres.tversus.src.data.models.User
 
 @HiltViewModel
 class CreateTournamentViewModel @Inject constructor(
     val authenticationRepository: AuthenticationRepository,
 ):ViewModel(){
-    private var organizator = ""
     private companion object{
         const val NAME_LENGTH = 4
         const val DESCRIPTION_LENGHT = 8
     }
+
+    private val _navigateToHome = MutableLiveData<Event<Boolean>>()
+    val navigateToHome: LiveData<Event<Boolean>>
+        get() = _navigateToHome
 
     private val _viewState = MutableStateFlow(CreateTournamentViewState())
     val viewState: StateFlow<CreateTournamentViewState>
@@ -89,11 +93,14 @@ class CreateTournamentViewModel @Inject constructor(
                 }
 
             })
+            _navigateToHome.value = Event(true)
         }else{
             onFieldsChanged(newTournament)
             Toast.makeText(context, "¡El torneo necesita un nombre y una descripcion!", Toast.LENGTH_SHORT).show()
         }
     }
+
+
 
 
 
