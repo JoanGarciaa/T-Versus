@@ -36,9 +36,8 @@
             android:id="@+id/input_card_number_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:text="3562 6270 2342 4322"
             android:inputType="textEmailAddress"
-            android:hint="Número de la tarjeta" />
+            android:hint="1234 1234 1234 1324" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -54,9 +53,9 @@
             android:id="@+id/input_card_cvv_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="CVV"
+            android:hint="1234"
             android:inputType="textEmailAddress"
-            tools:text="2051" />
+            />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -72,9 +71,8 @@
             android:id="@+id/input_card_caducity_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Fecha de caducidad"
-            android:inputType="textEmailAddress"
-            tools:text="21/04" />
+            android:hint="10/10"
+            android:inputType="textEmailAddress" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
@@ -162,6 +160,20 @@
         android:background="#3B000000"
         app:layout_constraintTop_toBottomOf="@id/tvArticleValue"
         tools:layout_editor_absoluteX="30dp" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottieLoading"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        android:visibility="gone"
+        app:lottie_rawRes="@raw/verifypayment"
+        tools:visibility="visible" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

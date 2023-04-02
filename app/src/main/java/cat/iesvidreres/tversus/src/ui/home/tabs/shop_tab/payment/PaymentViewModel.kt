@@ -7,19 +7,12 @@ import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import cat.iesvidreres.tversus.R
 import cat.iesvidreres.tversus.src.core.Event
-import cat.iesvidreres.tversus.src.data.interfaces.tournamentAPI
 import cat.iesvidreres.tversus.src.data.interfaces.userAPI
 import cat.iesvidreres.tversus.src.data.models.ShopCard
-import cat.iesvidreres.tversus.src.data.models.Tournament
 import cat.iesvidreres.tversus.src.data.models.User
 import cat.iesvidreres.tversus.src.data.providers.firebase.AuthenticationRepository
-import cat.iesvidreres.tversus.src.ui.home.tabs.profile_tab.ProfileViewModel
 import cat.iesvidreres.tversus.src.ui.home.tabs.shop_tab.payment.model.Payment
-import cat.iesvidreres.tversus.src.ui.home.tabs.tournament_tab.create_tournament_tab.CreateTournamentViewModel
-import cat.iesvidreres.tversus.src.ui.home.tabs.tournament_tab.create_tournament_tab.CreateTournamentViewState
-import cat.iesvidreres.tversus.src.ui.home.tabs.tournament_tab.create_tournament_tab.model.NewTournament
 import com.google.gson.GsonBuilder
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -30,7 +23,6 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Inject
-import kotlin.random.Random
 
 @HiltViewModel
 class PaymentViewModel @Inject constructor(
@@ -61,11 +53,11 @@ class PaymentViewModel @Inject constructor(
         _shopCard = shopCard
     }
 
-    fun isValidCardNumber(number: String) = number.length >= CARD_NUMBER_LENGTH
+    fun isValidCardNumber(number: String) = number.length == CARD_NUMBER_LENGTH
 
-    fun isValidPin(pin: String) = pin.length >= PIN_LENGTH
+    fun isValidPin(pin: String) = pin.length == PIN_LENGTH
 
-    fun isValidCaducity(caducity: String) = caducity.length >= CADUCITY_LENGTH
+    fun isValidCaducity(caducity: String) = caducity.length == CADUCITY_LENGTH
 
     fun Payment.toPaymentState(): PaymentViewState {
         return PaymentViewState(
@@ -100,6 +92,7 @@ class PaymentViewModel @Inject constructor(
                                 call: Call<User>, response: Response<User>
                             ) {
                                 user = response.body()!!
+                                _navigateToHome.value = Event(true)
                             }
                             override fun onFailure(call: Call<User>, t: Throwable) {
                                 Log.i("Error", "$t")
@@ -110,9 +103,7 @@ class PaymentViewModel @Inject constructor(
                     override fun onFailure(call: Call<User>, t: Throwable) {
                         Log.i("Error", "$t")
                     }
-
                 })
-            _navigateToHome.value = Event(true)
 
         }else{
             onFieldsChanged(payment)

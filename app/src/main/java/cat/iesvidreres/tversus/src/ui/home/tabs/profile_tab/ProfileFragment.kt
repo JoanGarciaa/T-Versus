@@ -10,16 +10,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import cat.iesvidreres.tversus.R
 import cat.iesvidreres.tversus.databinding.FragmentProfileBinding
-import cat.iesvidreres.tversus.databinding.FragmentShopBinding
 import cat.iesvidreres.tversus.src.data.interfaces.userAPI
 import cat.iesvidreres.tversus.src.data.models.User
-import cat.iesvidreres.tversus.src.data.providers.firebase.AuthenticationRepository
 import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.lifecycle.HiltViewModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -39,6 +35,9 @@ class ProfileFragment : Fragment() {
         binding =  FragmentProfileBinding.inflate(inflater,container,false)
 
 
+        binding.btnEditar.setOnClickListener {
+            view?.findNavController()?.navigate(R.id.action_profileFragment_to_editProfileFragment)
+        }
         init()
         return binding.root
     }
@@ -46,13 +45,13 @@ class ProfileFragment : Fragment() {
 
     private fun init(){
         changeVisibility()
-        ///getFields()
         retrofit()
+
     }
 
 
     private fun changeVisibility(){
-        binding.tvModificar.setOnClickListener {
+        binding.tvMoreInfo.setOnClickListener {
             if (binding.inputEmail.isVisible && binding.inputBornDate.isVisible) {
                 binding.inputEmail.setVisibility(View.GONE)
                 binding.inputBornDate.setVisibility(View.GONE)
@@ -72,6 +71,8 @@ class ProfileFragment : Fragment() {
             }
         }
     }
+
+
 
     private fun retrofit() {
         val retrofit = Retrofit.Builder().baseUrl("http://10.0.2.2:3000/")

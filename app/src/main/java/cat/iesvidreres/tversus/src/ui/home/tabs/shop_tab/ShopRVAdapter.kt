@@ -29,7 +29,7 @@ class ShopRVAdapter @Inject constructor() : RecyclerView.Adapter<ShopRVAdapter.S
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShopCardHolder {
         val v =
-            LayoutInflater.from(parent.context).inflate(R.layout.shop_card_item, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.item_shop_card, parent, false)
 
         return ShopCardHolder(v)
     }

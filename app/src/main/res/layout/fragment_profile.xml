@@ -38,7 +38,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:text="JoanAsecas"
+        tools:text="JoanAsecas"
         android:textColor="@color/terciarytversus"
         android:textSize="35sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -49,7 +49,7 @@
         android:id="@+id/btnEditar"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
-        android:text="Editar Perfil"
+        tools:text="Editar Perfil"
         android:layout_marginTop="20dp"
         style="@style/PrimaryButton"
         android:layout_marginRight="30dp"
@@ -61,7 +61,7 @@
         android:id="@+id/tokensUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="12000 tokens"
+        tools:text="12000 tokens"
         android:textSize="22sp"
         android:textColor="@color/secondarytversus"
         android:textStyle="italic"
@@ -81,13 +81,13 @@
         app:endIconTint="@color/secondarytversus"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvModificar">
+        app:layout_constraintTop_toBottomOf="@id/tvMoreInfo">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/inputEmailText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="joangsmassanet@gmail.com"
+            tools:text="joangsmassanet@gmail.com"
             android:hint="Correo electrónico"
             android:imeOptions="actionNext" />
 
@@ -112,7 +112,7 @@
             android:id="@+id/inputBornDateText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="10/10/2010"
+            tools:text="10/10/2010"
             android:hint="Fecha de nacimiento"
             android:imeOptions="actionNext" />
 
@@ -129,18 +129,18 @@
         android:layout_marginStart="20dp"
         app:layout_constraintTop_toBottomOf="@+id/tokensUser" />
 
-    <TextView
-        android:id="@+id/tvModificar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:layout_marginRight="43dp"
-        android:text="Modifica tus datos."
-        android:textColor="@color/white"
-        android:textSize="15sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageViewArrow"
-        app:layout_constraintTop_toBottomOf="@+id/tokensUser" />
+            <TextView
+                android:id="@+id/tvMoreInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:layout_marginRight="43dp"
+                android:text="Información de tu cuenta"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imageViewArrow"
+                app:layout_constraintTop_toBottomOf="@+id/tokensUser" />
 
             <ProgressBar
                 android:id="@+id/progressBar2"

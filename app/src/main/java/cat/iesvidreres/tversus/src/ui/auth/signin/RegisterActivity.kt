@@ -1,23 +1,15 @@
 package cat.iesvidreres.tversus.src.ui.auth.signin
 
-import android.content.ContentValues.TAG
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.EditText
-import android.widget.Toast
 import androidx.activity.viewModels
 import cat.iesvidreres.tversus.R
-import cat.iesvidreres.tversus.databinding.ActivityLoginBinding
 import cat.iesvidreres.tversus.databinding.ActivityRegisterBinding
 import cat.iesvidreres.tversus.src.ui.auth.LoginActivity
-import cat.iesvidreres.tversus.src.ui.auth.login.LoginViewModel
 import cat.iesvidreres.tversus.src.ui.auth.signin.model.UserRegister
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

@@ -7,9 +7,6 @@ import cat.iesvidreres.tversus.R
 import cat.iesvidreres.tversus.src.data.interfaces.tournamentAPI
 import cat.iesvidreres.tversus.src.data.models.Tournament
 import cat.iesvidreres.tversus.src.data.providers.firebase.AuthenticationRepository
-import cat.iesvidreres.tversus.src.data.providers.firebase.UserRepository
-import cat.iesvidreres.tversus.src.ui.home.tabs.profile_tab.ProfileFragment
-import cat.iesvidreres.tversus.src.ui.home.tabs.profile_tab.ProfileViewModel
 import cat.iesvidreres.tversus.src.ui.home.tabs.tournament_tab.create_tournament_tab.model.NewTournament
 import com.google.gson.GsonBuilder
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -25,11 +22,8 @@ import kotlin.random.Random
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.*
 import cat.iesvidreres.tversus.src.core.Event
-import cat.iesvidreres.tversus.src.data.models.User
+
 
 @HiltViewModel
 class CreateTournamentViewModel @Inject constructor(

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/tversus"
+    android:padding="16dp"
+    tools:context=".src.ui.home.admin.functions_admin.list_tournaments_admin.info_tournament_admin.InfoTournamentAdminFragment">
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvInfoTournamentPlayers"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/idInfoTournament"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="Id : 1102937"
+        android:layout_marginTop="10dp"
+        style="@style/basicText"
+        android:textColor="@color/secondarytversus"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/nameInfoTournament"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="Nombre: Torneo Valorant"
+        android:layout_marginTop="10dp"
+        style="@style/basicText"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/idInfoTournament" />
+
+    <TextView
+        android:id="@+id/organizerInfoTournament"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="Organizador: joangsmassanet@gmail.com"
+        android:layout_marginTop="10dp"
+        style="@style/basicText"
+        android:textSize="19sp"
+        android:textColor="@color/secondarytversus"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nameInfoTournament" />
+
+    <TextView
+        android:id="@+id/descriptionInfoTournament"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="Descripcion: Torneo de valorant para jugadores de un nivel avanzado y con mas de 1000horas de juego"
+        android:layout_marginTop="10dp"
+        style="@style/basicText"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/organizerInfoTournament" />
+
+    <TextView
+        android:id="@+id/typeInfoTournament"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="Tipo: Oficial"
+        android:layout_marginTop="10dp"
+        style="@style/basicText"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/descriptionInfoTournament" />
+
+    <TextView
+        android:id="@+id/priceInfoTournament"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="Precio: 1000 tk"
+        android:layout_marginTop="10dp"
+        style="@style/basicText"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/typeInfoTournament" />
+
+    <TextView
+        android:id="@+id/gameInfoTournament"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="Juego: Valorant"
+        android:layout_marginTop="10dp"
+        style="@style/basicText"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/priceInfoTournament" />
+
+    <ImageView
+        android:id="@+id/ivDeleteTournament"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/ic_baseline_delete_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvPlayers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="11dp"
+        android:text="Jugadores inscritos"
+        style="@style/basicText"
+        app:layout_constraintBottom_toTopOf="@+id/rvInfoTournamentPlayers"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

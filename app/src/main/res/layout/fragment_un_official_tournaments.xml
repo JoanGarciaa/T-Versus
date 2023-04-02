@@ -10,7 +10,7 @@
 
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewNoOficiales"
+        android:id="@+id/rvUnOfficialTournaments"
         android:layout_width="413dp"
         android:layout_height="542dp"
         app:layout_constraintEnd_toEndOf="parent"

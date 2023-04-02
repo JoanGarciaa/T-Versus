@@ -1,24 +1,23 @@
 package cat.iesvidreres.tversus.src.ui.auth
 
 import android.annotation.SuppressLint
-import android.content.ContentValues.TAG
-import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
-import android.widget.EditText
+import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
+import androidx.lifecycle.lifecycleScope
 import cat.iesvidreres.tversus.src.ui.home.MainActivity
-import cat.iesvidreres.tversus.R
 import cat.iesvidreres.tversus.databinding.ActivityLoginBinding
+import cat.iesvidreres.tversus.src.core.ex.loseFocusAfterAction
+import cat.iesvidreres.tversus.src.core.ex.onTextChanged
 import cat.iesvidreres.tversus.src.ui.auth.login.LoginViewModel
+import cat.iesvidreres.tversus.src.ui.auth.login.LoginViewState
 import cat.iesvidreres.tversus.src.ui.auth.signin.RegisterActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
@@ -32,6 +31,7 @@ class LoginActivity : AppCompatActivity() {
     private val GOOGLE_SIGN_IN = 100
     private lateinit var binding: ActivityLoginBinding
     private val loginViewModel: LoginViewModel by viewModels()
+
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,25 +44,14 @@ class LoginActivity : AppCompatActivity() {
             val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
         }
-
-        binding.buttonLogin.setOnClickListener {
-            val email = binding.inputEmailRegistreText.text.toString()
-            val password = binding.inputPasswordRegistreText.text.toString()
-            if (email.isNotEmpty() && password.isNotEmpty()) {
-                loginViewModel.loginUser(email,password,this)
-            }
-        }
-
-
-//        binding.buttonLoginGoogle.setOnClickListener {
-//            val googleConf = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken(getString(R.string.default_web_client_id)).requestEmail().build()
-//            val googleClient = GoogleSignIn.getClient(this,googleConf)
-//            googleClient.signOut()
-//            startActivityForResult(googleClient.signInIntent, GOOGLE_SIGN_IN)
-//        }
+        initUI()
 
     }
 
+    private fun initUI(){
+        initListeners()
+        initObservers()
+    }
     @SuppressLint("SuspiciousIndentation")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -99,6 +88,51 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+    private fun updateUI(viewState: LoginViewState) {
+        with(binding) {
+            inputEmailRegistre.error =
+                if (viewState.isValidEmail) null else "El correo no es valido"
+            inputPasswordRegistre.error =
+                if (viewState.isValidPassword) null else "La contraseña no es válida"
+        }
+    }
+
+    private fun onFieldChanged(hasFocus: Boolean = false) {
+        if (!hasFocus) {
+            loginViewModel.onFieldsChanged(
+                email = binding.inputEmailRegistreText.text.toString(),
+                password = binding.inputPasswordRegistreText.text.toString()
+            )
+        }
+    }
+
+    private fun initListeners() {
+
+        binding.inputEmailRegistreText.loseFocusAfterAction(EditorInfo.IME_ACTION_NEXT)
+        binding.inputEmailRegistreText.onTextChanged { onFieldChanged() }
+
+        binding.inputPasswordRegistreText.loseFocusAfterAction(EditorInfo.IME_ACTION_DONE)
+        binding.inputPasswordRegistreText.setOnFocusChangeListener { _, hasFocus -> onFieldChanged(hasFocus) }
+        binding.inputPasswordRegistreText.onTextChanged { onFieldChanged() }
+
+        binding.buttonLogin.setOnClickListener {
+            loginViewModel.onLoginSelected(
+                binding.inputEmailRegistreText.text.toString(),
+                binding.inputPasswordRegistreText.text.toString(),
+                this
+            )
+
+        }
+    }
+
+
+    private fun initObservers() {
+        lifecycleScope.launchWhenStarted {
+            loginViewModel.viewState.collect { viewState ->
+                updateUI(viewState)
+            }
+        }
+    }
 
     public override fun onStart() {
         super.onStart()

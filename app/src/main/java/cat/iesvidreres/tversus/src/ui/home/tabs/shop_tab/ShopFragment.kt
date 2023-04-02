@@ -1,8 +1,6 @@
 package cat.iesvidreres.tversus.src.ui.home.tabs.shop_tab
 
-import android.annotation.SuppressLint
 import android.os.Bundle
-import android.text.Editable
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -13,19 +11,11 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import cat.iesvidreres.tversus.R
 import cat.iesvidreres.tversus.databinding.FragmentShopBinding
-import cat.iesvidreres.tversus.src.data.interfaces.userAPI
 import cat.iesvidreres.tversus.src.data.models.ShopCard
-import cat.iesvidreres.tversus.src.data.models.User
 import cat.iesvidreres.tversus.src.data.providers.ShopCardProvider
 import cat.iesvidreres.tversus.src.ui.home.tabs.profile_tab.ProfileViewModel
 import cat.iesvidreres.tversus.src.ui.home.tabs.shop_tab.payment.PaymentViewModel
-import com.google.gson.GsonBuilder
 import dagger.hilt.android.AndroidEntryPoint
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 @AndroidEntryPoint
 class ShopFragment : Fragment() {

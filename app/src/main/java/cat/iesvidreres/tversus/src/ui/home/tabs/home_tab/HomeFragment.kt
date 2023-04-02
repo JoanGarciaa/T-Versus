@@ -23,7 +23,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
-
     private lateinit var binding: FragmentHomeBinding
     private var cardAdapter = HomeRVAdapter()
     private val infoTournamentViewModel : InfoTournamentViewModel by activityViewModels()

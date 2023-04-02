@@ -2,28 +2,23 @@ package cat.iesvidreres.tversus.src.ui.home.tabs.shop_tab.payment
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
+import android.os.Handler
+import android.os.Looper
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
-import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import cat.iesvidreres.tversus.R
-import cat.iesvidreres.tversus.databinding.FragmentInfoTournamentBinding
 import cat.iesvidreres.tversus.databinding.FragmentPaymentBinding
 import cat.iesvidreres.tversus.src.core.ex.loseFocusAfterAction
 import cat.iesvidreres.tversus.src.core.ex.onTextChanged
 import cat.iesvidreres.tversus.src.core.ex.toast
 import cat.iesvidreres.tversus.src.data.models.ShopCard
 import cat.iesvidreres.tversus.src.ui.home.tabs.shop_tab.payment.model.Payment
-import cat.iesvidreres.tversus.src.ui.home.tabs.tournament_tab.create_tournament_tab.CreateTournamentViewState
-import cat.iesvidreres.tversus.src.ui.home.tabs.tournament_tab.create_tournament_tab.model.NewTournament
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -84,6 +79,10 @@ class PaymentFragment : Fragment() {
             paymentViewModel.viewState.collect { viewState ->
                 updateUI(viewState)
                 binding.bntCompletePayment.setOnClickListener {
+                    binding.lottieLoading.visibility = View.VISIBLE
+                    Handler(Looper.getMainLooper()).postDelayed({
+                        binding.lottieLoading.visibility = View.GONE
+                    }, 1300)
                     paymentViewModel.onFinishSelected(
                         requireContext(), Payment(
                             cardNumber = binding.inputCardNumberText.text.toString(),
@@ -110,7 +109,7 @@ class PaymentFragment : Fragment() {
             if (viewState.isValidCardCvv) null else "No tiene un formato correcto"
 
         binding.inputCardCaducity.error =
-            if (viewState.isValidCardCvv) null else "No tiene un formato correcto"
+            if (viewState.isValidCardCaducity) null else "No tiene un formato correcto"
 
     }
 

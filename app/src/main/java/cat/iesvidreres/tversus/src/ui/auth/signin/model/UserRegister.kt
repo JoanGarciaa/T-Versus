@@ -6,4 +6,6 @@ class UserRegister(
     val password: String,
     val years : String
 ) {
+    fun isNotEmpty() =
+        nickname.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty() && years.isNotEmpty()
 }

@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
-
+    <item
+        android:icon="@drawable/ic_baseline_person_24"
+        android:iconTint="@color/tversus"
+        android:id="@+id/profileFragment"
+        android:title="Perfil" />
     <item
         android:icon="@drawable/icon_tournaments"
         android:id="@+id/tournamentFragment"
@@ -21,15 +25,16 @@
         android:title="Tienda" />
 
     <item
-        android:icon="@drawable/ic_baseline_person_24"
-        android:iconTint="@color/tversus"
-        android:id="@+id/profileFragment"
-        android:title="Perfil" />
-
-    <item
         android:id="@+id/signOut"
         android:icon="@drawable/ic_baseline_exit_to_app_24"
         android:iconTint="@color/tversus"
         android:title="Sign Out" />
+
+    <item
+        android:id="@+id/loginAdminFragment"
+        android:icon="@drawable/ic_baseline_admin_panel_settings_24"
+        android:iconTint="@color/tversus"
+        android:title="Admin" />
+
 
 </menu>

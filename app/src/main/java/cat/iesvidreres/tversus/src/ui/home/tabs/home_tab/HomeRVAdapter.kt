@@ -1,6 +1,5 @@
 package cat.iesvidreres.tversus.src.ui.home.tabs.home_tab
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,9 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import cat.iesvidreres.tversus.R
-import cat.iesvidreres.tversus.src.data.models.ShopCard
 import cat.iesvidreres.tversus.src.data.models.Tournament
-import cat.iesvidreres.tversus.src.ui.home.tabs.shop_tab.ShopRVAdapter
 import javax.inject.Inject
 
 class HomeRVAdapter @Inject constructor() : RecyclerView.Adapter<HomeRVAdapter.ItemTournamentHolder>() {
@@ -34,7 +31,7 @@ class HomeRVAdapter @Inject constructor() : RecyclerView.Adapter<HomeRVAdapter.I
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemTournamentHolder {
         val v = LayoutInflater.from(parent.context)
-            .inflate(R.layout.tournament_view_item, parent, false)
+            .inflate(R.layout.item_tournament_view, parent, false)
 
         return ItemTournamentHolder(v)
     }

@@ -5,14 +5,13 @@ import android.content.Context
 import android.content.Intent
 import android.util.Log
 import android.widget.Toast
-import cat.iesvidreres.tversus.src.data.models.User
 import cat.iesvidreres.tversus.src.ui.auth.LoginActivity
 import cat.iesvidreres.tversus.src.ui.auth.signin.model.UserRegister
 import cat.iesvidreres.tversus.src.ui.home.MainActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import javax.inject.Inject
-import javax.inject.Singleton
+
 
 class AuthenticationRepository @Inject constructor(
     private val userRepository: UserRepository

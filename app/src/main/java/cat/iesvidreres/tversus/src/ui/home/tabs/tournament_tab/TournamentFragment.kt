@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.findNavController
 import cat.iesvidreres.tversus.R
-import cat.iesvidreres.tversus.databinding.FragmentShopBinding
 import cat.iesvidreres.tversus.databinding.FragmentTournamentBinding
 import dagger.hilt.android.AndroidEntryPoint
 

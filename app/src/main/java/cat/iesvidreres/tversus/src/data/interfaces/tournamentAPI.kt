@@ -2,10 +2,7 @@ package cat.iesvidreres.tversus.src.data.interfaces
 
 import cat.iesvidreres.tversus.src.data.models.Tournament
 import retrofit2.Call
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Path
+import retrofit2.http.*
 
 interface tournamentAPI {
     @POST("new-tournament")
@@ -16,4 +13,13 @@ interface tournamentAPI {
 
     @GET("get-tournament/{id}")
     fun getTournamentID(@Path("id") id: String): Call<Tournament>
+
+    @GET("get-tournaments-unofficial")
+    fun getUnOfficialTournaments():Call<MutableList<Tournament>>
+
+    @GET("get-tournaments-official")
+    fun getOfficialTournaments():Call<MutableList<Tournament>>
+
+    @DELETE("delete-tournament/{id}")
+    fun deleteTournament(@Path("id") id: String): Call<Tournament>
 }

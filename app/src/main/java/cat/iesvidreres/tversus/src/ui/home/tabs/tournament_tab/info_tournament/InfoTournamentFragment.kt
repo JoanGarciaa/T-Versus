@@ -2,7 +2,6 @@ package cat.iesvidreres.tversus.src.ui.home.tabs.tournament_tab.info_tournament
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
-import android.app.Dialog
 import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
@@ -10,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
@@ -30,7 +30,7 @@ class InfoTournamentFragment : Fragment() {
     private lateinit var binding: FragmentInfoTournamentBinding
     private val infoTournamentViewModel: InfoTournamentViewModel by activityViewModels()
     private val profileViewModel: ProfileViewModel by activityViewModels()
-
+    private var isJoined : Boolean = false
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -43,6 +43,19 @@ class InfoTournamentFragment : Fragment() {
 
     private fun initUI() {
         retrofit(infoTournamentViewModel.tournament!!)
+        showPlayers()
+    }
+
+    fun showPlayers(){
+        if(isJoined){
+            binding.btnJoinTournament.isVisible = false
+            binding.btnToShowPlayers.isVisible = true
+            binding.btnToShowPlayers.setOnClickListener{
+                view?.findNavController()?.navigate(R.id.action_infoTournamentFragment_to_joinedTournamentFragment)
+            }
+        }else{
+            binding.btnJoinTournament.isVisible = true
+        }
     }
 
     fun retrofit(tournament: Tournament) {
@@ -56,6 +69,7 @@ class InfoTournamentFragment : Fragment() {
             override fun onResponse(
                 call: Call<Tournament>, response: Response<Tournament>
             ) {
+
                 infoTournament = response.body()!!
                 with(binding) {
                     tvInfoTournamentName.text = infoTournament.name
@@ -105,6 +119,8 @@ class InfoTournamentFragment : Fragment() {
                                                     Log.i("Error", "$t")
                                                 }
                                             })
+                                            isJoined = true
+                                            view?.findNavController()?.navigate(R.id.action_infoTournamentFragment_to_joinedTournamentFragment)
                                         })
                                         builder.setNegativeButton("Aun no", null)
                                         val dialog = builder.create()

@@ -61,5 +61,10 @@
         <item name="android:textColorHint">@color/terciarytversus</item>
     </style>
 
+    <style name="basicText">
+        <item name="android:textColor">@color/terciarytversus</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
 
 </resources>
