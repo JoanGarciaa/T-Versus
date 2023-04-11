@@ -82,7 +82,7 @@ class PaymentFragment : Fragment() {
                     binding.lottieLoading.visibility = View.VISIBLE
                     Handler(Looper.getMainLooper()).postDelayed({
                         binding.lottieLoading.visibility = View.GONE
-                    }, 1300)
+                    }, 3000)
                     paymentViewModel.onFinishSelected(
                         requireContext(), Payment(
                             cardNumber = binding.inputCardNumberText.text.toString(),

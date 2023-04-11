@@ -19,10 +19,12 @@ class UserRepository @Inject constructor(){
         const val BORN_FIELD = "borndate"
         const val TOKEN_FIELD = "tokens"
         const val TOURNAMENT_ID = "tournament_id"
+        const val IS_JOINED = "isJoined"
+        const val IMAGE = "image"
     }
 
     fun createUserTable(userRegister: UserRegister){
-        val user = User(userRegister.nickname, userRegister.email,userRegister.password,userRegister.years,0 , "")
+        val user = User(userRegister.nickname, userRegister.email,userRegister.password,userRegister.years,0 , "", isJoined = false, image = "")
         db.collection("users").document(user.email).set(user)
     }
     fun findUserByEmail(email:String):MutableLiveData<User>{
@@ -37,7 +39,10 @@ class UserRepository @Inject constructor(){
                 it.documents.first().getString(PASSWORD_FIELD)!!,
                 it.documents.first().getString(BORN_FIELD)!!,
                 it.documents.first().getField<Int>(TOKEN_FIELD)!!,
-                it.documents.first().getString(TOURNAMENT_ID)!!
+                it.documents.first().getString(TOURNAMENT_ID)!!,
+                it.documents.first().getString(IMAGE)!!,
+                it.documents.first().getBoolean(IS_JOINED)!!,
+
             )
         }
         return user

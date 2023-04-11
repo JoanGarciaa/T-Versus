@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import cat.iesvidreres.tversus.R
 import cat.iesvidreres.tversus.databinding.FragmentInfoTournamentBinding
@@ -19,6 +20,7 @@ import cat.iesvidreres.tversus.src.data.interfaces.tournamentAPI
 import cat.iesvidreres.tversus.src.data.interfaces.userAPI
 import cat.iesvidreres.tversus.src.data.models.Tournament
 import cat.iesvidreres.tversus.src.data.models.User
+import cat.iesvidreres.tversus.src.ui.home.admin.functions_admin.list_tournaments_admin.info_tournament_admin.InfoTournamentAdminViewModel
 import cat.iesvidreres.tversus.src.ui.home.tabs.profile_tab.ProfileViewModel
 import retrofit2.Call
 import retrofit2.Callback
@@ -30,7 +32,7 @@ class InfoTournamentFragment : Fragment() {
     private lateinit var binding: FragmentInfoTournamentBinding
     private val infoTournamentViewModel: InfoTournamentViewModel by activityViewModels()
     private val profileViewModel: ProfileViewModel by activityViewModels()
-    private var isJoined : Boolean = false
+    private val infoTournamentAdminViewModel : InfoTournamentAdminViewModel by viewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -43,20 +45,10 @@ class InfoTournamentFragment : Fragment() {
 
     private fun initUI() {
         retrofit(infoTournamentViewModel.tournament!!)
-        showPlayers()
+
     }
 
-    fun showPlayers(){
-        if(isJoined){
-            binding.btnJoinTournament.isVisible = false
-            binding.btnToShowPlayers.isVisible = true
-            binding.btnToShowPlayers.setOnClickListener{
-                view?.findNavController()?.navigate(R.id.action_infoTournamentFragment_to_joinedTournamentFragment)
-            }
-        }else{
-            binding.btnJoinTournament.isVisible = true
-        }
-    }
+
 
     fun retrofit(tournament: Tournament) {
         val retrofit = Retrofit.Builder().baseUrl("http://10.0.2.2:3000/")
@@ -87,6 +79,7 @@ class InfoTournamentFragment : Fragment() {
                                     call: Call<User>, response: Response<User>
                                 ) {
                                     user = response.body()!!
+                                    infoTournamentAdminViewModel.setUser(user)
                                     val oldTokens = user.tokens
                                     val finalTokens = user.tokens - infoTournament.price
                                     user.tokens = finalTokens
@@ -112,6 +105,7 @@ class InfoTournamentFragment : Fragment() {
                                                 override fun onResponse(
                                                     call: Call<User>, response: Response<User>
                                                 ) {
+                                                    user.isJoined = true
                                                     user = response.body()!!
                                                 }
 
@@ -119,7 +113,6 @@ class InfoTournamentFragment : Fragment() {
                                                     Log.i("Error", "$t")
                                                 }
                                             })
-                                            isJoined = true
                                             view?.findNavController()?.navigate(R.id.action_infoTournamentFragment_to_joinedTournamentFragment)
                                         })
                                         builder.setNegativeButton("Aun no", null)
@@ -145,6 +138,14 @@ class InfoTournamentFragment : Fragment() {
 
     }
 
+
+    fun isUserJoined(userJoined:Boolean){
+        Log.i("userJoin","$userJoined")
+        if(userJoined) {
+            binding.btnJoinTournament.visibility = View.GONE
+            binding.btnToShowPlayers.visibility = View.VISIBLE
+        }
+    }
     fun showDialogComprar() {
         val builder = AlertDialog.Builder(requireContext())
         builder.setTitle("¡Vaya!")

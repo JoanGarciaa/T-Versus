@@ -23,111 +23,111 @@
             android:background="@color/tversus"
             android:paddingHorizontal="20dp">
 
-    <ImageView
-        android:id="@+id/ivAvatarUser"
-        android:layout_width="163dp"
-        android:layout_height="154dp"
-        android:layout_marginTop="140dp"
-        android:src="@drawable/logo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/ivAvatarUser"
+                android:layout_width="163dp"
+                android:layout_height="154dp"
+                android:src="@drawable/logo"
+                android:layout_marginTop="140dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/tvUsername"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        tools:text="JoanAsecas"
-        android:textColor="@color/terciarytversus"
-        android:textSize="35sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivAvatarUser" />
+            <TextView
+                android:id="@+id/tvUsername"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:textColor="@color/terciarytversus"
+                android:textSize="35sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ivAvatarUser"
+                tools:text="JoanAsecas" />
 
-    <Button
-        android:id="@+id/btnEditar"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        tools:text="Editar Perfil"
-        android:layout_marginTop="20dp"
-        style="@style/PrimaryButton"
-        android:layout_marginRight="30dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
-    <TextView
-        android:id="@+id/tokensUser"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:text="12000 tokens"
-        android:textSize="22sp"
-        android:textColor="@color/secondarytversus"
-        android:textStyle="italic"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvUsername"
-        android:layout_marginTop="20dp"/>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/inputEmail"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:textColorHint="@color/secondarytversus"
-        app:endIconMode="clear_text"
-        android:visibility="gone"
-        app:endIconTint="@color/secondarytversus"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvMoreInfo">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/inputEmailText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:text="joangsmassanet@gmail.com"
-            android:hint="Correo electrónico"
-            android:imeOptions="actionNext" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/inputBornDate"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:textColorHint="@color/secondarytversus"
-        app:endIconMode="clear_text"
-        android:visibility="gone"
-        app:endIconTint="@color/secondarytversus"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/inputEmail"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="30dp">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/inputBornDateText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:text="10/10/2010"
-            android:hint="Fecha de nacimiento"
-            android:imeOptions="actionNext" />
-
-    </com.google.android.material.textfield.TextInputLayout>
+            <Button
+                android:id="@+id/btnEditar"
+                style="@style/PrimaryButton"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="30dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Editar Perfil" />
 
 
-    <ImageView
-        android:id="@+id/imageViewArrow"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="38dp"
-        android:src="@drawable/baseline_arrow_right_24"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="20dp"
-        app:layout_constraintTop_toBottomOf="@+id/tokensUser" />
+            <TextView
+                android:id="@+id/tokensUser"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:textColor="@color/secondarytversus"
+                android:textSize="22sp"
+                android:textStyle="italic"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvUsername"
+                tools:text="12000 tokens" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inputEmail"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:textColorHint="@color/secondarytversus"
+                android:visibility="gone"
+                app:endIconMode="clear_text"
+                app:endIconTint="@color/secondarytversus"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvMoreInfo">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inputEmailText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Correo electrónico"
+                    android:imeOptions="actionNext"
+                    tools:text="joangsmassanet@gmail.com" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inputBornDate"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:layout_marginBottom="30dp"
+                android:textColorHint="@color/secondarytversus"
+                android:visibility="gone"
+                app:endIconMode="clear_text"
+                app:endIconTint="@color/secondarytversus"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/inputEmail">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inputBornDateText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Fecha de nacimiento"
+                    android:imeOptions="actionNext"
+                    tools:text="10/10/2010" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <ImageView
+                android:id="@+id/imageViewArrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="38dp"
+                android:src="@drawable/baseline_arrow_right_24"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tokensUser" />
 
             <TextView
                 android:id="@+id/tvMoreInfo"
@@ -153,7 +153,6 @@
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

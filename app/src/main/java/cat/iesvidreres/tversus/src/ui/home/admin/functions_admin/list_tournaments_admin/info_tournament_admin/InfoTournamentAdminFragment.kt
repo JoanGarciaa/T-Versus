@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import cat.iesvidreres.tversus.R
@@ -37,7 +38,7 @@ class InfoTournamentAdminFragment : Fragment() {
     private lateinit var binding: FragmentInfoTournamentAdminBinding
     private val infoTournamentViewModel: InfoTournamentViewModel by activityViewModels()
     private var cardAdapter = InfoTournamentAdminRVAdapter()
-
+    private val infoTournamentAdminViewModel : InfoTournamentAdminViewModel by viewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
