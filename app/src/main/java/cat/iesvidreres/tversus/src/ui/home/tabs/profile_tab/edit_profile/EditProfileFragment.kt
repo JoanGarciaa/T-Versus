@@ -10,12 +10,19 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.MutableLiveData
+import androidx.navigation.findNavController
 import cat.iesvidreres.tversus.R
 import cat.iesvidreres.tversus.databinding.FragmentEditProfileBinding
 import cat.iesvidreres.tversus.databinding.FragmentProfileBinding
+import cat.iesvidreres.tversus.src.core.ex.toast
+import cat.iesvidreres.tversus.src.data.interfaces.tournamentAPI
 import cat.iesvidreres.tversus.src.data.interfaces.userAPI
+import cat.iesvidreres.tversus.src.data.models.Tournament
 import cat.iesvidreres.tversus.src.data.models.User
+import cat.iesvidreres.tversus.src.data.providers.nodejs.userNode
 import cat.iesvidreres.tversus.src.ui.home.tabs.profile_tab.ProfileViewModel
+import com.google.gson.GsonBuilder
 import dagger.hilt.android.AndroidEntryPoint
 import retrofit2.Call
 import retrofit2.Callback
@@ -43,26 +50,42 @@ class EditProfileFragment : Fragment() {
     }
 
     private fun retrofit() {
-        val retrofit = Retrofit.Builder().baseUrl("http://10.0.2.2:3000/")
-            .addConverterFactory(GsonConverterFactory.create()).build()
-        val api = retrofit.create(userAPI::class.java);
-        var user: User
-        api.getUserByEmail(profileViewModel.authenticationRepository.getCurrentUserEmail().email.toString()).enqueue(object :
-            Callback<User> {
-            @SuppressLint("SetTextI18n")
-            override fun onResponse(
-                call: Call<User>, response: Response<User>
-            ) {
-                user = response.body()!!
+        val userLiveData = MutableLiveData<User>()
+
+        userNode.getUserFromNode(profileViewModel.authenticationRepository.getCurrentUser().email.toString()) { user ->
+            userLiveData.postValue(user)
+        }
+
+        userLiveData.observe(requireActivity()) { user ->
                 binding.inputEmailEditText.text =  Editable.Factory.getInstance().newEditable(user.email)
                 binding.inputUsernameEditText.text = Editable.Factory.getInstance().newEditable(user.username)
                 binding.inputBorndateEditText.text = Editable.Factory.getInstance().newEditable(user.borndate)
-            }
-            override fun onFailure(call: Call<User>, t: Throwable) {
-                Log.i("Error","$t")
-            }
 
-        })
+                binding.btnModifyUser.setOnClickListener {
+                    val gson = GsonBuilder().setLenient().create()
+                    val retrofit = Retrofit.Builder().baseUrl("http://10.0.2.2:3000/")
+                        .addConverterFactory(GsonConverterFactory.create(gson)).build()
+                    val updatedEmail = binding.inputEmailEditText.text.toString()
+                    val updatedUsername = binding.inputUsernameEditText.text.toString()
+                    val updatedBorndate = binding.inputBorndateEditText.text.toString()
+                    var updateUser = User(updatedUsername,updatedEmail,user.password,updatedBorndate,user.tokens,user.tournament_id,user.image,user.isJoined)
+
+                    val api = retrofit.create(userAPI::class.java);
+                    api.updateUser(user.email,updateUser).enqueue(object : Callback<User> {
+                        override fun onResponse(
+                            call: Call<User>, response: Response<User>
+                        ) {
+                            updateUser = response.body()!!
+                        }
+
+                        override fun onFailure(call: Call<User>, t: Throwable) {
+                            Log.i("Erroddr","$t")
+                        }
+                    })
+                    toast("Has modificado correctamente tus datos")
+                    view?.findNavController()?.navigate(R.id.action_editProfileFragment_to_profileFragment)
+                }
+            }
     }
 
 }

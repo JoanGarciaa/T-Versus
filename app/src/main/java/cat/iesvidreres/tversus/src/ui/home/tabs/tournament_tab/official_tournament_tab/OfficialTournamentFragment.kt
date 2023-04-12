@@ -1,5 +1,6 @@
 package cat.iesvidreres.tversus.src.ui.home.tabs.tournament_tab.official_tournament_tab
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -11,13 +12,11 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import cat.iesvidreres.tversus.R
 import cat.iesvidreres.tversus.databinding.FragmentOfficialTournamentBinding
+import cat.iesvidreres.tversus.src.core.ex.toast
 import cat.iesvidreres.tversus.src.data.interfaces.tournamentAPI
 import cat.iesvidreres.tversus.src.data.models.Tournament
 import cat.iesvidreres.tversus.src.ui.home.tabs.tournament_tab.info_tournament.InfoTournamentViewModel
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import retrofit2.Retrofit
+import retrofit2.*
 import retrofit2.converter.gson.GsonConverterFactory
 
 class OfficialTournamentFragment : Fragment() {
@@ -61,19 +60,26 @@ class OfficialTournamentFragment : Fragment() {
         val api = retrofit.create(tournamentAPI::class.java)
         var tournamentList: MutableList<Tournament>
         api.getOfficialTournaments().enqueue(object : Callback<MutableList<Tournament>> {
+            @SuppressLint("NotifyDataSetChanged")
             override fun onResponse(
                 call: Call<MutableList<Tournament>>, response: Response<MutableList<Tournament>>
             ) {
-                tournamentList = response.body()!!
-                cardAdapter.setListData(tournamentList)
-                cardAdapter.notifyDataSetChanged()
+                try {
+                    tournamentList = response.body()!!
+                    cardAdapter.setListData(tournamentList)
+                    cardAdapter.notifyDataSetChanged()
+                } catch (e: NullPointerException) {
+                    toast("No hay torneos disponibles!")
+                }
             }
 
             override fun onFailure(call: Call<MutableList<Tournament>>, t: Throwable) {
-                Log.i("Erroddr","$t")
+                if (t is HttpException && t.code() == 404) {
+                    Log.e("Error", "No se encontraron torneos")
+                } else {
+                    Log.e("Error", "$t")
+                }
             }
-
-
         })
 
     }

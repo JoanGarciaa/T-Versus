@@ -69,7 +69,11 @@
         android:id="@+id/editProfileFragment"
         android:name="cat.iesvidreres.tversus.src.ui.home.tabs.profile_tab.edit_profile.EditProfileFragment"
         android:label="fragment_edit_profile"
-        tools:layout="@layout/fragment_edit_profile" />
+        tools:layout="@layout/fragment_edit_profile" >
+        <action
+            android:id="@+id/action_editProfileFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
     <fragment
         android:id="@+id/createTournamentFragment"
         android:name="cat.iesvidreres.tversus.src.ui.home.tabs.tournament_tab.create_tournament_tab.CreateTournamentFragment"
@@ -120,7 +124,11 @@
         android:id="@+id/createOfficialTournamentFragment"
         android:name="cat.iesvidreres.tversus.src.ui.home.admin.functions_admin.create_official_tournament_admin.CreateOfficialTournamentFragment"
         android:label="fragment_create_official_tournament"
-        tools:layout="@layout/fragment_create_official_tournament" />
+        tools:layout="@layout/fragment_create_official_tournament" >
+        <action
+            android:id="@+id/action_createOfficialTournamentFragment_to_functionsAdminFragment"
+            app:destination="@id/functionsAdminFragment" />
+    </fragment>
     <fragment
         android:id="@+id/functionsAdminFragment"
         android:name="cat.iesvidreres.tversus.src.ui.home.admin.functions_admin.FunctionsAdminFragment"

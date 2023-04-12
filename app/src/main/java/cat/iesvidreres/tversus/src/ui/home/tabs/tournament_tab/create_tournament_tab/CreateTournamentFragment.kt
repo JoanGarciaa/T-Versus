@@ -52,11 +52,12 @@ class CreateTournamentFragment : Fragment() {
 
             createTournamentViewModel.onFieldsChanged(
                 NewTournament(
+                    id = "",
                     image = R.drawable.ascent,
                     name = inputNameText.text.toString(),
                     description = inputDescriptionText.text.toString(),
-                    price = 0,
-                    organizer = createTournamentViewModel.authenticationRepository.getCurrentUser().email.toString()
+                    price = "0",
+                    organizer = createTournamentViewModel.authenticationRepository.getCurrentUser().email.toString(),
                 )
             )
         }
@@ -76,11 +77,12 @@ class CreateTournamentFragment : Fragment() {
                 updateUI(viewState)
                 binding.btnCreateNewTournament.setOnClickListener{
                     createTournamentViewModel.onFinishSelected(requireContext(),NewTournament(
+                        id = "",
                         image = R.drawable.valotourn,
                         name = binding.inputNameText.text.toString(),
                         description = binding.inputDescriptionText.text.toString(),
-                        price = 0,
-                        organizer = createTournamentViewModel.authenticationRepository.getCurrentUser().email.toString()
+                        price = "0",
+                        organizer = createTournamentViewModel.authenticationRepository.getCurrentUser().email.toString(),
                     ))
                 }
                 createTournamentViewModel.navigateToHome.observe(requireActivity()) {
@@ -98,11 +100,12 @@ class CreateTournamentFragment : Fragment() {
             if (!hasFocus) {
                 createTournamentViewModel.onFieldsChanged(
                     NewTournament(
+                        id = "",
                         image = R.drawable.ascent,
                         name = inputNameText.text.toString(),
                         description = inputDescriptionText.text.toString(),
-                        price = 0,
-                        organizer = createTournamentViewModel.authenticationRepository.getCurrentUser().email.toString()
+                        price = "0",
+                        organizer = createTournamentViewModel.authenticationRepository.getCurrentUser().email.toString(),
                     )
                 )
             }

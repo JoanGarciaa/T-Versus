@@ -27,7 +27,7 @@
                 android:id="@+id/ivAvatarUser"
                 android:layout_width="163dp"
                 android:layout_height="154dp"
-                android:src="@drawable/logo"
+                tools:src="@drawable/logo"
                 android:layout_marginTop="140dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -54,7 +54,7 @@
                 android:layout_marginRight="30dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="Editar Perfil" />
+                android:text="Editar Perfil" />
 
 
             <TextView
@@ -88,6 +88,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Correo electrónico"
+                    android:focusable="false"
                     android:imeOptions="actionNext"
                     tools:text="joangsmassanet@gmail.com" />
 
@@ -113,6 +114,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Fecha de nacimiento"
+                    android:focusable="false"
                     android:imeOptions="actionNext"
                     tools:text="10/10/2010" />
 

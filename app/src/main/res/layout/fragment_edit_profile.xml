@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:hint="Correo Electronico"
             android:inputType="textEmailAddress"
-            android:text="joangsmassanet@gmail.com" />
+            tools:text="joangsmassanet@gmail.com" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -54,7 +54,7 @@
             android:layout_height="wrap_content"
             android:hint="Fecha de nacimiento"
             android:inputType="textEmailAddress"
-            android:text="21/04/2003" />
+            tools:text="21/04/2003" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -77,7 +77,7 @@
             android:layout_height="wrap_content"
             android:hint="Username"
             android:inputType="textEmailAddress"
-            android:text="Joan Asecas" />
+            tools:text="Joan Asecas" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView

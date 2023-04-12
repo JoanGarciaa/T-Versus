@@ -32,7 +32,6 @@ class TournamentFragment : Fragment() {
 
         binding.btnNoOfficial.setOnClickListener(){
             view?.findNavController()?.navigate(R.id.action_tournamentFragment_to_unOfficialTournamentsFragment)
-
         }
 
         binding.btnToCreateTournament.setOnClickListener{

@@ -1,5 +1,6 @@
 package cat.iesvidreres.tversus.src.data.interfaces
 
+import androidx.lifecycle.MutableLiveData
 import cat.iesvidreres.tversus.src.data.models.User
 import retrofit2.Call
 import retrofit2.http.Body
@@ -11,6 +12,9 @@ import retrofit2.http.Path
 interface userAPI {
     @GET("get-user/{email}")
     fun getUserByEmail(@Path("email") email: String?): Call<User>
+
+    @GET("get-user/{email}")
+    fun getUserByNode(@Path("email") email: String?): Call<User>
 
     @POST("buy-tokens/{id}")
     fun buyTokens(@Path("id")id:String,@Body user:User): Call<User>
@@ -28,5 +32,5 @@ interface userAPI {
     fun deleteUser(@Path("id")id: String) : Call<User>
 
     @POST("update-user/{id}")
-    fun update(@Path("id")id: String, @Body user:User) : Call<User>
+    fun updateUser(@Path("id")id: String, @Body user:User) : Call<User>
 }
