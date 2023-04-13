@@ -1,6 +1,7 @@
 package cat.iesvidreres.tversus.src.ui.home.admin.login_admin
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -25,10 +26,11 @@ class LoginAdminFragment : Fragment() {
     }
 
     private fun succesLogin(){
-        val username = binding.inputUsernameAdminText.text
-        val password = binding.inputPasswordAdminText.text
+        val username = binding.inputUsernameAdminText.text.toString()
+        val password = binding.inputPasswordAdminText.text.toString()
+        Log.e("$username","$password")
         binding.buttonLoginAdmin.setOnClickListener {
-            if(username.toString() == "AdminTversus" && password.toString() == "admin123"){
+            if(username == "AdminTversus" && password == "admin123"){
                 view?.findNavController()?.navigate(R.id.action_loginAdminFragment_to_functionsAdminFragment)
                 toast("Bienvenido admin")
 

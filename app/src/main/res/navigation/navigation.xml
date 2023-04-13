@@ -127,7 +127,8 @@
         tools:layout="@layout/fragment_create_official_tournament" >
         <action
             android:id="@+id/action_createOfficialTournamentFragment_to_functionsAdminFragment"
-            app:destination="@id/functionsAdminFragment" />
+            app:destination="@id/functionsAdminFragment"
+            app:popUpTo="@id/functionsAdminFragment" />
     </fragment>
     <fragment
         android:id="@+id/functionsAdminFragment"
@@ -162,5 +163,10 @@
         android:id="@+id/infoTournamentAdminFragment"
         android:name="cat.iesvidreres.tversus.src.ui.home.admin.functions_admin.list_tournaments_admin.info_tournament_admin.InfoTournamentAdminFragment"
         android:label="fragment_info_tournament_admin"
-        tools:layout="@layout/fragment_info_tournament_admin" />
+        tools:layout="@layout/fragment_info_tournament_admin" >
+        <action
+            android:id="@+id/action_infoTournamentAdminFragment_to_functionsAdminFragment"
+            app:destination="@id/functionsAdminFragment"
+            app:popUpTo="@id/functionsAdminFragment" />
+    </fragment>
 </navigation>

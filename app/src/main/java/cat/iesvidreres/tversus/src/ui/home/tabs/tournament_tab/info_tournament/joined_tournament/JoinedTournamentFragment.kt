@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import cat.iesvidreres.tversus.databinding.FragmentJoinedTournamentBinding
+import cat.iesvidreres.tversus.src.core.ex.toast
 import cat.iesvidreres.tversus.src.data.interfaces.userAPI
 import cat.iesvidreres.tversus.src.data.models.User
 import cat.iesvidreres.tversus.src.ui.home.tabs.tournament_tab.info_tournament.InfoTournamentViewModel
@@ -23,7 +24,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 class JoinedTournamentFragment : Fragment() {
     private lateinit var binding: FragmentJoinedTournamentBinding
     private var cardAdapter = JoinedTournamentRVAdapter()
-    private val infoTournamentViewModel : InfoTournamentViewModel by activityViewModels()
+    private val infoTournamentViewModel: InfoTournamentViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,7 +37,7 @@ class JoinedTournamentFragment : Fragment() {
         return binding.root
     }
 
-    private fun initUI(){
+    private fun initUI() {
         setRecyclerView()
     }
 
@@ -65,19 +66,17 @@ class JoinedTournamentFragment : Fragment() {
                 override fun onResponse(
                     call: Call<MutableList<User>>, response: Response<MutableList<User>>
                 ) {
-
-                    playerList = response.body()!!
-    //                val tournaments = arrayOfNulls<String>(tournamentList.size)
-    //
-    //                for (i in tournamentList.indices) {
-    //                    tournaments[i] = tournamentList[i].name
-    //                }
-                    cardAdapter.setListData(playerList)
-                    cardAdapter.notifyDataSetChanged()
+                    try {
+                        playerList = response.body()!!
+                        cardAdapter.setListData(playerList)
+                        cardAdapter.notifyDataSetChanged()
+                    } catch (e: NullPointerException) {
+                        toast("No hay jugadores disponibles!")
+                    }
                 }
 
                 override fun onFailure(call: Call<MutableList<User>>, t: Throwable) {
-                    Log.i("Erroddr","$t")
+                    Log.i("Erroddr", "$t")
                 }
 
 
@@ -85,7 +84,6 @@ class JoinedTournamentFragment : Fragment() {
         }
 
     }
-
 
 
 }

@@ -76,7 +76,20 @@ class InfoTournamentAdminFragment : Fragment() {
                         val retrofit = Retrofit.Builder().baseUrl("http://10.0.2.2:3000/")
                             .addConverterFactory(GsonConverterFactory.create(gson)).build()
                         val api = retrofit.create(userAPI::class.java)
-                        var thisUser = user
+                        var thisUser = User(user.username,user.email,user.password,user.borndate,user.tokens,"",user.image,user.isJoined)
+                        api.updateUser(user.email,thisUser).enqueue(object : Callback<User> {
+                            override fun onResponse(
+                                call: Call<User>, response: Response<User>
+                            ) {
+                                thisUser = response.body()!!
+                                cardAdapter.notifyDataSetChanged()
+                            }
+
+                            override fun onFailure(call: Call<User>, t: Throwable) {
+                                cardAdapter.notifyDataSetChanged()
+
+                            }
+                        })
                     })
                 builder.setNegativeButton("No", null)
                 val dialog = builder.create()
@@ -87,9 +100,9 @@ class InfoTournamentAdminFragment : Fragment() {
     }
 
     fun retrofit(tournament: Tournament) {
+        val gson = GsonBuilder().setLenient().create()
         val retrofit = Retrofit.Builder().baseUrl("http://10.0.2.2:3000/")
-            .addConverterFactory(GsonConverterFactory.create()).build()
-
+            .addConverterFactory(GsonConverterFactory.create(gson)).build()
         val apiTournament = retrofit.create(tournamentAPI::class.java)
         var infoTournament: Tournament
         apiTournament.getTournamentID(tournament.id).enqueue(object : Callback<Tournament> {
@@ -119,6 +132,9 @@ class InfoTournamentAdminFragment : Fragment() {
 
                             override fun onFailure(call: Call<Tournament>, t: Throwable) {
                                 Log.i("No se ha podido borrar el torneo" ,"$t")
+                                toast("Torneo eliminado!")
+                                view?.findNavController()?.navigate(R.id.action_infoTournamentAdminFragment_to_functionsAdminFragment)
+
                             }
 
                         })
@@ -155,11 +171,6 @@ class InfoTournamentAdminFragment : Fragment() {
                     } catch (e: ApiException) {
                         Log.i("Error in players call", "$e")
                     }
-                    //                val tournaments = arrayOfNulls<String>(tournamentList.size)
-                    //
-                    //                for (i in tournamentList.indices) {
-                    //                    tournaments[i] = tournamentList[i].name
-                    //                }
                     cardAdapter.notifyDataSetChanged()
                 }
 

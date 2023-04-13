@@ -30,11 +30,26 @@
         android:iconTint="@color/tversus"
         android:title="Sign Out" />
 
+    <item android:title=""
+        android:enabled="false"/>
+    <item android:title=""
+        android:enabled="false"/>
+    <item android:title=""
+        android:enabled="false"/>
+    <item android:title=""
+        android:enabled="false"/>
+    <item android:title=""
+        android:enabled="false"/>
+    <item android:title=""
+        android:enabled="false"/>
+    <item android:title=""
+        android:enabled="false"/>
+
+
     <item
         android:id="@+id/loginAdminFragment"
         android:icon="@drawable/ic_baseline_admin_panel_settings_24"
         android:iconTint="@color/tversus"
         android:title="Admin" />
-
 
 </menu>

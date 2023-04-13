@@ -47,7 +47,6 @@ class ShopFragment : Fragment() {
         cardAdapter.setItemListener(object : ShopRVAdapter.OnItemClickListener {
             override fun onItemClick(shopCard: ShopCard) {
                 paymentViewModel.setItemShop(shopCard)
-                Log.i("adasdasdsadasd","$shopCard")
                 view?.findNavController()?.navigate(R.id.action_shopFragment_to_paymentFragment)
             }
         })

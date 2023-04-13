@@ -13,6 +13,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.MutableLiveData
 import androidx.navigation.findNavController
 import cat.iesvidreres.tversus.R
 import cat.iesvidreres.tversus.databinding.FragmentInfoTournamentBinding
@@ -20,8 +21,10 @@ import cat.iesvidreres.tversus.src.data.interfaces.tournamentAPI
 import cat.iesvidreres.tversus.src.data.interfaces.userAPI
 import cat.iesvidreres.tversus.src.data.models.Tournament
 import cat.iesvidreres.tversus.src.data.models.User
+import cat.iesvidreres.tversus.src.data.providers.nodejs.userNode
 import cat.iesvidreres.tversus.src.ui.home.admin.functions_admin.list_tournaments_admin.info_tournament_admin.InfoTournamentAdminViewModel
 import cat.iesvidreres.tversus.src.ui.home.tabs.profile_tab.ProfileViewModel
+import com.squareup.picasso.Picasso
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -33,17 +36,23 @@ class InfoTournamentFragment : Fragment() {
     private val infoTournamentViewModel: InfoTournamentViewModel by activityViewModels()
     private val profileViewModel: ProfileViewModel by activityViewModels()
     private val infoTournamentAdminViewModel : InfoTournamentAdminViewModel by viewModels()
+    val userLiveData = MutableLiveData<User>()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentInfoTournamentBinding.inflate(inflater, container, false)
+        userNode.getUserFromNode(profileViewModel.authenticationRepository.getCurrentUser().email.toString()) { user ->
+            userLiveData.postValue(user)
+        }
         initUI()
         return binding.root
     }
 
     private fun initUI() {
+
         retrofit(infoTournamentViewModel.tournament!!)
 
     }
@@ -69,6 +78,19 @@ class InfoTournamentFragment : Fragment() {
                     tvInfoTournamentGame.text = "GAME: " + infoTournament.game
                     definePrice(infoTournament.price)
                     progressBarInfoTournament.visibility = View.GONE
+                    userLiveData.observe(requireActivity()) { user ->
+                        if(user.isJoined && tournament.id == user.tournament_id){
+                            binding.btnJoinTournament.isVisible = false
+                            binding.btnToShowPlayers.isVisible = true
+                            binding.btnToShowPlayers.setOnClickListener {
+                                view?.findNavController()?.navigate(R.id.action_infoTournamentFragment_to_joinedTournamentFragment)
+
+                            }
+                        }else{
+                            binding.btnJoinTournament.isVisible = true
+
+                        }
+                    }
                     btnJoinTournament.setOnClickListener {
                         val apiUser = retrofit.create(userAPI::class.java)
                         var user: User
@@ -84,7 +106,7 @@ class InfoTournamentFragment : Fragment() {
                                     val finalTokens = user.tokens - infoTournament.price
                                     user.tokens = finalTokens
                                     user.tournament_id = infoTournament.id
-
+                                    user.isJoined = true
                                     if (oldTokens < infoTournament.price) {
                                         Toast.makeText(
                                             requireContext(),

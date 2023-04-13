@@ -128,14 +128,17 @@ class ProfileFragment : Fragment() {
                         val gson = GsonBuilder().setLenient().create()
                         val retrofit = Retrofit.Builder().baseUrl("http://10.0.2.2:3000/")
                             .addConverterFactory(GsonConverterFactory.create(gson)).build()
-                        var new : User
+                        var new: User
                         val api = retrofit.create(userAPI::class.java);
-                        api.updateUser(user.email,user).enqueue(object : Callback<User> {
+                        api.updateUser(user.email, user).enqueue(object : Callback<User> {
                             override fun onResponse(
                                 call: Call<User>, response: Response<User>
                             ) {
-                                imageReference = FirebaseStorage.getInstance().reference.child("profile")
-                                imageReference = imageReference.child(System.currentTimeMillis().toString())
+
+                                imageReference =
+                                    FirebaseStorage.getInstance().reference.child("profile")
+                                imageReference =
+                                    imageReference.child(System.currentTimeMillis().toString())
                                 currentFile?.let {
                                     imageReference.putFile(it).addOnSuccessListener {
                                         imageReference.downloadUrl.addOnSuccessListener {
@@ -148,7 +151,7 @@ class ProfileFragment : Fragment() {
                             }
 
                             override fun onFailure(call: Call<User>, t: Throwable) {
-                                Log.i("Erroddr","$t")
+                                Log.i("Erroddr", "$t")
                             }
 
                         })
@@ -157,10 +160,10 @@ class ProfileFragment : Fragment() {
                 })
             builder.setNegativeButton("No",
                 DialogInterface.OnClickListener { dialog, id ->
-                userLiveData.observe(requireActivity()) { user ->
-                    Picasso.get().load(user.image).into(binding.ivAvatarUser)
-                }
-            })
+                    userLiveData.observe(requireActivity()) { user ->
+                        Picasso.get().load(user.image).into(binding.ivAvatarUser)
+                    }
+                })
             val dialog = builder.create()
             dialog.show()
         }
@@ -171,18 +174,16 @@ class ProfileFragment : Fragment() {
     private fun retrofit() {
 
 
-
-
         userLiveData.observe(requireActivity()) { user ->
             binding.inputEmailText.text = Editable.Factory.getInstance().newEditable(user.email)
             binding.tokensUser.text = user.tokens.toString() + " TOKENS"
             binding.tvUsername.text = user.username
             binding.inputBornDateText.text = Editable.Factory.getInstance().newEditable(user.borndate)
-            binding.progressBar2.visibility = View.GONE
             Picasso.get().load(user.image).into(binding.ivAvatarUser)
+            binding.progressBar2.visibility = View.GONE
 
 
-                    }
+        }
 
     }
 }

@@ -31,6 +31,9 @@ interface userAPI {
     @DELETE("delete-user/{id}")
     fun deleteUser(@Path("id")id: String) : Call<User>
 
+    @POST("delete-user-from-tournament/{id}")
+    fun deleteUserTournament(@Path("id")id: String,@Body user: User) : Call<User>
+
     @POST("update-user/{id}")
     fun updateUser(@Path("id")id: String, @Body user:User) : Call<User>
 }
