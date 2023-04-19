@@ -1,103 +1,122 @@
 package cat.iesvidreres.tversus.src.ui.auth.signin
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.inputmethod.EditorInfo
 import android.widget.Button
 import android.widget.EditText
 import androidx.activity.viewModels
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.findNavController
 import cat.iesvidreres.tversus.R
 import cat.iesvidreres.tversus.databinding.ActivityRegisterBinding
+import cat.iesvidreres.tversus.src.core.ex.loseFocusAfterAction
+import cat.iesvidreres.tversus.src.core.ex.onTextChanged
+import cat.iesvidreres.tversus.src.core.ex.toast
 import cat.iesvidreres.tversus.src.ui.auth.LoginActivity
 import cat.iesvidreres.tversus.src.ui.auth.signin.model.UserRegister
+import cat.iesvidreres.tversus.src.ui.home.tabs.tournament_tab.create_tournament_tab.CreateTournamentViewState
+import cat.iesvidreres.tversus.src.ui.home.tabs.tournament_tab.create_tournament_tab.model.NewTournament
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class RegisterActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegisterBinding
-    private lateinit var userText: EditText
-    private lateinit var emailText: EditText
-    private lateinit var passwordText: EditText
-    private lateinit var dataText: EditText
     private val registerViewModel: RegisterViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        userText = findViewById(R.id.input_nickname_registre_text)
-        emailText = findViewById(R.id.input_email_registre_text)
-        passwordText = findViewById(R.id.input_password_registre_text)
-        dataText = findViewById(R.id.input_borndate_registre_text)
 
-        if (savedInstanceState != null) {
-            registerViewModel.setUser(savedInstanceState.getString("user", ""))
-            registerViewModel.setPass(savedInstanceState.getString("pass", ""))
-            registerViewModel.setEmail(savedInstanceState.getString("email", ""))
-            registerViewModel.setData(savedInstanceState.getString("data", ""))
-        }
-
-        var buttonToLogin: Button = findViewById(R.id.buttonToLogin)
-        var buttonRegister: Button = findViewById(R.id.btnRegister)
-
-
-        buttonRegister.setOnClickListener {
-            val email = binding.inputEmailRegistreText.text.toString()
-            val password = binding.inputPasswordRegistreText.text.toString()
-            val nickname = binding.inputNicknameRegistreText.text.toString()
-            val years = binding.inputBorndateRegistreText.text.toString()
-            registerViewModel.registerUser(this, UserRegister(nickname, email, password, years))
-        }
-
-        buttonToLogin.setOnClickListener {
+        initUI()
+        binding.buttonToLogin.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
         }
+    }
 
-        //Observadores
-//        viewModel.correu.observe(this) { text ->
-//            emailText.setText(text)
-//        }
-//
-//        viewModel.contrasenya.observe(this) { text ->
-//            passwordText.setText(text)
-//        }
-//
-//        viewModel.username.observe(this) { text ->
-//            userText.setText(text)
-//        }
-//
-//        viewModel.dataNaixement.observe(this) { text ->
-//            dataText.setText(text)
-//        }
+    private fun initUI(){
+        initListeners()
+        initObservers(this)
+    }
+
+    private fun initListeners() {
+
+        with(binding) {
+
+            inputEmailRegistreText.loseFocusAfterAction(EditorInfo.IME_ACTION_NEXT)
+            inputEmailRegistreText.setOnFocusChangeListener { _, hasFocus -> onFieldChanged(hasFocus) }
+            inputEmailRegistreText.onTextChanged { onFieldChanged() }
+
+            inputPasswordRegistreText.loseFocusAfterAction(EditorInfo.IME_ACTION_NEXT)
+            inputPasswordRegistreText.setOnFocusChangeListener { _, hasFocus -> onFieldChanged(hasFocus) }
+            inputPasswordRegistreText.onTextChanged { onFieldChanged() }
+
+            inputNicknameRegistreText.loseFocusAfterAction(EditorInfo.IME_ACTION_NEXT)
+            inputNicknameRegistreText.setOnFocusChangeListener { _, hasFocus -> onFieldChanged(hasFocus) }
+            inputNicknameRegistreText.onTextChanged { onFieldChanged() }
+
+            inputBorndateRegistreText.loseFocusAfterAction(EditorInfo.IME_ACTION_NEXT)
+            inputBorndateRegistreText.setOnFocusChangeListener { _, hasFocus -> onFieldChanged(hasFocus) }
+            inputBorndateRegistreText.onTextChanged { onFieldChanged() }
+
+
+            registerViewModel.onFieldsChanged(
+                UserRegister(
+                    nickname = inputNicknameRegistreText.text.toString(),
+                    email = inputEmailRegistreText.text.toString(),
+                    password = inputPasswordRegistreText.text.toString(),
+                    years = inputBorndateRegistreText.text.toString()
+                )
+            )
+        }
+    }
+
+    private fun updateUI(viewState: RegisterViewState) {
+        binding.inputEmailRegistre.error = if (viewState.isValidEmail) null else "El email tiene un formato incorrecto"
+
+        binding.inputNicknameRegistre.error = if (viewState.isValidNickName) null else "El nombre no esta disponible"
+
+        binding.inputPasswordRegistre.error = if (viewState.isValidPassword) null else "La contraseña es demasiado débil"
+
+        binding.inputBorndateRegistre.error = if (viewState.isValidBornDate) null else "La fecha no tiene un formato correcto"
 
     }
 
-    public override fun onStart() {
-        super.onStart()
-        // Check if user is signed in (non-null) and update UI accordingly.
+    private fun initObservers(context: Context) {
+        lifecycleScope.launchWhenStarted {
+            registerViewModel.viewState.collect { viewState ->
+                updateUI(viewState)
+                binding.btnRegister.setOnClickListener{
+                    registerViewModel.onSignInSelected(context,UserRegister(
+                        nickname = binding.inputNicknameRegistreText.text.toString(),
+                        email = binding.inputEmailRegistreText.text.toString(),
+                        password = binding.inputPasswordRegistreText.text.toString(),
+                        years = binding.inputBorndateRegistreText.text.toString()
+                    )
+                    )
+                }
+            }
+        }
     }
 
-    //Guardar datos al cerrar activity
-//    override fun onSaveInstanceState(outState: Bundle) {
-//        super.onSaveInstanceState(outState)
-//
-//        viewModel.setUser(userText.text.toString())
-//
-//        viewModel.setEmail(emailText.text.toString())
-//
-//        viewModel.setPass(passwordText.text.toString())
-//
-//        viewModel.setData(dataText.text.toString())
-//
-//        outState.putString("user", viewModel.username.value)
-//        Log.d(TAG, "Valor user "+viewModel.username.value)
-//        outState.putString("email", viewModel.correu.value)
-//        Log.d(TAG, "Valor correo "+viewModel.correu.value)
-//        outState.putString("pass", viewModel.contrasenya.value)
-//        Log.d(TAG, "Valor pass "+viewModel.contrasenya.value)
-//        outState.putString("data", viewModel.dataNaixement.value)
-//        Log.d(TAG, "Valor data "+viewModel.dataNaixement.value)
-//    }
+    private fun onFieldChanged(hasFocus: Boolean = false) {
+        with(binding) {
+            if (!hasFocus) {
+                registerViewModel.onFieldsChanged(
+                    UserRegister(
+                        nickname = binding.inputNicknameRegistreText.text.toString(),
+                        email = binding.inputEmailRegistreText.text.toString(),
+                        password = binding.inputPasswordRegistreText.text.toString(),
+                        years = binding.inputBorndateRegistreText.text.toString()
+                    )
+                )
+            }
+        }
+    }
+
 
 }

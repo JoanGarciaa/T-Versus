@@ -25,6 +25,7 @@ object userNode{
         val api = retrofit.create(userAPI::class.java)
 
         api.getUserByNode(email).enqueue(object : Callback<User> {
+            @SuppressLint("LogNotTimber")
             override fun onResponse(call: Call<User>, response: Response<User>) {
                 if (response.isSuccessful) {
                     val user = response.body()!!
@@ -33,7 +34,7 @@ object userNode{
                     Log.e("getUserFromNode", "Error en la respuesta del servicio API: ${response.code()}")
                 }
             }
-
+            @SuppressLint("LogNotTimber")
             override fun onFailure(call: Call<User>, t: Throwable) {
                 Log.e("getUserFromNode", "Error al obtener el usuario desde el servicio API", t)
             }

@@ -5,8 +5,7 @@ import retrofit2.Call
 import retrofit2.http.*
 
 interface tournamentAPI {
-    @POST("new-tournament")
-    fun newTournament(@Body tournament: Tournament): Call<Tournament>
+
 
     @GET("tournaments")
     fun showTournaments(): Call<MutableList<Tournament>>
@@ -19,6 +18,9 @@ interface tournamentAPI {
 
     @GET("get-tournaments-official")
     fun getOfficialTournaments():Call<MutableList<Tournament>>
+
+    @POST("new-tournament")
+    fun newTournament(@Body tournament: Tournament): Call<Tournament>
 
     @DELETE("delete-tournament/{id}")
     fun deleteTournament(@Path("id") id: String): Call<Tournament>

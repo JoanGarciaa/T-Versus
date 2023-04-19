@@ -110,7 +110,11 @@
         android:id="@+id/joinedTournamentFragment"
         android:name="cat.iesvidreres.tversus.src.ui.home.tabs.tournament_tab.info_tournament.joined_tournament.JoinedTournamentFragment"
         android:label="fragment_joined_tournament"
-        tools:layout="@layout/fragment_joined_tournament" />
+        tools:layout="@layout/fragment_joined_tournament" >
+        <action
+            android:id="@+id/action_joinedTournamentFragment_to_matchmakingFragment"
+            app:destination="@id/matchmakingFragment" />
+    </fragment>
     <fragment
         android:id="@+id/loginAdminFragment"
         android:name="cat.iesvidreres.tversus.src.ui.home.admin.login_admin.LoginAdminFragment"
@@ -169,4 +173,9 @@
             app:destination="@id/functionsAdminFragment"
             app:popUpTo="@id/functionsAdminFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/matchmakingFragment"
+        android:name="cat.iesvidreres.tversus.src.ui.home.tabs.tournament_tab.matchmaking.MatchmakingFragment"
+        android:label="fragment_matchmaking"
+        tools:layout="@layout/fragment_matchmaking" />
 </navigation>

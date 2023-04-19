@@ -7,7 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import cat.iesvidreres.tversus.R
 import cat.iesvidreres.tversus.databinding.FragmentJoinedTournamentBinding
 import cat.iesvidreres.tversus.src.core.ex.toast
 import cat.iesvidreres.tversus.src.data.interfaces.userAPI
@@ -32,16 +34,22 @@ class JoinedTournamentFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentJoinedTournamentBinding.inflate(inflater, container, false)
-
+        
         initUI()
         return binding.root
     }
 
     private fun initUI() {
+        goToMachmaking()
         setRecyclerView()
     }
 
     private fun setRecyclerView() {
+
+
+
+
+
 
         val cardRecyclerview = binding.rvPlayers
         cardRecyclerview.layoutManager = LinearLayoutManager(requireContext())
@@ -83,6 +91,12 @@ class JoinedTournamentFragment : Fragment() {
             })
         }
 
+    }
+    
+    private fun goToMachmaking(){
+        binding.btnToMatchmaking.setOnClickListener {
+            view?.findNavController()?.navigate(R.id.action_joinedTournamentFragment_to_matchmakingFragment)
+        }
     }
 
 

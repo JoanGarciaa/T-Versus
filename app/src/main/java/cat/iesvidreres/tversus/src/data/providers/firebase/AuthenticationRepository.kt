@@ -39,7 +39,6 @@ class AuthenticationRepository @Inject constructor(
         auth.createUserWithEmailAndPassword(userRegister.email, userRegister.password).addOnCompleteListener() { task ->
             if (task.isSuccessful) {
                 auth.currentUser?.sendEmailVerification()?.addOnCompleteListener {
-                    userRepository.createUserTable(userRegister)
                     Toast.makeText(context,"Registro completado con exito! Verifica tu cuenta con el correo" , Toast.LENGTH_SHORT).show()
                     Log.d(ContentValues.TAG, "createUserWithEmail:success")
                     val intent = Intent(context, LoginActivity::class.java)

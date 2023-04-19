@@ -49,6 +49,24 @@ class HomeRVAdapter @Inject constructor() : RecyclerView.Adapter<HomeRVAdapter.I
         }
     }
 
+    fun insertLineBreaks(input: String): String {
+        val output = StringBuilder(input)
+        var i = 24
+        while (i < output.length) {
+            output.insert(i, "\n")
+            i += 25
+        }
+        return output.toString()
+    }
+
+    fun truncateString(str: String): String {
+        if (str.length <= 20) {
+            return str
+        } else {
+            return str.substring(0, 20) + "..."
+        }
+    }
+
     inner class ItemTournamentHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bindView(tournament: Tournament) {
             val descriptionViewTournament = itemView.findViewById<TextView>(R.id.tvDescriptionViewTournament)
@@ -56,7 +74,7 @@ class HomeRVAdapter @Inject constructor() : RecyclerView.Adapter<HomeRVAdapter.I
             val imageViewTournament = itemView.findViewById<ImageView>(R.id.ivViewTournament)
             imageViewTournament.setImageResource(R.drawable.valotourn)
             val nameViewTournament = itemView.findViewById<TextView>(R.id.tvNameViewTournament)
-            nameViewTournament.text = tournament.name
+            nameViewTournament.text = truncateString(tournament.name)
             val priceViewTournament = itemView.findViewById<TextView>(R.id.tvPriceTournament)
             priceViewTournament.text = tournament.price.toString()
             val btnJoin = itemView.findViewById<Button>(R.id.btnToJoin)

@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -31,6 +32,7 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding =  FragmentHomeBinding.inflate(inflater,container,false)
+
         initUI()
         return binding.root
     }
@@ -65,13 +67,7 @@ class HomeFragment : Fragment() {
             override fun onResponse(
                 call: Call<MutableList<Tournament>>, response: Response<MutableList<Tournament>>
             ) {
-
                 tournamentList = response.body()!!
-//                val tournaments = arrayOfNulls<String>(tournamentList.size)
-//
-//                for (i in tournamentList.indices) {
-//                    tournaments[i] = tournamentList[i].name
-//                }
                 cardAdapter.setListData(tournamentList)
                 binding.progressBar.visibility = View.GONE
                 cardAdapter.notifyDataSetChanged()
@@ -85,5 +81,6 @@ class HomeFragment : Fragment() {
         })
 
     }
+
 
 }
