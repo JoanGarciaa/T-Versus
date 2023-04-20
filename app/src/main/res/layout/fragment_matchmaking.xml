@@ -6,8 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".src.ui.home.tabs.tournament_tab.matchmaking.MatchmakingFragment"
     android:background="@color/tversus"
-    android:padding="50dp">
-
+    android:paddingHorizontal="30dp">
 
     <TextView
         android:id="@+id/player0"
@@ -15,6 +14,7 @@
         android:layout_height="wrap_content"
         tools:text="TextView"
         style="@style/basicText"
+        android:layout_marginTop="40dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -23,6 +23,7 @@
         style="@style/basicText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="TextView" />
@@ -108,39 +109,42 @@
         tools:text="TextView" />
 
     <EditText
-        android:id="@+id/editTextNumber"
+        android:id="@+id/resultPlayer0"
         android:layout_width="47dp"
         android:layout_height="40dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginBottom="40dp"
-        android:ems="10"
+        android:layout_marginTop="30dp"
+        android:backgroundTint="@color/secondarytversus"
         android:inputType="number"
         android:textColor="@color/terciarytversus"
-        app:layout_constraintBottom_toTopOf="@+id/player2"
-        app:layout_constraintStart_toEndOf="@+id/player0" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/dots1"
+        android:layout_marginEnd="10dp"
+        tools:layout_editor_absoluteX="139dp" />
 
     <EditText
-        android:id="@+id/editTextNumber2"
+        android:id="@+id/resultPlayer1"
         android:layout_width="47dp"
         android:layout_height="40dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="40dp"
-        android:ems="10"
+        android:layout_marginTop="30dp"
         android:inputType="number"
         android:textColor="@color/terciarytversus"
-        app:layout_constraintBottom_toTopOf="@+id/player3"
-        app:layout_constraintEnd_toStartOf="@+id/player1" />
+        android:backgroundTint="@color/secondarytversus"
+        app:layout_constraintStart_toEndOf="@id/dots1"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="10dp"
+        tools:layout_editor_absoluteX="226dp" />
 
 
     <TextView
-        android:id="@+id/dots"
+        android:id="@+id/dots1"
         style="@style/basicText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
         android:text=":"
         android:textSize="20dp"
-        app:layout_constraintEnd_toStartOf="@+id/editTextNumber2"
-        app:layout_constraintStart_toEndOf="@+id/editTextNumber"
+        app:layout_constraintEnd_toStartOf="@+id/player1"
+        app:layout_constraintStart_toEndOf="@+id/player0"
         app:layout_constraintTop_toTopOf="parent" />
 
 

@@ -33,13 +33,13 @@ class MatchmakingFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding =  FragmentMatchmakingBinding.inflate(inflater,container,false)
+        binding = FragmentMatchmakingBinding.inflate(inflater, container, false)
         initUI()
         return binding.root
     }
 
-    private fun initUI(){
-    getUsers()
+    private fun initUI() {
+        getUsers()
     }
 
     private fun getUsers() {
@@ -48,40 +48,47 @@ class MatchmakingFragment : Fragment() {
 
         val api = retrofit.create(userAPI::class.java)
         var playerList: MutableList<User>
-        var player = listOf<User>()
-        val playerTextViews = listOf(
-            binding.player0,binding.player1,binding.player2,binding.player3,binding.player4,binding.player5,binding.player6,binding.player7,binding.player8,binding.player9,
-        )
+        with(binding) {
+            val playerTextViews = listOf(
+                player0,
+                player1,
+                player2,
+                player3,
+                player4,
+                player5,
+                player6,
+                player7,
+                player8,
+                player9
+            )
+            infoTournamentViewModel.tournament?.let { tournament ->
+                api.showPlayers(tournament.id).enqueue(object : Callback<MutableList<User>> {
+                    override fun onResponse(
+                        call: Call<MutableList<User>>, response: Response<MutableList<User>>
+                    ) {
+                        try {
+                            if (response.body() != null) {
+                                playerList = response.body()!!
+                                for ((index, player) in playerList.withIndex()) {
+                                    playerTextViews[index].text = player.username
+                                }
 
-        infoTournamentViewModel.tournament?.let { tournament ->
-            api.showPlayers(tournament.id).enqueue(object : Callback<MutableList<User>> {
-                override fun onResponse(
-                    call: Call<MutableList<User>>, response: Response<MutableList<User>>
-                ) {
-                    try {
-                        if (response.body() != null) {
-                            playerList = response.body()!!
-//                            for (player in playerList) {
-//                                Log.i("jugadores","${player.username}")
-//                            }
-                            for ((index, player) in playerList.withIndex()) {
-                                playerTextViews[index].text = player.username
+                            } else {
+                                toast("no hay jugadores dentro de este torneo")
                             }
-
-                        } else {
-                            toast("no hay jugadores dentro de este torneo")
+                        } catch (e: ApiException) {
+                            Log.i("Error in players call", "$e")
                         }
-                    } catch (e: ApiException) {
-                        Log.i("Error in players call", "$e")
                     }
-                }
 
-                override fun onFailure(call: Call<MutableList<User>>, t: Throwable) {
-                    Log.i("Erroddr", "$t")
-                }
+                    override fun onFailure(call: Call<MutableList<User>>, t: Throwable) {
+                        Log.i("Erroddr", "$t")
+                    }
 
 
-            })
+                })
+            }
+
         }
 
     }
