@@ -96,6 +96,11 @@
         <action
             android:id="@+id/action_infoTournamentFragment_to_joinedTournamentFragment"
             app:destination="@id/joinedTournamentFragment" />
+        <action
+            android:id="@+id/action_infoTournamentFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false" />
     </fragment>
     <fragment
         android:id="@+id/paymentFragment"
@@ -172,6 +177,9 @@
             android:id="@+id/action_infoTournamentAdminFragment_to_functionsAdminFragment"
             app:destination="@id/functionsAdminFragment"
             app:popUpTo="@id/functionsAdminFragment" />
+        <action
+            android:id="@+id/action_infoTournamentAdminFragment_to_matchmakingFragment"
+            app:destination="@id/matchmakingFragment" />
     </fragment>
     <fragment
         android:id="@+id/matchmakingFragment"

@@ -17,6 +17,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.navigation.findNavController
 import cat.iesvidreres.tversus.R
 import cat.iesvidreres.tversus.databinding.FragmentInfoTournamentBinding
+import cat.iesvidreres.tversus.src.core.ex.toast
 import cat.iesvidreres.tversus.src.data.interfaces.tournamentAPI
 import cat.iesvidreres.tversus.src.data.interfaces.userAPI
 import cat.iesvidreres.tversus.src.data.models.Tournament
@@ -24,12 +25,14 @@ import cat.iesvidreres.tversus.src.data.models.User
 import cat.iesvidreres.tversus.src.data.providers.nodejs.userNode
 import cat.iesvidreres.tversus.src.ui.home.admin.functions_admin.list_tournaments_admin.info_tournament_admin.InfoTournamentAdminViewModel
 import cat.iesvidreres.tversus.src.ui.home.tabs.profile_tab.ProfileViewModel
-import com.squareup.picasso.Picasso
+import com.google.gson.GsonBuilder
+import okhttp3.OkHttpClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+
 
 class InfoTournamentFragment : Fragment() {
     private lateinit var binding: FragmentInfoTournamentBinding
@@ -82,9 +85,42 @@ class InfoTournamentFragment : Fragment() {
                         if(user.isJoined && tournament.id == user.tournament_id){
                             binding.btnJoinTournament.isVisible = false
                             binding.btnToShowPlayers.isVisible = true
+                            binding.btnToExitTournament.isVisible = true
                             binding.btnToShowPlayers.setOnClickListener {
                                 view?.findNavController()?.navigate(R.id.action_infoTournamentFragment_to_joinedTournamentFragment)
+                            }
+                            binding.btnToExitTournament.setOnClickListener {
+                                userLiveData.observe(requireActivity()) { user ->
+                                    val gson = GsonBuilder().setLenient().create()
+                                    val retrofit = Retrofit.Builder().baseUrl("http://10.0.2.2:3000/")
+                                        .addConverterFactory(GsonConverterFactory.create(gson)).build()
+                                    val finalTokens = tournament.price + user.tokens
+                                    var new = User(user.username,user.email,user.password,user.borndate,finalTokens,"",user.image,false)
+                                    val api = retrofit.create(userAPI::class.java);
+                                    try {
+                                        api.updateUser(user.email, new).enqueue(object : Callback<User> {
+                                            override fun onResponse(
+                                                call: Call<User>, responseUser: Response<User>
+                                            ) {
+                                                new = responseUser.body()!!
+                                            }
 
+                                            override fun onFailure(call: Call<User>, t: Throwable) {
+                                                Log.i("Error", "${t.cause}")
+                                                view?.findNavController()?.navigate(R.id.action_infoTournamentFragment_to_homeFragment)
+                                                Toast.makeText(
+                                                    context, "Has salido del torneo",
+                                                    Toast.LENGTH_SHORT
+                                                ).show()
+                                            }
+
+                                        })
+                                    }catch (e: Error){
+                                        Log.e("Error en el catch","$e");
+                                    }
+
+
+                                }
                             }
                         }else{
                             binding.btnJoinTournament.isVisible = true

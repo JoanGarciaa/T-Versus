@@ -46,6 +46,11 @@ class InfoTournamentAdminFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentInfoTournamentAdminBinding.inflate(inflater, container, false)
         initUI()
+
+        binding.btnToResults.setOnClickListener {
+            view?.findNavController()?.navigate(R.id.action_infoTournamentAdminFragment_to_matchmakingFragment)
+        }
+
         return binding.root
     }
 
@@ -72,6 +77,7 @@ class InfoTournamentAdminFragment : Fragment() {
                 builder.setPositiveButton(
                     "Si, borrar!",
                     DialogInterface.OnClickListener { dialog, id ->
+                        cardAdapter.notifyDataSetChanged()
                         val gson = GsonBuilder().setLenient().create()
                         val retrofit = Retrofit.Builder().baseUrl("http://10.0.2.2:3000/")
                             .addConverterFactory(GsonConverterFactory.create(gson)).build()

@@ -16,7 +16,7 @@
         style="@style/basicText"
         android:layout_marginTop="40dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/tvInfoPress" />
 
     <TextView
         android:id="@+id/player1"
@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvInfoPress"
         tools:text="TextView" />
 
     <TextView
@@ -109,30 +109,32 @@
         tools:text="TextView" />
 
     <EditText
-        android:id="@+id/resultPlayer0"
+        android:id="@+id/result0"
         android:layout_width="47dp"
         android:layout_height="40dp"
+        android:layout_marginStart="110dp"
         android:layout_marginTop="30dp"
+        android:layout_marginEnd="10dp"
         android:backgroundTint="@color/secondarytversus"
         android:inputType="number"
         android:textColor="@color/terciarytversus"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toStartOf="@id/dots1"
-        android:layout_marginEnd="10dp"
-        tools:layout_editor_absoluteX="139dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvInfoPress" />
 
     <EditText
-        android:id="@+id/resultPlayer1"
+        android:id="@+id/result1"
         android:layout_width="47dp"
         android:layout_height="40dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="30dp"
+        android:layout_marginEnd="120dp"
+        android:backgroundTint="@color/secondarytversus"
         android:inputType="number"
         android:textColor="@color/terciarytversus"
-        android:backgroundTint="@color/secondarytversus"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/dots1"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginStart="10dp"
-        tools:layout_editor_absoluteX="226dp" />
+        app:layout_constraintTop_toBottomOf="@id/tvInfoPress"/>
 
 
     <TextView
@@ -143,8 +145,200 @@
         android:layout_marginTop="30dp"
         android:text=":"
         android:textSize="20dp"
-        app:layout_constraintEnd_toStartOf="@+id/player1"
-        app:layout_constraintStart_toEndOf="@+id/player0"
+        app:layout_constraintEnd_toStartOf="@+id/result1"
+        app:layout_constraintStart_toEndOf="@+id/result0"
+        app:layout_constraintTop_toBottomOf="@id/tvInfoPress"/>
+
+
+    <EditText
+        android:id="@+id/result2"
+        android:layout_width="47dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="110dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="10dp"
+        android:backgroundTint="@color/secondarytversus"
+        android:inputType="number"
+        android:textColor="@color/terciarytversus"
+        app:layout_constraintEnd_toStartOf="@id/dots2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/result0" />
+
+    <EditText
+        android:id="@+id/result3"
+        android:layout_width="47dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="120dp"
+        android:backgroundTint="@color/secondarytversus"
+        android:inputType="number"
+        android:textColor="@color/terciarytversus"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/dots2"
+        app:layout_constraintTop_toBottomOf="@id/result1" />
+
+
+    <TextView
+        android:id="@+id/dots2"
+        style="@style/basicText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="45dp"
+        android:text=":"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toStartOf="@+id/result2"
+        app:layout_constraintStart_toEndOf="@+id/result3"
+        app:layout_constraintTop_toBottomOf="@id/dots1" />
+
+
+    <EditText
+        android:id="@+id/result4"
+        android:layout_width="47dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="110dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="10dp"
+        android:backgroundTint="@color/secondarytversus"
+        android:inputType="number"
+        android:textColor="@color/terciarytversus"
+        app:layout_constraintEnd_toStartOf="@id/dots3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/result2" />
+
+    <EditText
+        android:id="@+id/result5"
+        android:layout_width="47dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="120dp"
+        android:backgroundTint="@color/secondarytversus"
+        android:inputType="number"
+        android:textColor="@color/terciarytversus"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/dots3"
+        app:layout_constraintTop_toBottomOf="@id/result3" />
+
+
+    <TextView
+        android:id="@+id/dots3"
+        style="@style/basicText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="45dp"
+        android:text=":"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toStartOf="@+id/result4"
+        app:layout_constraintStart_toEndOf="@+id/result5"
+        app:layout_constraintTop_toBottomOf="@id/dots2" />
+
+
+    <EditText
+        android:id="@+id/result6"
+        android:layout_width="47dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="110dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="10dp"
+        android:backgroundTint="@color/secondarytversus"
+        android:inputType="number"
+        android:textColor="@color/terciarytversus"
+        app:layout_constraintEnd_toStartOf="@id/dots4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/result4" />
+
+    <EditText
+        android:id="@+id/result7"
+        android:layout_width="47dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="120dp"
+        android:backgroundTint="@color/secondarytversus"
+        android:inputType="number"
+        android:textColor="@color/terciarytversus"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/dots4"
+        app:layout_constraintTop_toBottomOf="@id/result5" />
+
+
+    <TextView
+        android:id="@+id/dots4"
+        style="@style/basicText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="45dp"
+        android:text=":"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toStartOf="@+id/result6"
+        app:layout_constraintStart_toEndOf="@+id/result7"
+        app:layout_constraintTop_toBottomOf="@id/dots3" />
+
+
+    <EditText
+        android:id="@+id/result8"
+        android:layout_width="47dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="110dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="10dp"
+        android:backgroundTint="@color/secondarytversus"
+        android:inputType="number"
+        android:textColor="@color/terciarytversus"
+        app:layout_constraintEnd_toStartOf="@id/dots5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/result6" />
+
+    <EditText
+        android:id="@+id/result9"
+        android:layout_width="47dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="120dp"
+        android:backgroundTint="@color/secondarytversus"
+        android:inputType="number"
+        android:textColor="@color/terciarytversus"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/dots5"
+        app:layout_constraintTop_toBottomOf="@id/result7" />
+
+
+    <TextView
+        android:id="@+id/dots5"
+        style="@style/basicText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="45dp"
+        android:text=":"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toStartOf="@+id/result8"
+        app:layout_constraintStart_toEndOf="@+id/result9"
+        app:layout_constraintTop_toBottomOf="@id/dots4" />
+
+    <Button
+        style="@style/PrimaryButton"
+        android:id="@+id/btnSavePoints"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="150dp"
+        android:background="@drawable/rounded_button"
+        android:text="Guardar Cambios"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/result9" />
+
+    <TextView
+        android:id="@+id/tvInfoPress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/basicText"
+        android:layout_marginTop="40dp"
+        android:textSize="20sp"
+        android:text="Presiona sobre tu nombre y pon tu puntuación!"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 
