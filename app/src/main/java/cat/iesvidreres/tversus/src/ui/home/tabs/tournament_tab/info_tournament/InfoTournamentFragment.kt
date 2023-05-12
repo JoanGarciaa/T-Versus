@@ -95,7 +95,7 @@ class InfoTournamentFragment : Fragment() {
                                     val retrofit = Retrofit.Builder().baseUrl("http://10.0.2.2:3000/")
                                         .addConverterFactory(GsonConverterFactory.create(gson)).build()
                                     val finalTokens = tournament.price + user.tokens
-                                    var new = User(user.username,user.email,user.password,user.borndate,finalTokens,"",user.image,false)
+                                    var new = User(user.username,user.email,user.password,user.borndate,finalTokens,"",user.image,false,user.points)
                                     val api = retrofit.create(userAPI::class.java);
                                     try {
                                         api.updateUser(user.email, new).enqueue(object : Callback<User> {

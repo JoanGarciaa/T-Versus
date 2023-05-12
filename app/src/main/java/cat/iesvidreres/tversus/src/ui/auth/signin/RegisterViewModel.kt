@@ -80,7 +80,8 @@ class RegisterViewModel @Inject constructor(
                 9,
                 "",
                 "https://imagen.research.google/main_gallery_images/a-brain-riding-a-rocketship.jpg",
-                false
+                false,
+                0
             )
             val api = retrofit.create(userAPI::class.java);
             api.newUserDB(user).enqueue(object : Callback<User> {

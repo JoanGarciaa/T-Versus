@@ -60,7 +60,7 @@ class ListUsersAdminFragment : Fragment() {
                         val retrofit = Retrofit.Builder().baseUrl("http://10.0.2.2:3000/")
                             .addConverterFactory(GsonConverterFactory.create(gson)).build()
                         val api = retrofit.create(userAPI::class.java)
-                        var thisUser  = User(user.username,user.email,user.password,user.email,user.tokens,"",user.image,user.isJoined)
+                        var thisUser  = User(user.username,user.email,user.password,user.email,user.tokens,"",user.image,user.isJoined,user.points)
                         api.deleteUser(user.email).enqueue(object : Callback<User> {
                             override fun onResponse(
                                 call: Call<User>, response: Response<User>

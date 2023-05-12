@@ -68,7 +68,7 @@ class EditProfileFragment : Fragment() {
                     val updatedEmail = binding.inputEmailEditText.text.toString()
                     val updatedUsername = binding.inputUsernameEditText.text.toString()
                     val updatedBorndate = binding.inputBorndateEditText.text.toString()
-                    var updateUser = User(updatedUsername,updatedEmail,user.password,updatedBorndate,user.tokens,user.tournament_id,user.image,user.isJoined)
+                    var updateUser = User(updatedUsername,updatedEmail,user.password,updatedBorndate,user.tokens,user.tournament_id,user.image,user.isJoined,user.points)
 
                     val api = retrofit.create(userAPI::class.java);
                     api.updateUser(user.email,updateUser).enqueue(object : Callback<User> {

@@ -21,10 +21,11 @@ class UserRepository @Inject constructor(){
         const val TOURNAMENT_ID = "tournament_id"
         const val IS_JOINED = "isJoined"
         const val IMAGE = "image"
+        const val POINTS = "points"
     }
 
     fun createUserTable(userRegister: UserRegister){
-        val user = User(userRegister.nickname, userRegister.email,userRegister.password,userRegister.years,0 , "", isJoined = false, image = "")
+        val user = User(userRegister.nickname, userRegister.email,userRegister.password,userRegister.years,0 , "", isJoined = false, image = "",points = 0)
         db.collection("users").document(user.email).set(user)
     }
     fun findUserByEmail(email:String):MutableLiveData<User>{
@@ -42,8 +43,8 @@ class UserRepository @Inject constructor(){
                 it.documents.first().getString(TOURNAMENT_ID)!!,
                 it.documents.first().getString(IMAGE)!!,
                 it.documents.first().getBoolean(IS_JOINED)!!,
-
-            )
+                it.documents.first().getField<Int>(POINTS)!!,
+                )
         }
         return user
     }

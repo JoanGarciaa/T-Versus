@@ -11,5 +11,6 @@ data class User(
     var tokens: Int,
     var tournament_id: String,
     var image: String,
-    var isJoined : Boolean = false
+    var isJoined : Boolean = false,
+    var points : Int,
 )

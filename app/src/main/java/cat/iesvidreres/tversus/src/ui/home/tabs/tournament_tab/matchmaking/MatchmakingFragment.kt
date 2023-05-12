@@ -1,6 +1,8 @@
 package cat.iesvidreres.tversus.src.ui.home.tabs.tournament_tab.matchmaking
 
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.text.Editable
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -80,6 +82,7 @@ class MatchmakingFragment : Fragment() {
 
         val api = retrofit.create(userAPI::class.java)
         var playerList: MutableList<User>
+
         with(binding) {
             val playerTextViews = listOf(
                 player0,
@@ -109,6 +112,9 @@ class MatchmakingFragment : Fragment() {
                                 for ((index, player) in playerList.withIndex()) {
                                     val playerTextView = playerTextViews[index]
                                     playerTextView.text = player.username
+                                    var playerPoints = listOf(player.points.toString())
+
+                                    selectedEditText?.text = Editable.Factory.getInstance().newEditable(player.points.toString())
                                     val resultEditText = when (playerTextView) {
                                         player0 -> result0
                                         player1 -> result1
@@ -122,23 +128,54 @@ class MatchmakingFragment : Fragment() {
                                         player9 -> result9
                                         else -> null
                                     }
-                                    playerTextView.setOnClickListener {
+                                    playerTextViews.forEachIndexed { index, playerTextView ->
+                                        resultEditText?.text = Editable.Factory.getInstance()
+                                            .newEditable(playerPoints.toString())
+                                    }
+
+
+                                        playerTextView.setOnClickListener {
                                         // Deshabilitar EditText anteriormente seleccionado, si lo hay
                                         userLiveData.observe(requireActivity()) { user ->
-                                            if(user.username == playerTextView.text){
+                                            if (user.username == playerTextView.text) {
                                                 selectedEditText?.isEnabled = false
                                                 // Habilitar el EditText correspondiente
                                                 resultEditText?.isEnabled = true
                                                 // Guardar el EditText seleccionado
                                                 selectedEditText = resultEditText
-                                            }
-                                            else{
+                                                binding.btnSavePoints.setOnClickListener {
+                                                    if (resultEditText != null) {
+                                                        val userPoints = User(
+                                                            user.username,
+                                                            user.email,
+                                                            user.password,
+                                                            user.borndate,
+                                                            user.tokens,
+                                                            user.tournament_id,
+                                                            user.image,
+                                                            user.isJoined,
+                                                            resultEditText.text.toString().toInt()
+                                                        )
+                                                        api.updateUser(user.email, userPoints).enqueue(object : Callback<User> {
+                                                                override fun onResponse(call: Call<User>, response: Response<User>) {
+                                                                }
+
+                                                                @SuppressLint("LogNotTimber")
+                                                                override fun onFailure(call: Call<User>, t: Throwable) {
+                                                                    Log.e("Error","$t")
+                                                                }
+                                                            })
+                                                    }
+                                                }
+                                            } else {
                                                 resultEditText?.isEnabled = false
                                                 selectedEditText?.isEnabled = false
                                             }
                                         }
 
                                     }
+
+
                                 }
 
                             } else {
