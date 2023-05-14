@@ -12,6 +12,7 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.MutableLiveData
+import androidx.navigation.findNavController
 import cat.iesvidreres.tversus.R
 import cat.iesvidreres.tversus.databinding.FragmentHomeBinding
 import cat.iesvidreres.tversus.databinding.FragmentMatchmakingBinding
@@ -112,7 +113,7 @@ class MatchmakingFragment : Fragment() {
                                 for ((index, player) in playerList.withIndex()) {
                                     val playerTextView = playerTextViews[index]
                                     playerTextView.text = player.username
-                                    var playerPoints = listOf(player.points.toString())
+                                    var playerPoints = player.points.toString()
 
                                     selectedEditText?.text = Editable.Factory.getInstance().newEditable(player.points.toString())
                                     val resultEditText = when (playerTextView) {
@@ -129,8 +130,11 @@ class MatchmakingFragment : Fragment() {
                                         else -> null
                                     }
                                     playerTextViews.forEachIndexed { index, playerTextView ->
-                                        resultEditText?.text = Editable.Factory.getInstance()
-                                            .newEditable(playerPoints.toString())
+                                        if(playerPoints == "0"){
+
+                                        }else{
+                                            resultEditText?.text = Editable.Factory.getInstance().newEditable(playerPoints)
+                                        }
                                     }
 
 
@@ -165,6 +169,9 @@ class MatchmakingFragment : Fragment() {
                                                                     Log.e("Error","$t")
                                                                 }
                                                             })
+                                                        view?.findNavController()?.navigate(R.id.action_matchmakingFragment_to_joinedTournamentFragment)
+                                                        toast("Gracias por poner tu puntuación!")
+
                                                     }
                                                 }
                                             } else {

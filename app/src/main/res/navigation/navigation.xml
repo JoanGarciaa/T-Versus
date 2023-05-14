@@ -185,5 +185,11 @@
         android:id="@+id/matchmakingFragment"
         android:name="cat.iesvidreres.tversus.src.ui.home.tabs.tournament_tab.matchmaking.MatchmakingFragment"
         android:label="fragment_matchmaking"
-        tools:layout="@layout/fragment_matchmaking" />
+        tools:layout="@layout/fragment_matchmaking" >
+        <action
+            android:id="@+id/action_matchmakingFragment_to_joinedTournamentFragment"
+            app:destination="@id/joinedTournamentFragment"
+            app:popUpTo="@id/infoTournamentFragment"
+            app:popUpToInclusive="false" />
+    </fragment>
 </navigation>

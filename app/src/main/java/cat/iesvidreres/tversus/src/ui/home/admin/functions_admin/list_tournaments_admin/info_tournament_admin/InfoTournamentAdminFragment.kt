@@ -73,16 +73,16 @@ class InfoTournamentAdminFragment : Fragment() {
             override fun onDeleteUser(user: User) {
                 val builder = AlertDialog.Builder(requireContext())
                 builder.setTitle("Cuidado!")
-                builder.setMessage("Estas seguro de que quieres eliminar al usuario?")
+                builder.setMessage("Estas seguro de que quieres sacar del torneo al usuario?")
                 builder.setPositiveButton(
-                    "Si, borrar!",
+                    "Si, sacar!",
                     DialogInterface.OnClickListener { dialog, id ->
                         cardAdapter.notifyDataSetChanged()
                         val gson = GsonBuilder().setLenient().create()
                         val retrofit = Retrofit.Builder().baseUrl("http://10.0.2.2:3000/")
                             .addConverterFactory(GsonConverterFactory.create(gson)).build()
                         val api = retrofit.create(userAPI::class.java)
-                        var thisUser = User(user.username,user.email,user.password,user.borndate,user.tokens,"",user.image,user.isJoined,user.points)
+                        var thisUser = User(user.username,user.email,user.password,user.borndate,user.tokens,"",user.image,user.isJoined,0)
                         api.updateUser(user.email,thisUser).enqueue(object : Callback<User> {
                             override fun onResponse(
                                 call: Call<User>, response: Response<User>

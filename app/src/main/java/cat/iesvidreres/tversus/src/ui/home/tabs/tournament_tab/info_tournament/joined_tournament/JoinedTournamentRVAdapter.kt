@@ -1,5 +1,6 @@
 package cat.iesvidreres.tversus.src.ui.home.tabs.tournament_tab.info_tournament.joined_tournament
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,6 +22,7 @@ class JoinedTournamentRVAdapter @Inject constructor() : RecyclerView.Adapter<Joi
     fun setListData(data: List<User>) {
         listData = data
     }
+
 
     fun setItemListener(listener: JoinedTournamentRVAdapter.OnItemClickListener) {
         this.listener = listener
