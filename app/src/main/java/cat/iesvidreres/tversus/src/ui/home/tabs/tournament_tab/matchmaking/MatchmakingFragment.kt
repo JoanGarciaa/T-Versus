@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.TextView
+import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.findNavController
@@ -22,6 +23,7 @@ import cat.iesvidreres.tversus.src.data.models.User
 import cat.iesvidreres.tversus.src.data.providers.nodejs.userNode
 import cat.iesvidreres.tversus.src.ui.home.tabs.profile_tab.ProfileViewModel
 import cat.iesvidreres.tversus.src.ui.home.tabs.tournament_tab.info_tournament.InfoTournamentViewModel
+import cat.iesvidreres.tversus.src.ui.home.tabs.tournament_tab.report_user.ReportViewModel
 import com.google.android.gms.common.api.ApiException
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
@@ -36,6 +38,7 @@ class MatchmakingFragment : Fragment() {
     private lateinit var binding: FragmentMatchmakingBinding
     private val infoTournamentViewModel: InfoTournamentViewModel by activityViewModels()
     private val profileViewModel: ProfileViewModel by activityViewModels()
+    private val reportViewModel: ReportViewModel by activityViewModels()
 
     val userLiveData = MutableLiveData<User>()
 
@@ -48,11 +51,21 @@ class MatchmakingFragment : Fragment() {
         initUI()
         userNode.getUserFromNode(profileViewModel.authenticationRepository.getCurrentUser().email.toString()) { user ->
             userLiveData.postValue(user)
+            binding.btnToReport.setOnClickListener {
+                userNode.getUserFromNode(profileViewModel.authenticationRepository.getCurrentUser().email.toString()) { user ->
+                    //SVM
+                    reportViewModel.setInfoReport(user.username,user.tournament_id)
+                }
+                //bundle
+                view?.findNavController()?.navigate(R.id.action_matchmakingFragment_to_reportFragment, bundleOf("username" to user.username,"idTournament" to user.tournament_id ))
+
+            }
         }
         return binding.root
     }
 
     private fun initUI() {
+        navigation(bundleOf())
         getUsers()
         initEditTexts()
     }
@@ -113,7 +126,7 @@ class MatchmakingFragment : Fragment() {
                                 for ((index, player) in playerList.withIndex()) {
                                     val playerTextView = playerTextViews[index]
                                     playerTextView.text = player.username
-                                    var playerPoints = player.points.toString()
+                                    val playerPoints = player.points.toString()
 
                                     selectedEditText?.text = Editable.Factory.getInstance().newEditable(player.points.toString())
                                     val resultEditText = when (playerTextView) {
@@ -130,9 +143,7 @@ class MatchmakingFragment : Fragment() {
                                         else -> null
                                     }
                                     playerTextViews.forEachIndexed { index, playerTextView ->
-                                        if(playerPoints == "0"){
-
-                                        }else{
+                                        if(playerPoints != "0"){
                                             resultEditText?.text = Editable.Factory.getInstance().newEditable(playerPoints)
                                         }
                                     }
@@ -203,6 +214,8 @@ class MatchmakingFragment : Fragment() {
 
         }
 
+    }
+    fun navigation(bundle: Bundle){
 
     }
 

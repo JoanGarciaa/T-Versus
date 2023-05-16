@@ -191,5 +191,13 @@
             app:destination="@id/joinedTournamentFragment"
             app:popUpTo="@id/infoTournamentFragment"
             app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/action_matchmakingFragment_to_reportFragment"
+            app:destination="@id/reportFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/reportFragment"
+        android:name="cat.iesvidreres.tversus.src.ui.home.tabs.tournament_tab.report_user.ReportFragment"
+        android:label="fragment_report"
+        tools:layout="@layout/fragment_report" />
 </navigation>

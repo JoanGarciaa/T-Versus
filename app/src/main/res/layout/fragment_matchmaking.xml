@@ -318,8 +318,8 @@
         app:layout_constraintTop_toBottomOf="@id/dots4" />
 
     <Button
-        style="@style/PrimaryButton"
         android:id="@+id/btnSavePoints"
+        style="@style/PrimaryButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="150dp"
@@ -340,6 +340,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnToReport"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginBottom="44dp"
+        android:text="Reportar Usuario"
+        android:background="@drawable/rounded_button"
+        style="@style/PrimaryButton"
+        app:layout_constraintBottom_toTopOf="@+id/btnSavePoints"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/result9" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

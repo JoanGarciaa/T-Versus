@@ -108,7 +108,7 @@ class InfoTournamentFragment : Fragment() {
                                         "",
                                         user.image,
                                         false,
-                                        user.points
+                                        0
                                     )
                                     val api = retrofit.create(userAPI::class.java);
                                     val builder = AlertDialog.Builder(requireContext())
@@ -168,6 +168,7 @@ class InfoTournamentFragment : Fragment() {
                                     user.tokens = finalTokens
                                     user.tournament_id = infoTournament.id
                                     user.isJoined = true
+                                    user.points = 0
                                     if (oldTokens < infoTournament.price) {
                                         Toast.makeText(
                                             requireContext(),

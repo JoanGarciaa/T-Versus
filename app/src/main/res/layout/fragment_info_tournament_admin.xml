@@ -126,5 +126,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/priceInfoTournament" />
 
+    <Button
+        android:id="@+id/btnShowReports"
+        style="@style/PrimaryButton"
+        android:layout_width="116dp"
+        android:textSize="11sp"
+        android:layout_height="30dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/rounded_button"
+        android:text="Reportes"
+        app:layout_constraintBottom_toTopOf="@+id/btnToResults"
+        app:layout_constraintEnd_toEndOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
