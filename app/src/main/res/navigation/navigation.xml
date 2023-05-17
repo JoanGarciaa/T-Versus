@@ -153,6 +153,9 @@
         <action
             android:id="@+id/action_functionsAdminFragment_to_listUsersFragmentAdmin"
             app:destination="@id/listUsersFragmentAdmin" />
+        <action
+            android:id="@+id/action_functionsAdminFragment_to_rewardsFragment"
+            app:destination="@id/rewardsFragment" />
     </fragment>
     <fragment
         android:id="@+id/listTournamentsAdminFragment"
@@ -200,4 +203,14 @@
         android:name="cat.iesvidreres.tversus.src.ui.home.tabs.tournament_tab.report_user.ReportFragment"
         android:label="fragment_report"
         tools:layout="@layout/fragment_report" />
+    <fragment
+        android:id="@+id/rewardsFragment"
+        android:name="cat.iesvidreres.tversus.src.ui.home.admin.functions_admin.rewards_admin.RewardsFragment"
+        android:label="fragment_rewards"
+        tools:layout="@layout/fragment_rewards" />
+    <fragment
+        android:id="@+id/spendPointsFragment"
+        android:name="cat.iesvidreres.tversus.src.ui.home.tabs.spend_points.SpendPointsFragment"
+        android:label="fragment_spend_points"
+        tools:layout="@layout/fragment_spend_points" />
 </navigation>

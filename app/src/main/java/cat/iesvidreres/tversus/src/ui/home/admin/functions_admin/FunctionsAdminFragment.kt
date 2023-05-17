@@ -32,15 +32,20 @@ class FunctionsAdminFragment : Fragment() {
         // Inflate the layout for this fragment
         binding =  FragmentFunctionsAdminBinding.inflate(inflater,container,false)
 
-        goTo()
+        init()
         return binding.root
     }
 
-    fun goTo(){
+    private fun init(){
+        goTo()
+    }
+
+    private fun goTo(){
         with(binding){
             btnToListUsers.setOnClickListener {view?.findNavController()?.navigate(R.id.action_functionsAdminFragment_to_listUsersFragmentAdmin) }
             btnToCreateOfficialTournament.setOnClickListener {view?.findNavController()?.navigate(R.id.action_functionsAdminFragment_to_createOfficialTournamentFragment) }
             btnToListTournaments.setOnClickListener {view?.findNavController()?.navigate(R.id.action_functionsAdminFragment_to_listTournamentsAdminFragment) }
+            btnToRewards.setOnClickListener{(view?.findNavController()?.navigate(R.id.action_functionsAdminFragment_to_rewardsFragment))}
         }
     }
 

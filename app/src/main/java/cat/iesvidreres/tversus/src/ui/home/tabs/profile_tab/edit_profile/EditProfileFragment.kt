@@ -60,7 +60,6 @@ class EditProfileFragment : Fragment() {
                 binding.inputEmailEditText.text =  Editable.Factory.getInstance().newEditable(user.email)
                 binding.inputUsernameEditText.text = Editable.Factory.getInstance().newEditable(user.username)
                 binding.inputBorndateEditText.text = Editable.Factory.getInstance().newEditable(user.borndate)
-
                 binding.btnModifyUser.setOnClickListener {
                     val gson = GsonBuilder().setLenient().create()
                     val retrofit = Retrofit.Builder().baseUrl("http://10.0.2.2:3000/")
