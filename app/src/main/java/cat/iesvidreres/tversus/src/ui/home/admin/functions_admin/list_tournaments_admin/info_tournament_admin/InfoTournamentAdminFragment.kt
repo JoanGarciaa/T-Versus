@@ -50,7 +50,9 @@ class InfoTournamentAdminFragment : Fragment() {
         binding.btnToResults.setOnClickListener {
             view?.findNavController()?.navigate(R.id.action_infoTournamentAdminFragment_to_matchmakingFragment)
         }
-
+        binding.btnShowReports.setOnClickListener { 
+            toast("Futura implementación")
+        }
         return binding.root
     }
 

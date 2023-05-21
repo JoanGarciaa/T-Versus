@@ -7,9 +7,13 @@ class SpendItemProvider {
     companion object {
         fun getListItemsToSpend(): MutableList<ShopCard> {
             return mutableListOf(
+                ShopCard("Iphone 11 pro",200000, R.drawable.iphone11pro,150000),
+                ShopCard("Pelota de futbol",2500, R.drawable.pelota,2500),
+                ShopCard("Mac Air m1 2020",6000, R.drawable.macair,200000),
+                ShopCard("Google play 10€",12000, R.drawable.googleplay,12000),
                 ShopCard("Iphone 11 pro",200000, R.drawable.iphone11pro,200000),
                 ShopCard("Pelota de futbol",2500, R.drawable.pelota,2500),
-                ShopCard("Mac Air m1 2020",6000, R.drawable.macair,6000),
+                ShopCard("Mac Air m1 2020",6000, R.drawable.macair,20000),
                 ShopCard("Google play 10€",12000, R.drawable.googleplay,12000)
             )
         }

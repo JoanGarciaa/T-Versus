@@ -19,7 +19,7 @@ class SpendPointsRVAdapter @Inject constructor() : RecyclerView.Adapter<SpendPoi
     private var listData = listOf<ShopCard>()
 
     interface OnItemClickListener {
-        fun onItemClick()
+        fun onItemClick(shopCard: ShopCard)
     }
 
     fun setListData(data: List<ShopCard>) {
@@ -60,7 +60,9 @@ class SpendPointsRVAdapter @Inject constructor() : RecyclerView.Adapter<SpendPoi
             val priceViewSpendItem = itemView.findViewById<TextView>(R.id.tvPriceTournament)
             priceViewSpendItem.text = card.price.toString()
 
-
+            itemView.setOnClickListener{
+                listener.onItemClick(card)
+            }
 
 
 
