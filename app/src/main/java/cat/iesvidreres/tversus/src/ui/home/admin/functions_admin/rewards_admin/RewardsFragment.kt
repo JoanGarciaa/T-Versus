@@ -1,5 +1,6 @@
 package cat.iesvidreres.tversus.src.ui.home.admin.functions_admin.rewards_admin
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,7 +11,6 @@ import cat.iesvidreres.tversus.databinding.FragmentRewardsBinding
 import cat.iesvidreres.tversus.src.core.ex.toast
 import cat.iesvidreres.tversus.src.data.interfaces.userAPI
 import cat.iesvidreres.tversus.src.data.models.User
-import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import retrofit2.Call
 import retrofit2.Callback
@@ -24,7 +24,7 @@ class RewardsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         binding = FragmentRewardsBinding.inflate(inflater, container, false)
 
@@ -48,7 +48,7 @@ class RewardsFragment : Fragment() {
 
         val retrofit = Retrofit.Builder().baseUrl("http://10.0.2.2:3000/").addConverterFactory(GsonConverterFactory.create(gson)).build()
         lateinit var users: MutableList<User>
-        val api = retrofit.create(userAPI::class.java);
+        val api = retrofit.create(userAPI::class.java)
 
         api.getUsers().enqueue(object : Callback<MutableList<User>> {
             override fun onResponse(
@@ -58,8 +58,8 @@ class RewardsFragment : Fragment() {
 
 
                 binding.bntSendRewards.setOnClickListener {
-                    var winnerPlayer = binding.editTextUsernameReward.text.toString()
-                    var userFound = false;
+                    val winnerPlayer = binding.editTextUsernameReward.text.toString()
+                    var userFound = false
                     lateinit var userReward :User
                     for (username in users) {
                         if (winnerPlayer == username.username) {
@@ -78,14 +78,16 @@ class RewardsFragment : Fragment() {
                             sendTokens(userReward)
                         }else{
                             toast("Los campos de tokens no coinciden!")
-
                         }
 
+                    }else{
+                        toast("Usuario no encontrado")
                     }
                 }
 
             }
 
+            @SuppressLint("LogNotTimber")
             override fun onFailure(call: Call<MutableList<User>>, t: Throwable) {
                 Log.i("Erroddr", "$t")
             }
@@ -97,8 +99,7 @@ class RewardsFragment : Fragment() {
         val gson = GsonBuilder().setLenient().create()
 
         val retrofit = Retrofit.Builder().baseUrl("http://10.0.2.2:3000/").addConverterFactory(GsonConverterFactory.create(gson)).build()
-        lateinit var users: MutableList<User>
-        val api = retrofit.create(userAPI::class.java);
+        val api = retrofit.create(userAPI::class.java)
         var userNew = userReward
         val finalTokens = userReward.tokens + binding.etReward2.text.toString().toInt()
         userNew = User(userReward.username,userReward.email,userReward.password,userReward.borndate,finalTokens,userReward.tournament_id,userReward.image,userReward.isJoined,userReward.points)

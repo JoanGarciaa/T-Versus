@@ -1,7 +1,5 @@
 package cat.iesvidreres.tversus.src.data.models
 
-import cat.iesvidreres.tversus.R
-
 
 data class User(
     val username : String,
