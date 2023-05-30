@@ -195,7 +195,16 @@
         android:id="@+id/matchmakingFragment"
         android:name="cat.iesvidreres.tversus.src.ui.home.tabs.tournament_tab.matchmaking.MatchmakingFragment"
         android:label="fragment_matchmaking"
-        tools:layout="@layout/fragment_matchmaking" />
+        tools:layout="@layout/fragment_matchmaking">
+    <action
+        android:id="@+id/action_matchmakingFragment_to_joinedTournamentFragment"
+        app:destination="@id/joinedTournamentFragment"
+        app:popUpTo="@id/infoTournamentFragment"
+        app:popUpToInclusive="false" />
+    <action
+        android:id="@+id/action_matchmakingFragment_to_reportFragment"
+        app:destination="@id/reportFragment" />
+    </fragment>
     <fragment
         android:id="@+id/adminRoundsTournamentFragment"
         android:name="cat.iesvidreres.tversus.src.ui.home.tabs.tournament_tab.info_tournament.joined_tournament.tournamentRounds.PantallasCreador.AdminRoundsTournamentFragment"
@@ -226,16 +235,7 @@
             android:id="@+id/action_adminStartTournament_to_adminRoundsTournamentFragment"
             app:destination="@id/adminRoundsTournamentFragment" />
     </fragment>
-        tools:layout="@layout/fragment_matchmaking" >
-        <action
-            android:id="@+id/action_matchmakingFragment_to_joinedTournamentFragment"
-            app:destination="@id/joinedTournamentFragment"
-            app:popUpTo="@id/infoTournamentFragment"
-            app:popUpToInclusive="false" />
-        <action
-            android:id="@+id/action_matchmakingFragment_to_reportFragment"
-            app:destination="@id/reportFragment" />
-    </fragment>
+
     <fragment
         android:id="@+id/reportFragment"
         android:name="cat.iesvidreres.tversus.src.ui.home.tabs.tournament_tab.report_user.ReportFragment"
@@ -256,6 +256,7 @@
         android:name="cat.iesvidreres.tversus.src.ui.home.tabs.tournament_tab.info_tournament.joined_tournament.tournamentRounds.PantallasUser.DatosRonda.FragmentUserDatosRonda"
         android:label="fragment_user_datos_ronda"
         tools:layout="@layout/fragment_user_datos_ronda" />
+    <fragment
         android:id="@+id/spendPointsFragment"
         android:name="cat.iesvidreres.tversus.src.ui.home.tabs.spend_points.SpendPointsFragment"
         android:label="fragment_spend_points"

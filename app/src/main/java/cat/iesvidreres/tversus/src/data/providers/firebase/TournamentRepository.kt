@@ -22,7 +22,7 @@ class TournamentRepository {
 
         var lista: MutableLiveData<List<Tournament>> = MutableLiveData<List<Tournament>>()
 
-        api.getUnOfficialTournaments().enqueue(object : Callback<MutableList<Tournament>> {
+        api.getTypeTournaments("unofficial").enqueue(object : Callback<MutableList<Tournament>> {
 
             override fun onResponse(
                 call: Call<MutableList<Tournament>>, response: Response<MutableList<Tournament>>

@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -46,7 +47,6 @@ class InfoTournamentFragment : Fragment() {
     private val adminTournamentSharedViewModel: AdminTournamentSharedViewModel by activityViewModels()
     private val userTournamentSharedViewModel: UserTournamentSharedViewModel by activityViewModels()
 
-    private val infoTournamentAdminViewModel: InfoTournamentAdminViewModel by viewModels()
     val userLiveData = MutableLiveData<User>()
 
     override fun onCreateView(
@@ -64,9 +64,7 @@ class InfoTournamentFragment : Fragment() {
     }
 
     private fun initUI() {
-
         retrofit(infoTournamentViewModel.tournament!!)
-
     }
 
 
@@ -78,16 +76,13 @@ class InfoTournamentFragment : Fragment() {
         var infoTournament: Tournament
         apiTournament.getTournamentID(tournament.id).enqueue(object : Callback<Tournament> {
             @SuppressLint("SetTextI18n")
-            override fun onResponse(
-                call: Call<Tournament>, response: Response<Tournament>
-            ) {
+            override fun onResponse(call: Call<Tournament>, response: Response<Tournament>) {
+                val infoTournament = response.body()!!
 
-                infoTournament = response.body()!!
-
-                Log.d("Torneo",infoTournament.toString())
-                //Se asigna el torneo actual
-                adminTournamentSharedViewModel.torneigActual=MutableLiveData(infoTournament)
-                userTournamentSharedViewModel.torneigActual=MutableLiveData(infoTournament)
+                Log.d("Torneo", infoTournament.toString())
+                // Se asigna el torneo actual
+                adminTournamentSharedViewModel.torneigActual.value = infoTournament
+                userTournamentSharedViewModel.torneigActual.value = infoTournament
 
                 with(binding) {
                     tvInfoTournamentName.text = infoTournament.name
@@ -95,151 +90,68 @@ class InfoTournamentFragment : Fragment() {
                     tvInfoTournamentGame.text = "GAME: " + infoTournament.game
                     definePrice(infoTournament.price)
                     progressBarInfoTournament.visibility = View.GONE
-                    userLiveData.observe(requireActivity()) { user ->
-                        if (user.isJoined && tournament.id == user.tournament_id) {
-                            binding.btnJoinTournament.isVisible = false
-                            binding.btnToShowPlayers.isVisible = true
-                            binding.btnToExitTournament.isVisible = true
-
-
-                            binding.btnToShowPlayers.setOnClickListener {
-
-                                adminTournamentSharedViewModel.getRondes()
-                                userTournamentSharedViewModel.getRondes()
-                                Log.d("Infotournamentfragment 106",userTournamentSharedViewModel.torneigActual.value.toString())
-
-                                view?.findNavController()?.navigate(R.id.action_infoTournamentFragment_to_joinedTournamentFragment)
-                                //Se asignan las rondas
-
-                            //TODO Cmabiar esto para que muestre el fragmnto de rondas
-                            }
-                            binding.btnToExitTournament.setOnClickListener {
-                                userLiveData.observe(requireActivity()) { user ->
-                                    val gson = GsonBuilder().setLenient().create()
-                                    val retrofit =
-                                        Retrofit.Builder().baseUrl("http://10.0.2.2:3000/")
-                                            .addConverterFactory(GsonConverterFactory.create(gson))
-                                            .build()
-                                    val finalTokens = tournament.price + user.tokens
-                                    var new = User(
-                                        user.username,
-                                        user.email,
-                                        user.password,
-                                        user.borndate,
-                                        finalTokens,
-                                        "",
-                                        user.image,
-                                        false,
-                                        0
-                                    )
-                                    val api = retrofit.create(userAPI::class.java);
-                                    val builder = AlertDialog.Builder(requireContext())
-                                    builder.setTitle("Cuidado!")
-                                    builder.setMessage("Estas seguro de que quieres salir del torneo?")
-                                    builder.setPositiveButton(
-                                        "Si, salir!",
-                                        DialogInterface.OnClickListener { dialog, id ->
-                                            try {
-                                                api.updateUser(user.email, new)
-                                                    .enqueue(object : Callback<User> {
-                                                        override fun onResponse(
-                                                            call: Call<User>,
-                                                            responseUser: Response<User>
-                                                        ) {
-                                                            new = responseUser.body()!!
-                                                        }
-
-                                                        override fun onFailure(
-                                                            call: Call<User>,
-                                                            t: Throwable
-                                                        ) {
-                                                            Log.i("Error", "${t.cause}")
-                                                            view?.findNavController()?.navigate(R.id.action_infoTournamentFragment_to_homeFragment)
-                                                            Toast.makeText(context, "Has salido del torneo", Toast.LENGTH_SHORT).show()
-                                                        }
-
-                                                    })
-                                            } catch (e: Error) {
-                                                Log.e("Error en el catch", "$e");
-                                            }
-                                        })
-                                    builder.setNegativeButton("No", null)
-                                    val dialog = builder.create()
-                                    dialog.show()
-
-                                }
-                            }
-                        } else {
-                            binding.btnJoinTournament.isVisible = true
-
-                        }
+                    binding.btnJoinTournament.setOnClickListener {
+                        adminTournamentSharedViewModel.getRondes()
+                        userTournamentSharedViewModel.getRondes()
+                        Log.d("Infotournamentfragment 106", userTournamentSharedViewModel.torneigActual.value.toString())
+                        view?.findNavController()?.navigate(R.id.action_infoTournamentFragment_to_joinedTournamentFragment)
                     }
-                    btnJoinTournament.setOnClickListener {
-                        val apiUser = retrofit.create(userAPI::class.java)
-                        var user: User
-                        apiUser.getUserByEmail(profileViewModel.authenticationRepository.getCurrentUserEmail().email.toString())
-                            .enqueue(object : Callback<User> {
-                                @SuppressLint("SetTextI18n")
-                                override fun onResponse(
-                                    call: Call<User>, response: Response<User>
-                                ) {
-                                    user = response.body()!!
-                                    infoTournamentAdminViewModel.setUser(user)
-                                    val oldTokens = user.tokens
-                                    val finalTokens = user.tokens - infoTournament.price
-                                    user.tokens = finalTokens
-                                    user.tournament_id = infoTournament.id
-                                    user.isJoined = true
-                                    user.points = 0
-                                    if (oldTokens < infoTournament.price) {
-                                        Toast.makeText(
-                                            requireContext(),
-                                            "No tienes dinero para acceder a este torneo",
-                                            Toast.LENGTH_SHORT
-                                        ).show()
-                                        showDialogComprar()
-                                    } else {
-                                        val builder = AlertDialog.Builder(requireContext())
-                                        builder.setTitle("Te vas a unir!")
-                                        builder.setMessage("Estas seguro de que quieres unirte al torneo?")
-                                        builder.setPositiveButton(
-                                            "SI!",
-                                            DialogInterface.OnClickListener { dialog, id ->
-                                                apiUser.joinTournament(
-                                                    profileViewModel.authenticationRepository.getCurrentUserEmail().email.toString(),
-                                                    user
-                                                ).enqueue(object : Callback<User> {
-                                                    @SuppressLint("SetTextI18n")
-                                                    override fun onResponse(
-                                                        call: Call<User>, response: Response<User>
-                                                    ) {
-                                                        user.isJoined = true
-                                                        user = response.body()!!
-                                                    }
 
-                                                    override fun onFailure(
-                                                        call: Call<User>,
-                                                        t: Throwable
-                                                    ) {
-                                                        Log.i("Error", "$t")
-                                                    }
-                                                })
-                                                view?.findNavController()?.navigate(R.id.action_infoTournamentFragment_to_joinedTournamentFragment)
-                                            })
+                }
 
-                                            view?.findNavController()?.navigate(R.id.action_infoTournamentFragment_to_joinedTournamentFragment)
-                                       })
-                                        builder.setNegativeButton("Aun no", null)
-                                        val dialog = builder.create()
-                                        dialog.show()
-                                    }
+                userLiveData.observe(requireActivity()) { user ->
+                    if (user.isJoined && tournament.id == user.tournament_id) {
+                        binding.btnJoinTournament.isVisible = false
+                        binding.btnToShowPlayers.isVisible = true
+                        binding.btnToExitTournament.isVisible = true
+
+
+
+                        binding.btnToExitTournament.setOnClickListener {
+                            val gson = GsonBuilder().setLenient().create()
+                            val retrofit = Retrofit.Builder().baseUrl("http://10.0.2.2:3000/")
+                                .addConverterFactory(GsonConverterFactory.create(gson)).build()
+
+                            val finalTokens = tournament.price + user.tokens
+                            var new = User(
+                                user.username,
+                                user.email,
+                                user.password,
+                                user.borndate,
+                                finalTokens,
+                                "",
+                                user.image,
+                                false,
+                                0
+                            )
+
+                            val api = retrofit.create(userAPI::class.java)
+                            val builder = AlertDialog.Builder(requireContext())
+                            builder.setTitle("Cuidado!")
+                            builder.setMessage("Estas seguro de que quieres salir del torneo?")
+                            builder.setPositiveButton("Si, salir!") { dialog, id ->
+                                try {
+                                    api.updateUser(user.email, new).enqueue(object : Callback<User> {
+                                        override fun onResponse(call: Call<User>, responseUser: Response<User>) {
+                                            new = responseUser.body()!!
+                                        }
+
+                                        override fun onFailure(call: Call<User>, t: Throwable) {
+                                            Log.i("Error", "${t.cause}")
+                                            view?.findNavController()?.navigate(R.id.action_infoTournamentFragment_to_homeFragment)
+                                            Toast.makeText(context, "Has salido del torneo", Toast.LENGTH_SHORT).show()
+                                        }
+                                    })
+                                } catch (e: Error) {
+                                    Log.e("Error en el catch", "$e")
                                 }
-
-                                override fun onFailure(call: Call<User>, t: Throwable) {
-                                    Log.i("Error", "$t")
-                                }
-
-                            })
+                            }
+                            builder.setNegativeButton("No", null)
+                            val dialog = builder.create()
+                            dialog.show()
+                        }
+                    } else {
+                        binding.btnJoinTournament.isVisible = true
                     }
                 }
             }
@@ -247,10 +159,9 @@ class InfoTournamentFragment : Fragment() {
             override fun onFailure(call: Call<Tournament>, t: Throwable) {
                 Log.i("Error", "$t")
             }
+        })}
 
-        })
 
-    }
 
 
     fun isUserJoined(userJoined: Boolean) {
@@ -282,7 +193,6 @@ class InfoTournamentFragment : Fragment() {
         } else {
             binding.tvInfoTournamentPrice.text = "Precio: $price"
         }
-    }
+    }}
 
 
-}
