@@ -11,10 +11,13 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import cat.iesvidreres.tversus.R
 import cat.iesvidreres.tversus.databinding.FragmentJoinedTournamentBinding
+import cat.iesvidreres.tversus.databinding.FragmentRondesUserBinding
 import cat.iesvidreres.tversus.src.core.ex.toast
 import cat.iesvidreres.tversus.src.data.interfaces.userAPI
 import cat.iesvidreres.tversus.src.data.models.User
+import cat.iesvidreres.tversus.src.ui.home.tabs.profile_tab.ProfileViewModel
 import cat.iesvidreres.tversus.src.ui.home.tabs.tournament_tab.info_tournament.InfoTournamentViewModel
+import cat.iesvidreres.tversus.src.ui.home.tabs.tournament_tab.info_tournament.joined_tournament.tournamentRounds.PantallasUser.UserTournamentSharedViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import retrofit2.Call
 import retrofit2.Callback
@@ -27,6 +30,8 @@ class JoinedTournamentFragment : Fragment() {
     private lateinit var binding: FragmentJoinedTournamentBinding
     private var cardAdapter = JoinedTournamentRVAdapter()
     private val infoTournamentViewModel: InfoTournamentViewModel by activityViewModels()
+    private val profileViewModel: ProfileViewModel by activityViewModels()
+    private val userTournamentSharedViewModel: UserTournamentSharedViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,6 +41,7 @@ class JoinedTournamentFragment : Fragment() {
         binding = FragmentJoinedTournamentBinding.inflate(inflater, container, false)
         
         initUI()
+        Log.d("Torneo JoinedTournamentFragmnt 44",userTournamentSharedViewModel.torneigActual.value.toString())
         return binding.root
     }
 
@@ -45,10 +51,6 @@ class JoinedTournamentFragment : Fragment() {
     }
 
     private fun setRecyclerView() {
-
-
-
-
 
 
         val cardRecyclerview = binding.rvPlayers
@@ -94,8 +96,40 @@ class JoinedTournamentFragment : Fragment() {
     }
     
     private fun goToMachmaking(){
+
+        //TODO Hacer que abra el activity de rondas
         binding.btnToMatchmaking.setOnClickListener {
-            view?.findNavController()?.navigate(R.id.action_joinedTournamentFragment_to_matchmakingFragment)
+
+            //Si la modalidad es Teams
+            if (infoTournamentViewModel.tournament?.modality.equals("Teams")){
+                //Si tambien es organizador
+                if (infoTournamentViewModel.tournament?.organizer.equals(profileViewModel.authenticationRepository.getCurrentUser().email.toString())){
+                    //TODO Que se abra la pestaña del admin
+                    Log.d("Teams admin","Teams Admin")
+                    if (userTournamentSharedViewModel.rondasActuales.value?.isEmpty() == true){
+                        Log.d("Teams user","Vacio")
+                        view?.findNavController()?.navigate(R.id.adminStartTournament)
+                    }else{
+                        Log.d("Teams user","No Vacio")
+                        view?.findNavController()?.navigate(R.id.adminRoundsTournamentFragment)
+                    }
+
+                //Si no lo es
+                }else{
+
+                    Log.d("Teams user","Teams user")
+                    view?.findNavController()?.navigate(R.id.rondesUser)
+                }
+            }
+            else{
+                //Si la modalidad no es teams
+
+                view?.findNavController()?.navigate(R.id.action_joinedTournamentFragment_to_matchmakingFragment)
+            }
+
+
+
+            //view?.findNavController()?.navigate(R.id.action_joinedTournamentFragment_to_adminRoundsTournamentFragment)
         }
     }
 

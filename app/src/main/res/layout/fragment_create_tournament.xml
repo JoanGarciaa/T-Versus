@@ -10,10 +10,10 @@
 
     <ImageView
         android:id="@+id/ivNewTournament"
-        android:layout_width="wrap_content"
-        android:layout_height="200dp"
-        android:src="@drawable/ascent"
+        android:layout_width="377dp"
+        android:layout_height="155dp"
         android:layout_marginTop="20dp"
+        android:src="@drawable/ascent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -23,9 +23,9 @@
         style="@style/FormTextInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
         app:endIconMode="clear_text"
         app:endIconTint="@color/white"
-        android:layout_marginTop="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ivNewTournament"
@@ -70,9 +70,42 @@
         style="@style/PrimaryButton"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
         android:text="Crear Torneo"
-        android:layout_marginTop="60dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.445"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Spinner
+        android:id="@+id/spinnerModalitat"
+        android:layout_width="312dp"
+        android:layout_height="26dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2"></Spinner>
+
+    <Spinner
+        android:id="@+id/spinnerQuantitat"
+        android:layout_width="295dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="16dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.577"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerModalitat" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Modalidad"
+        android:textColor="@color/terciarytversus"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.049"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/inputDescription" />
 

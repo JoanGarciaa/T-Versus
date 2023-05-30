@@ -14,8 +14,8 @@ interface userAPI {
     fun getUserByEmail(@Path("email") email: String?): Call<User>
     @GET("get-user/{email}")
     fun getUserByNode(@Path("email") email: String?): Call<User>
-    @GET("get-players-by-tournament/{id}")
-    fun showPlayers(@Path("id")id:String): Call<MutableList<User>>
+    @GET("get-users-by-tournament-id/{id}")
+    fun showPlayers(@Path("id") id:String): Call<MutableList<User>>
     @GET("users")
     fun getUsers(): Call<MutableList<User>>
     @POST("buy-tokens/{id}")
@@ -31,4 +31,6 @@ interface userAPI {
     @DELETE("delete-user/{id}")
     fun deleteUser(@Path("id")id: String) : Call<User>
 
+    @GET("get-usersData-by-tournament-id/{id}")
+    fun getUsersDataByTournamentId(@Path("id") id: String): Call<List<Any>>
 }

@@ -78,7 +78,7 @@ class HomeRVAdapter @Inject constructor() : RecyclerView.Adapter<HomeRVAdapter.I
             val priceViewTournament = itemView.findViewById<TextView>(R.id.tvPriceTournament)
             priceViewTournament.text = tournament.price.toString()
             val btnJoin = itemView.findViewById<Button>(R.id.btnToJoin)
-
+            //TODO Hacer para ver numero de equipos
             itemView.setOnClickListener {
                 listener.onItemClick(tournament)
             }

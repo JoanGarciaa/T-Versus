@@ -67,26 +67,44 @@ class CreateTournamentViewModel @Inject constructor(
             val name = newTournament.name
             val description = newTournament.description
             val organization = newTournament.organizer
-
-            val tournament = Tournament(name,id,"Valorant",organization,description,0, R.drawable.valotourn,"unofficial")
+            val teamsNumber = newTournament.teamsnumber
+            val modality = newTournament.modality
+            val tournament = Tournament(name,id,"Valorant",organization,description,0, R.drawable.valotourn,"unofficial",
+            mutableListOf(),
+                emptyList(),teamsNumber,0.0,1,modality)
 
             val gson = GsonBuilder().setLenient().create()
             val retrofit = Retrofit.Builder().baseUrl("http://10.0.2.2:3000/")
                 .addConverterFactory(GsonConverterFactory.create(gson)).build()
             var new : Tournament
             val api = retrofit.create(tournamentAPI::class.java);
-            api.newTournament(tournament).enqueue(object : Callback<Tournament> {
-                override fun onResponse(
-                    call: Call<Tournament>, response: Response<Tournament>
-                ) {
-                    new = response.body()!!
-                }
 
-                override fun onFailure(call: Call<Tournament>, t: Throwable) {
-                    Log.i("Erroddr","$t")
-                }
+            if (modality.equals("Individual")){
+                api.newTournament(tournament).enqueue(object : Callback<Tournament> {
+                    override fun onResponse(
+                        call: Call<Tournament>, response: Response<Tournament>
+                    ) {
+                        new = response.body()!!
+                    }
 
-            })
+                    override fun onFailure(call: Call<Tournament>, t: Throwable) {
+                        Log.i("Erroddr","$t")
+                    }
+                })
+            }else{
+                api.newTeamsTournament(tournament).enqueue(object : Callback<Tournament> {
+                    override fun onResponse(
+                        call: Call<Tournament>, response: Response<Tournament>
+                    ) {
+                        new = response.body()!!
+                    }
+
+                    override fun onFailure(call: Call<Tournament>, t: Throwable) {
+                        Log.i("Erroddr","$t")
+                    }
+                })
+            }
+
             _navigateToHome.value = Event(true)
         }else{
             onFieldsChanged(newTournament)

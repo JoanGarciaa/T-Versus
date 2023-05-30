@@ -26,6 +26,9 @@ import cat.iesvidreres.tversus.src.data.interfaces.userAPI
 import cat.iesvidreres.tversus.src.data.models.Tournament
 import cat.iesvidreres.tversus.src.data.models.User
 import cat.iesvidreres.tversus.src.data.providers.nodejs.userNode
+import cat.iesvidreres.tversus.src.ui.auth.LoginActivity
+import cat.iesvidreres.tversus.src.ui.home.MainActivity
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import dagger.hilt.android.AndroidEntryPoint
@@ -57,6 +60,13 @@ class ProfileFragment : Fragment() {
 
         userNode.getUserFromNode(profileViewModel.authenticationRepository.getCurrentUser().email.toString()) { user ->
             userLiveData.postValue(user)
+        }
+
+        binding.buttonCerrarSesion.setOnClickListener {
+            val mAuth = FirebaseAuth.getInstance()
+            mAuth.signOut()
+            var intent = Intent(context, LoginActivity::class.java)
+            startActivity(intent)
         }
 
         binding.btnEditar.setOnClickListener {
@@ -175,10 +185,16 @@ class ProfileFragment : Fragment() {
 
 
         userLiveData.observe(requireActivity()) { user ->
-            binding.inputEmailText.text = Editable.Factory.getInstance().newEditable(user.email)
+            if (user.email != null) {
+                binding.inputEmailText.text = Editable.Factory.getInstance().newEditable(user.email)
+            }
             binding.tokensUser.text = user.tokens.toString() + " TOKENS"
             binding.tvUsername.text = user.username
-            binding.inputBornDateText.text = Editable.Factory.getInstance().newEditable(user.borndate)
+
+            if (user.borndate != null) {
+                binding.inputBornDateText.text = Editable.Factory.getInstance().newEditable(user.borndate)
+            }
+
             Picasso.get().load(user.image).into(binding.ivAvatarUser)
             binding.progressBar2.visibility = View.GONE
 

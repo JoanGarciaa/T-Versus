@@ -19,14 +19,16 @@ class AuthenticationRepository @Inject constructor(
     val auth: FirebaseAuth get() = FirebaseAuth.getInstance()
 
     fun login(email: String, password: String, context: Context) {
+        Log.d("Empieza login","Empieza login")
         auth.signInWithEmailAndPassword(email, password).addOnCompleteListener() { task ->
+            Log.d("Respuesta",task.toString())
             if (task.isSuccessful) {
                 if (auth.currentUser?.isEmailVerified() == true) {
                     Log.d(ContentValues.TAG, "signInWithEmail:success")
                     val intent = Intent(context, MainActivity::class.java)
                     context.startActivity(intent)
                 } else {
-
+                    Log.d("Verifica","Verifica")
                     Toast.makeText(context,"Verifica tu cuenta con el correo" , Toast.LENGTH_SHORT).show()
                 }
             } else {

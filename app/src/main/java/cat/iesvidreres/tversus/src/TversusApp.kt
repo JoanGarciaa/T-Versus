@@ -1,7 +1,8 @@
 package cat.iesvidreres.tversus.src
 
 import android.app.Application
-import cat.iesvidreres.tversus.BuildConfig
+import androidx.databinding.ktx.BuildConfig
+
 import dagger.hilt.android.HiltAndroidApp
 import timber.log.Timber
 import timber.log.Timber.DebugTree

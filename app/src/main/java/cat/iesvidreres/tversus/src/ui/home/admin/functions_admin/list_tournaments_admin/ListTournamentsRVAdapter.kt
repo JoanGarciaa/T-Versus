@@ -59,7 +59,7 @@ class ListTournamentsRVAdapter @Inject constructor() : RecyclerView.Adapter<List
             priceViewTournament.text = tournament.price.toString()
             val typeViewTournament = itemView.findViewById<TextView>(R.id.tvTypeTournamentAdmin)
             typeViewTournament.text = tournament.type
-
+            //TODO Hacer para ver numero de equipos
             itemView.setOnClickListener {
                 listener.onItemClick(tournament)
             }

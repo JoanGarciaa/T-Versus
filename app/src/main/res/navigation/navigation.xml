@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="cat.iesvidreres.tversus.src.ui.home.tabs.home_tab.HomeFragment"
-        android:label="fragment_menu"
+        android:label="home_fragment"
         tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/action_homeFragment_to_infoTournamentFragment"
@@ -96,6 +96,9 @@
         <action
             android:id="@+id/action_infoTournamentFragment_to_joinedTournamentFragment"
             app:destination="@id/joinedTournamentFragment" />
+        <action
+            android:id="@+id/action_infoTournamentFragment_to_adminStartTournament"
+            app:destination="@id/adminStartTournament" />
     </fragment>
     <fragment
         android:id="@+id/paymentFragment"
@@ -114,6 +117,9 @@
         <action
             android:id="@+id/action_joinedTournamentFragment_to_matchmakingFragment"
             app:destination="@id/matchmakingFragment" />
+        <action
+            android:id="@+id/action_joinedTournamentFragment_to_adminRoundsTournamentFragment"
+            app:destination="@id/adminRoundsTournamentFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginAdminFragment"
@@ -148,6 +154,9 @@
         <action
             android:id="@+id/action_functionsAdminFragment_to_listUsersFragmentAdmin"
             app:destination="@id/listUsersFragmentAdmin" />
+        <action
+            android:id="@+id/action_functionsAdminFragment_to_rewardsFragment"
+            app:destination="@id/rewardsFragment" />
     </fragment>
     <fragment
         android:id="@+id/listTournamentsAdminFragment"
@@ -178,4 +187,49 @@
         android:name="cat.iesvidreres.tversus.src.ui.home.tabs.tournament_tab.matchmaking.MatchmakingFragment"
         android:label="fragment_matchmaking"
         tools:layout="@layout/fragment_matchmaking" />
+    <fragment
+        android:id="@+id/adminRoundsTournamentFragment"
+        android:name="cat.iesvidreres.tversus.src.ui.home.tabs.tournament_tab.info_tournament.joined_tournament.tournamentRounds.PantallasCreador.AdminRoundsTournamentFragment"
+        android:label="fragment_rounds_tournament"
+        tools:layout="@layout/fragment_rounds_tournament" >
+        <action
+            android:id="@+id/action_adminRoundsTournamentFragment_to_fragmentAdminDatosRonda"
+            app:destination="@id/fragmentAdminDatosRonda" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentAdminDatosRonda"
+        android:name="cat.iesvidreres.tversus.src.ui.home.tabs.tournament_tab.info_tournament.joined_tournament.tournamentRounds.PantallasCreador.DatosRonda.FragmentAdminDatosRonda"
+        android:label="fragment_admin_datos_ronda"
+        tools:layout="@layout/fragment_admin_datos_ronda" >
+        <action
+            android:id="@+id/action_fragmentAdminDatosRonda_to_adminRoundsTournamentFragment"
+            app:destination="@id/adminRoundsTournamentFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/adminStartTournament"
+        android:name="cat.iesvidreres.tversus.src.ui.home.tabs.tournament_tab.info_tournament.joined_tournament.tournamentRounds.PantallasCreador.AdminStartTournament"
+        android:label="fragment_admin_start_tournament"
+        tools:layout="@layout/fragment_admin_start_tournament" >
+        <action
+            android:id="@+id/action_adminStartTournament_to_joinedTournamentFragment"
+            app:destination="@id/joinedTournamentFragment" />
+        <action
+            android:id="@+id/action_adminStartTournament_to_adminRoundsTournamentFragment"
+            app:destination="@id/adminRoundsTournamentFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/rewardsFragment"
+        android:name="cat.iesvidreres.tversus.src.ui.home.admin.functions_admin.rewards_admin.RewardsFragment"
+        android:label="fragment_rewards"
+        tools:layout="@layout/fragment_rewards" />
+    <fragment
+        android:id="@+id/rondesUser"
+        android:name="cat.iesvidreres.tversus.src.ui.home.tabs.tournament_tab.info_tournament.joined_tournament.tournamentRounds.PantallasUser.RondesUser"
+        android:label="fragment_rondes_user"
+        tools:layout="@layout/fragment_rondes_user" />
+    <fragment
+        android:id="@+id/fragmentUserDatosRonda"
+        android:name="cat.iesvidreres.tversus.src.ui.home.tabs.tournament_tab.info_tournament.joined_tournament.tournamentRounds.PantallasUser.DatosRonda.FragmentUserDatosRonda"
+        android:label="fragment_user_datos_ronda"
+        tools:layout="@layout/fragment_user_datos_ronda" />
 </navigation>

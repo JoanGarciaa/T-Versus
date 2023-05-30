@@ -79,7 +79,9 @@ class CreateOfficialTournamentFragment : Fragment() {
                     name = inputNameText.text.toString(),
                     description = inputDescriptionText.text.toString(),
                     price = inputPriceText.text.toString(),
-                    organizer = "admin"
+                    organizer = "admin",
+                    teamsnumber = 0,
+                    modality = "Individual"
                 )
             )
         }
@@ -97,6 +99,8 @@ class CreateOfficialTournamentFragment : Fragment() {
                         description = binding.inputDescriptionText.text.toString(),
                         price = binding.inputPriceText.text.toString(),
                         organizer = "admin",
+                        teamsnumber = 0,
+                        modality = "Individual"
                     ))
                 }
                 createOfficialTournamentViewModel.navigateToHome.observe(requireActivity()) {
@@ -119,7 +123,9 @@ class CreateOfficialTournamentFragment : Fragment() {
                         name = inputNameText.text.toString(),
                         description = inputDescriptionText.text.toString(),
                         price = binding.inputPriceText.text.toString(),
-                        organizer = ""
+                        organizer = "",
+                        teamsnumber = 0,
+                        modality = "Individual"
                     )
                 )
             }

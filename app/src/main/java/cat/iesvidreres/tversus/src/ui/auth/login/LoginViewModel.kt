@@ -1,6 +1,7 @@
 package cat.iesvidreres.tversus.src.ui.auth.login
 
 import android.content.Context
+import android.util.Log
 import android.util.Patterns
 import androidx.lifecycle.ViewModel
 import cat.iesvidreres.tversus.src.data.providers.firebase.AuthenticationRepository
@@ -31,6 +32,7 @@ class LoginViewModel @Inject constructor(
     }
 
     fun loginUser(email: String, password: String, context: Context) {
+        Log.d("Login","Login")
         authenticationRepository.login(email, password, context)
     }
 

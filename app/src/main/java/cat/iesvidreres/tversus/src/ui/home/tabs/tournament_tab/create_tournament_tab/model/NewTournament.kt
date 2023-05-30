@@ -7,6 +7,9 @@ data class NewTournament(
     var description: String,
     var price: String,
     var organizer : String,
+    var teamsnumber: Int,
+    var modality: String
+    //TODO Poner lo que falta
 ){
     fun isNotEmpty() =name.isNotEmpty() && description.isNotEmpty()
 }

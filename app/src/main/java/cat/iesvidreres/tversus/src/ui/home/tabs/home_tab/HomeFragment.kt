@@ -51,6 +51,7 @@ class HomeFragment : Fragment() {
         cardAdapter.setItemListener(object : HomeRVAdapter.OnItemClickListener {
             override fun onItemClick(tournament: Tournament) {
                 infoTournamentViewModel.setTournament(tournament)
+                //TODO Hacer pantallas de editar torneo para ambas modalidades
                 view?.findNavController()?.navigate(R.id.action_homeFragment_to_infoTournamentFragment)
             }
         })

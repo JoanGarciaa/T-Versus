@@ -46,6 +46,13 @@ class InfoTournamentAdminFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentInfoTournamentAdminBinding.inflate(inflater, container, false)
         initUI()
+
+        binding.btnToResults.setOnClickListener {
+           //TODO view?.findNavController()?.navigate(R.id.action_infoTournamentAdminFragment_to_matchmakingFragment)
+        }
+        binding.btnShowReports.setOnClickListener { 
+            toast("Futura implementación")
+        }
         return binding.root
     }
 
@@ -68,15 +75,16 @@ class InfoTournamentAdminFragment : Fragment() {
             override fun onDeleteUser(user: User) {
                 val builder = AlertDialog.Builder(requireContext())
                 builder.setTitle("Cuidado!")
-                builder.setMessage("Estas seguro de que quieres eliminar al usuario?")
+                builder.setMessage("Estas seguro de que quieres sacar del torneo al usuario?")
                 builder.setPositiveButton(
-                    "Si, borrar!",
+                    "Si, sacar!",
                     DialogInterface.OnClickListener { dialog, id ->
+                        cardAdapter.notifyDataSetChanged()
                         val gson = GsonBuilder().setLenient().create()
                         val retrofit = Retrofit.Builder().baseUrl("http://10.0.2.2:3000/")
                             .addConverterFactory(GsonConverterFactory.create(gson)).build()
                         val api = retrofit.create(userAPI::class.java)
-                        var thisUser = User(user.username,user.email,user.password,user.borndate,user.tokens,"",user.image,user.isJoined)
+                        var thisUser = User(user.username,user.email,user.password,user.borndate,user.tokens,"",user.image,user.isJoined,0)
                         api.updateUser(user.email,thisUser).enqueue(object : Callback<User> {
                             override fun onResponse(
                                 call: Call<User>, response: Response<User>
@@ -120,7 +128,7 @@ class InfoTournamentAdminFragment : Fragment() {
                     gameInfoTournament.text = infoTournament.game
                     typeInfoTournament.text = infoTournament.type
                     organizerInfoTournament.text = infoTournament.organizer
-
+                    //TODO Hacer para mostrar el numero de equipos
                     val apiUser = retrofit.create(userAPI::class.java)
                     var tournamentDeleted = tournament
                     ivDeleteTournament.setOnClickListener{

@@ -39,6 +39,29 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
         auth = Firebase.auth
 
+        //Comprueba si hay cuenta de google
+        val account = GoogleSignIn.getLastSignedInAccount(this)
+
+        if (account != null) {
+            val credential = GoogleAuthProvider.getCredential(account.idToken, null)
+            auth.signInWithCredential(credential)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        val intent = Intent(this, MainActivity::class.java)
+                        startActivity(intent)
+                    }
+                }
+        } else{
+            //Comprueba si tiene una sesion x usuario y contraseña
+            val currentUser = auth.currentUser
+            if (currentUser != null) {
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+            }
+        }
+
+
+
 
         binding.btnToRegister.setOnClickListener {
             val intent = Intent(this, RegisterActivity::class.java)

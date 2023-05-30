@@ -7,6 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import cat.iesvidreres.tversus.R
 import cat.iesvidreres.tversus.src.data.models.User
+import com.app.projecte.tversus.AdaptadorMatch
 import javax.inject.Inject
 
 class JoinedTournamentRVAdapter @Inject constructor() : RecyclerView.Adapter<JoinedTournamentRVAdapter.ItemPlayersHolder>() {
@@ -26,6 +27,9 @@ class JoinedTournamentRVAdapter @Inject constructor() : RecyclerView.Adapter<Joi
         this.listener = listener
     }
 
+    fun setOnItemClickListener(clickListener: JoinedTournamentRVAdapter.OnItemClickListener){
+        listener=clickListener
+    }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): JoinedTournamentRVAdapter.ItemPlayersHolder {
         val v = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_player_card, parent, false)

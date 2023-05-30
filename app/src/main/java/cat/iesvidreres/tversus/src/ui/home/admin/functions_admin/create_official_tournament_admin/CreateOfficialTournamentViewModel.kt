@@ -70,8 +70,11 @@ class CreateOfficialTournamentViewModel @Inject constructor(
             val name = newTournament.name
             val description = newTournament.description
             val price = newTournament.price
-
-            val tournament = Tournament(name,id,"Valorant","admin",description,price.toInt(), R.drawable.valotourn,"official")
+            val teamsNumber = newTournament.teamsnumber
+            val tournament = Tournament(name,id,"Valorant","admin",description,price.toInt(), R.drawable.valotourn,"official",
+                mutableListOf(),
+                emptyList(),
+                teamsNumber,0.0)
 
             val gson = GsonBuilder().setLenient().create()
             val retrofit = Retrofit.Builder().baseUrl("http://10.0.2.2:3000/")

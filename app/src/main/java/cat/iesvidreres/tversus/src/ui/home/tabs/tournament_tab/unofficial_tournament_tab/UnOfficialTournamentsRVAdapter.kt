@@ -60,7 +60,7 @@ class UnOfficialTournamentsRVAdapter @Inject constructor() : RecyclerView.Adapte
             val priceViewTournament = itemView.findViewById<TextView>(R.id.tvPriceTournament)
             priceViewTournament.text = tournament.price.toString()
             val btnJoin = itemView.findViewById<Button>(R.id.btnToJoin)
-
+            //TODO Poner numero equipos
             itemView.setOnClickListener {
                 listener.onItemClick(tournament)
             }
