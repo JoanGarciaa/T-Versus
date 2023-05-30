@@ -18,11 +18,9 @@ interface tournamentAPI {
     @GET("get-tournament/{id}")
     fun getTournamentID(@Path("id") id: String): Call<Tournament>
 
-    @GET("get-tournaments-unofficial")
-    fun getUnOfficialTournaments():Call<MutableList<Tournament>>
 
-    @GET("get-tournaments-official")
-    fun getOfficialTournaments():Call<MutableList<Tournament>>
+    @GET("get-tournaments-type/{id}")
+    fun getTypeTournaments(@Path("id") id: String):Call<MutableList<Tournament>>
 
     @GET("get-tournaments-type/{id}")
     fun getTournamentsTipus(@Path("id") id: String):Call<MutableList<Tournament>>

@@ -59,7 +59,7 @@ class UnOfficialTournamentsFragment : Fragment() {
 
         val api = retrofit.create(tournamentAPI::class.java)
         var tournamentList: MutableList<Tournament>
-        api.getTournamentsTipus("unofficial").enqueue(object : Callback<MutableList<Tournament>> {
+        api.getTypeTournaments("unofficial").enqueue(object : Callback<MutableList<Tournament>> {
             @SuppressLint("NotifyDataSetChanged")
             override fun onResponse(
                 call: Call<MutableList<Tournament>>, response: Response<MutableList<Tournament>>
