@@ -10,6 +10,7 @@
     <color name="tversus">#29262E</color>
     <color name="secondarytversus">#FF4057</color>
     <color name="terciarytversus">#F6F6F6 </color>
+    <color name="shadow">#5E5E5E</color>
     <color name="rhino">#38FF00</color>
     <color name="verde">#00B894</color>
 </resources>

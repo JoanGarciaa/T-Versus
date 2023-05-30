@@ -25,13 +25,19 @@
         android:title="Tienda" />
 
     <item
+        android:id="@+id/spendPointsFragment"
+        android:icon="@drawable/ic_baseline_attach_money_24"
+        android:iconTint="@color/tversus"
+        android:title="Canjear puntos"/>
+
+    <item
         android:id="@+id/signOut"
         android:icon="@drawable/ic_baseline_exit_to_app_24"
         android:iconTint="@color/tversus"
         android:title="Sign Out" />
 
-    <item android:title=""
-        android:enabled="false"/>
+
+
     <item android:title=""
         android:enabled="false"/>
     <item android:title=""

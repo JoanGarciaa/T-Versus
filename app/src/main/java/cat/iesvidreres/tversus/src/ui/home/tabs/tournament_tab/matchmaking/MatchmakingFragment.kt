@@ -57,7 +57,7 @@ class MatchmakingFragment : Fragment() {
                     reportViewModel.setInfoReport(user.username,user.tournament_id)
                 }
                 //bundle
-                //TODO view?.findNavController()?.navigate(R.id.action_matchmakingFragment_to_reportFragment, bundleOf("username" to user.username,"idTournament" to user.tournament_id ))
+                view?.findNavController()?.navigate(R.id.action_matchmakingFragment_to_reportFragment, bundleOf("username" to user.username,"idTournament" to user.tournament_id ))
 
             }
         }
@@ -180,7 +180,7 @@ class MatchmakingFragment : Fragment() {
                                                                     Log.e("Error","$t")
                                                                 }
                                                             })
-                                                 //TODO       view?.findNavController()?.navigate(R.id.action_matchmakingFragment_to_joinedTournamentFragment)
+                                                        view?.findNavController()?.navigate(R.id.action_matchmakingFragment_to_joinedTournamentFragment)
                                                         toast("Gracias por poner tu puntuación!")
 
                                                     }

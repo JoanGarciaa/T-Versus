@@ -99,6 +99,12 @@
         <action
             android:id="@+id/action_infoTournamentFragment_to_adminStartTournament"
             app:destination="@id/adminStartTournament" />
+
+            <action
+            android:id="@+id/action_infoTournamentFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false" />
     </fragment>
     <fragment
         android:id="@+id/paymentFragment"
@@ -181,6 +187,9 @@
             android:id="@+id/action_infoTournamentAdminFragment_to_functionsAdminFragment"
             app:destination="@id/functionsAdminFragment"
             app:popUpTo="@id/functionsAdminFragment" />
+        <action
+            android:id="@+id/action_infoTournamentAdminFragment_to_matchmakingFragment"
+            app:destination="@id/matchmakingFragment" />
     </fragment>
     <fragment
         android:id="@+id/matchmakingFragment"
@@ -217,6 +226,21 @@
             android:id="@+id/action_adminStartTournament_to_adminRoundsTournamentFragment"
             app:destination="@id/adminRoundsTournamentFragment" />
     </fragment>
+        tools:layout="@layout/fragment_matchmaking" >
+        <action
+            android:id="@+id/action_matchmakingFragment_to_joinedTournamentFragment"
+            app:destination="@id/joinedTournamentFragment"
+            app:popUpTo="@id/infoTournamentFragment"
+            app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/action_matchmakingFragment_to_reportFragment"
+            app:destination="@id/reportFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/reportFragment"
+        android:name="cat.iesvidreres.tversus.src.ui.home.tabs.tournament_tab.report_user.ReportFragment"
+        android:label="fragment_report"
+        tools:layout="@layout/fragment_report" />
     <fragment
         android:id="@+id/rewardsFragment"
         android:name="cat.iesvidreres.tversus.src.ui.home.admin.functions_admin.rewards_admin.RewardsFragment"
@@ -232,4 +256,8 @@
         android:name="cat.iesvidreres.tversus.src.ui.home.tabs.tournament_tab.info_tournament.joined_tournament.tournamentRounds.PantallasUser.DatosRonda.FragmentUserDatosRonda"
         android:label="fragment_user_datos_ronda"
         tools:layout="@layout/fragment_user_datos_ronda" />
+        android:id="@+id/spendPointsFragment"
+        android:name="cat.iesvidreres.tversus.src.ui.home.tabs.spend_points.SpendPointsFragment"
+        android:label="fragment_spend_points"
+        tools:layout="@layout/fragment_spend_points" />
 </navigation>

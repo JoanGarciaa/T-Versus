@@ -30,6 +30,8 @@ interface userAPI {
     fun newUserDB(@Body user:User): Call<User>
     @DELETE("delete-user/{id}")
     fun deleteUser(@Path("id")id: String) : Call<User>
+    @GET("get-username/JoanAsecass")
+    fun getUserByUsername() : Call<User>
 
     @GET("get-usersData-by-tournament-id/{id}")
     fun getUsersDataByTournamentId(@Path("id") id: String): Call<List<Any>>

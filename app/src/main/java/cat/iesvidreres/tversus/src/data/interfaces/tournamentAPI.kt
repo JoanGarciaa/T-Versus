@@ -11,7 +11,6 @@ import retrofit2.http.*
 
 interface tournamentAPI {
 
-
     @GET("tournaments")
     fun showTournaments(): Call<MutableList<Tournament>>
 

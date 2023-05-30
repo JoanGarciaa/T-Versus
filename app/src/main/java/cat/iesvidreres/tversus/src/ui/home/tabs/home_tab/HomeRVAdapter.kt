@@ -60,10 +60,10 @@ class HomeRVAdapter @Inject constructor() : RecyclerView.Adapter<HomeRVAdapter.I
     }
 
     fun truncateString(str: String): String {
-        if (str.length <= 20) {
+        if (str.length <= 15) {
             return str
         } else {
-            return str.substring(0, 20) + "..."
+            return str.substring(0, 15) + "..."
         }
     }
 
@@ -76,7 +76,11 @@ class HomeRVAdapter @Inject constructor() : RecyclerView.Adapter<HomeRVAdapter.I
             val nameViewTournament = itemView.findViewById<TextView>(R.id.tvNameViewTournament)
             nameViewTournament.text = truncateString(tournament.name)
             val priceViewTournament = itemView.findViewById<TextView>(R.id.tvPriceTournament)
-            priceViewTournament.text = tournament.price.toString()
+            if(tournament.price == 0){
+                priceViewTournament.text = "Gratis"
+            }else{
+                priceViewTournament.text = tournament.price.toString()
+            }
             val btnJoin = itemView.findViewById<Button>(R.id.btnToJoin)
             //TODO Hacer para ver numero de equipos
             itemView.setOnClickListener {

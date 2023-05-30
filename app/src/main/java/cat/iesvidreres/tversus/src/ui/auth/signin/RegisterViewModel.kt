@@ -1,15 +1,13 @@
 package cat.iesvidreres.tversus.src.ui.auth.signin
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.util.Log
 import android.util.Patterns
 import android.widget.Toast
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import cat.iesvidreres.tversus.src.data.interfaces.tournamentAPI
 import cat.iesvidreres.tversus.src.data.interfaces.userAPI
-import cat.iesvidreres.tversus.src.data.models.Tournament
 import cat.iesvidreres.tversus.src.data.models.User
 import cat.iesvidreres.tversus.src.data.providers.firebase.AuthenticationRepository
 import cat.iesvidreres.tversus.src.ui.auth.signin.model.UserRegister
@@ -66,6 +64,7 @@ class RegisterViewModel @Inject constructor(
     }
 
 
+    @SuppressLint("LogNotTimber")
     fun onSignInSelected(context: Context, userRegister: UserRegister) {
         val viewState = userRegister.toSignInViewState()
         if (viewState.userValidated() && userRegister.isNotEmpty()) {
@@ -77,12 +76,13 @@ class RegisterViewModel @Inject constructor(
                 userRegister.email,
                 userRegister.password,
                 userRegister.years,
-                9,
+                0,
                 "",
                 "https://imagen.research.google/main_gallery_images/a-brain-riding-a-rocketship.jpg",
-                false
+                false,
+                0
             )
-            val api = retrofit.create(userAPI::class.java);
+            val api = retrofit.create(userAPI::class.java)
             api.newUserDB(user).enqueue(object : Callback<User> {
                 override fun onResponse(
                     call: Call<User>, response: Response<User>
